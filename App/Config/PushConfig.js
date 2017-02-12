@@ -5,12 +5,12 @@ PushNotification.configure({
 
   // (optional) Called when Token is generated (iOS and Android)
   onRegister: (token) => {
-    if (__DEV__) console.log('TOKEN:', token)
+    if (__DEV__) {console.log('TOKEN:', token)}
   },
 
   // (required) Called when a remote or local notification is opened or received
   onNotification: (notification) => {
-    if (__DEV__) console.log('NOTIFICATION:', notification)
+    if (__DEV__) {console.log('NOTIFICATION:', notification)}
   },
 
   // ANDROID ONLY: (optional) GCM Sender ID.
