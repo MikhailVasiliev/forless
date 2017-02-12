@@ -3,5 +3,5 @@ import { is } from 'ramda'
 
 // process STARTUP actions
 export function * startup (action) {
-    console.tron.log('Hello, I\'m an example of how to log via Reactotron.')
+  console.tron.log('Hello, I\'m an example of how to log via Reactotron.')
 }

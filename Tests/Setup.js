@@ -31,8 +31,8 @@ mockery.registerMock('react-native-router-flux', {Actions: {'myScreen': () => {}
 mockery.registerMock('react-native-i18n', {
   t: (key, replacements) => {
     let value = english[key]
-    if (!value) return key
-    if (!replacements) return value
+    if (!value) {return key}
+    if (!replacements) {return value}
 
     forEach((r) => {
       value = replace(`{{${r}}}`, replacements[r], value)
