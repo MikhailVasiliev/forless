@@ -320,7 +320,6 @@
 		EB266AB6FFB3473AAD2234E1 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		EF1A59C9DE8F4C54A1B8363C /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		F6859D899B4F46D7808E3B2D /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		FB1903A62FE24616B24FE93F /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -554,7 +553,6 @@
 				7BB7AEF205F4416B958C1CCF /* ReactNativeConfig.xcodeproj */,
 				A6D23638DE14486284BF84A8 /* RNDeviceInfo.xcodeproj */,
 				0A2CCA5FCEA44D20B1427544 /* RNI18n.xcodeproj */,
-				FB1903A62FE24616B24FE93F /* AirMaps.xcodeproj */,
 				EB266AB6FFB3473AAD2234E1 /* RNVectorIcons.xcodeproj */,
 			);
 			name = Libraries;

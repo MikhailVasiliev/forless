@@ -30,7 +30,16 @@ const metrics = {
     medium: 40,
     large: 60,
     logo: 300
-  }
+  },
+  feedHeaderHeight: 30,
+  feeditemHeight: 67.5,
+  separatorHeight: 0.5,
+  separatorMargin: width * 0.19,
+  feedPhotoWidth: width * 0.19,
+  feedPhoto: 40,
+  feedIcon: 12,
+  borderRadius: 20,
+  footerHeight: 80
 }
 
 export default metrics
