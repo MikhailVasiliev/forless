@@ -144,7 +144,7 @@ configurations.all {
             // If different projects require different versions of
             // Google Play Services it causes a crash on run.
             // Fix by overriding version for all projects.
-            details.useVersion('10.0.1')
+            details.useVersion('10.2.0') 
         }
     }
 }
@@ -153,3 +153,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+apply plugin: 'com.google.gms.google-services'
