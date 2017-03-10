@@ -1,4 +1,4 @@
-package com.forexlessons;
+package com.vasiliev.forexlessons;
 
 import android.app.Application;
 import android.util.Log;
