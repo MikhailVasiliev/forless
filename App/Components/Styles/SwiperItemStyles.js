@@ -7,6 +7,7 @@ export default StyleSheet.create({
   },
   image:{
     flex: 1,
+    resizeMode: 'cover'
   },
   overlay: {
     flex: 1,
@@ -18,8 +19,7 @@ export default StyleSheet.create({
   articleTitle: {
     ...Fonts.style.h1,
     color: 'white',
-    marginLeft: 20,
-    marginBottom: 20,
+    margin: 20,
   },
   articleDate: {
     color: 'white',

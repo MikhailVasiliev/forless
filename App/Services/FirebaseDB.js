@@ -18,26 +18,33 @@ class Database {
 
   }
 
-    /**
-     * Listen for changes to a users mobile number
-     * @param userId
-     * @param callback Users mobile number
-     */
-  static listenUserMobile(userId, callback) {
+  static async getAllArticles(callback) {
 
-    let userMobilePath = '/user/' + userId + '/details';
-
-    firebase.database().ref(userMobilePath).on('value', (snapshot) => {
-
-      var mobile = '';
-
-      if (snapshot.val()) {
-        mobile = snapshot.val().mobile
-      }
-
-      callback(mobile)
+    const rootRef = firebase.database().ref().child('/articles')
+    var articles = []
+    rootRef.on('value', (snap) => {
+      snap.forEach((child) => {
+        articles.push({
+          title: child.val().title,
+          data: child.val().data,
+          cover: child.val().cover,
+          date: child.key
+        });
+        console.tron.log(articles)
+      });
+      callback(articles)
     });
   }
+
+  // snapshot.forEach((child) => {
+  //   console.tron.log('child - ' + child.val().title)
+  //   articles.push({
+  //     title: child.val().title,
+  //     data: child.val().data,
+  //     date: child.key
+  //   });
+  // });
+
 
 }
 

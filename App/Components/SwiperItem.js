@@ -15,12 +15,13 @@ const photoPlaceHolder = 'https://2ch.hk/b/arch/2016-03-15/src/120139891/1458064
 export default class SwiperItem extends React.Component {
 
   render() {
+    let article = this.props.article
     return (
       <View style={styles.main} >
-        <Image style={styles.main} source={{uri: photoPlaceHolder}}>
-          <TouchableOpacity activeOpacity={0.95} style={styles.overlay} onPress={NavigationActions.articleScreen}>
-            <Text style={styles.articleDate}>Thu, Feb 17</Text>
-            <Text style={styles.articleTitle}>New Article about Forex Education</Text>
+        <Image style={styles.main} source={{uri: article.cover}}>
+          <TouchableOpacity activeOpacity={0.95} style={styles.overlay} onPress={() => {NavigationActions.articleScreen({article})}}>
+            <Text style={styles.articleDate}>{article.date}</Text>
+            <Text style={styles.articleTitle}>{article.title}</Text>
           </TouchableOpacity>
         </Image>
       </View>
@@ -29,8 +30,5 @@ export default class SwiperItem extends React.Component {
 }
 
 SwiperItem.propTypes = {
-  image: React.PropTypes.string,
-  title: React.PropTypes.string,
-  date: React.PropTypes.string,
-  onPress: React.PropTypes.func,
+  article: React.PropTypes.object,
 }

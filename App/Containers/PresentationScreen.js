@@ -17,10 +17,22 @@ import * as firebase from 'firebase';
 // Redux
 import { connect } from 'react-redux'
 
+// Redux
+import FirebaseDB from '../Services/FirebaseDB'
+
 // Styles
 import styles from './Styles/PresentationScreenStyles'
 
 class PresentationScreen extends React.Component {
+
+  // this.login('mr.m.vasiliev@gmail.com', '111111')
+  constructor () {
+    super()
+
+    this.state = {
+      articles: []
+    }
+  }
 
   componentWillMount() {
     firebase.initializeApp({
@@ -30,31 +42,41 @@ class PresentationScreen extends React.Component {
       storageBucket: 'numeric-oarlock-144410.appspot.com'
     });
 
+    FirebaseDB.getAllArticles(this.setArticlesInState.bind(this))
     NavigationActions.refresh({onLeft: () => {
-      console.tron.log('onLeft'),
-      this.login('mr.m.vasiliev@gmail.com', '111111')
-    } })
+      console.tron.log(this.state.articles)
+    }
+    })
+  }
+
+  setArticlesInState (articles) {
+    this.setState({articles})
   }
 
   render () {
-    return (
-      <View style={styles.main}>
-        <Swiper horizontal={false}  >
-          <SwiperItem/>
-          <SwiperItem/>
-          <SwiperItem/>
-          <SwiperItem/>
-        </Swiper>
-        <View style={styles.footer}>
-          <TouchableOpacity style={styles.footerButtons} onPress={() => {console.tron.log('Footer buttom pressed')}}>
-            <Text style={styles.footerButtonText}>Read</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.footerButtons} onPress={() => {console.tron.log('Footer buttom pressed')}}>
-            <Text style={styles.footerButtonText}>Next</Text>
-          </TouchableOpacity>
+    let articles = this.state.articles
+
+    if (articles.length > 0) {
+      return (
+        <View style={styles.main}>
+          <Swiper horizontal={false}  >
+            { articles.map((article, index) => {
+              return (<SwiperItem article={article} key={index}/>)
+            }) }
+          </Swiper>
+          <View style={styles.footer}>
+            <TouchableOpacity style={styles.footerButtons} onPress={() => {console.tron.log('Footer buttom pressed')}}>
+              <Text style={styles.footerButtonText}>Read</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.footerButtons} onPress={() => {console.tron.log('Footer buttom pressed')}}>
+              <Text style={styles.footerButtonText}>Next</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    )
+      )
+    } else {
+      return (<View style={{flex: 1, backgroundColor: 'green'}}/>)
+    }
   }
 
   async signup(email, pass) {
