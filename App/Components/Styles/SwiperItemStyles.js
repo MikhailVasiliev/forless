@@ -17,9 +17,10 @@ export default StyleSheet.create({
     paddingBottom: Metrics.footerHeight,
   },
   articleTitle: {
-    ...Fonts.style.h1,
+    ...Fonts.style.h3,
     color: 'white',
     margin: 20,
+    marginBottom: Metrics.articleTitleMarginBottom
   },
   articleDate: {
     color: 'white',

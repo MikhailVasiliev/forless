@@ -44,6 +44,7 @@ class PresentationScreen extends React.Component {
 
     FirebaseDB.getAllArticles(this.setArticlesInState.bind(this))
     NavigationActions.refresh({onLeft: () => {
+      this.login('mr.m.vasiliev@gmail.com', '111111')
       console.tron.log(this.state.articles)
     }
     })
