@@ -35,19 +35,19 @@ class PresentationScreen extends React.Component {
   }
 
   componentWillMount() {
-    firebase.initializeApp({
-      apiKey: 'AIzaSyAVa9_vTm7U308w4KVwpkwGvXF1xgGIT_o',
-      authDomain: 'numeric-oarlock-144410.firebaseio.com',
-      databaseURL: 'https://numeric-oarlock-144410.firebaseio.com',
-      storageBucket: 'numeric-oarlock-144410.appspot.com'
-    });
-
-    NavigationActions.refresh({onLeft: () => {
-      this.login('mr.m.vasiliev@gmail.com', '111111')
-      FirebaseDB.getAllArticles(this.setArticlesInState.bind(this))
-      console.tron.log(this.state.articles)
-    }
-    })
+    // firebase.initializeApp({
+    //   apiKey: 'AIzaSyAVa9_vTm7U308w4KVwpkwGvXF1xgGIT_o',
+    //   authDomain: 'numeric-oarlock-144410.firebaseio.com',
+    //   databaseURL: 'https://numeric-oarlock-144410.firebaseio.com',
+    //   storageBucket: 'numeric-oarlock-144410.appspot.com'
+    // });
+    //
+    // NavigationActions.refresh({onLeft: () => {
+    //   this.login('mr.m.vasiliev@gmail.com', '111111')
+    FirebaseDB.getAllArticles(this.setArticlesInState.bind(this))
+    //   console.tron.log(this.state.articles)
+    // }
+    // })
   }
 
   setArticlesInState (articles) {
