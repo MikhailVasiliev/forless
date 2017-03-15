@@ -6,9 +6,16 @@ import { Colors, Metrics, Fonts, ApplicationStyles } from '../../Themes/'
 export default StyleSheet.create({
   main:{
     flex: 1,
+    paddingBottom: 15
+  },
+  cover:{
+    height: Metrics.screenHeight / 3,
+    resizeMode: 'cover'
   },
   image:{
     height: Metrics.screenHeight / 3,
+    resizeMode: 'cover',
+    marginTop: 15,
   },
   overlay: {
     backgroundColor: Colors.overlay,
@@ -27,7 +34,7 @@ export default StyleSheet.create({
     fontFamily: 'Avenir Next'
   },
   articleDate: {
-    ...Fonts.style.normal,
+    ...Fonts.style.description,
     marginLeft: 20,
     fontFamily: 'Avenir Next',
     color: 'gray'
@@ -36,6 +43,7 @@ export default StyleSheet.create({
     ...Fonts.style.normal,
     margin: 20,
     marginTop: 15,
+    marginBottom: 0,
     lineHeight: 25,
     textAlign: 'justify',
     fontFamily: 'Avenir Next'

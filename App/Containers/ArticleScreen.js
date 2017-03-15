@@ -21,14 +21,21 @@ const photoPlaceHolder = 'https://2ch.hk/b/arch/2016-03-15/src/120139891/1458064
 class ArticleScreen extends React.Component {
 
   render () {
+    var article = this.props.article
     return (
       <ScrollView style={styles.main} >
-        <Image style={styles.image} source={{uri: photoPlaceHolder}}>
+        <Image style={styles.cover} source={{uri: article.cover}}>
           <View style={styles.overlay}/>
         </Image>
-        <Text style={styles.articleTitle}>New Article about Forex Education</Text>
-        <Text style={styles.articleDate}>Thu, Feb 17</Text>
-        <Text style={styles.text}>{articleText}</Text>
+        <Text style={styles.articleTitle}>{article.title}</Text>
+        <Text style={styles.articleDate}>{article.date}</Text>
+        { article.data.map((element, index) => {
+          if (element.pic) {
+            return (<Image style={styles.image} source={{uri: element.pic}} key={index}/>)
+          } else {
+            return (<Text style={styles.text} key={index}>  {element.text}</Text>)
+          }
+        }) }
       </ScrollView>
     )
   }
@@ -36,7 +43,6 @@ class ArticleScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    article: state.articles.currentArticle,
   }
 }
 

@@ -7,6 +7,7 @@ export default StyleSheet.create({
   },
   image:{
     flex: 1,
+    resizeMode: 'cover'
   },
   overlay: {
     flex: 1,
@@ -16,10 +17,10 @@ export default StyleSheet.create({
     paddingBottom: Metrics.footerHeight,
   },
   articleTitle: {
-    ...Fonts.style.h1,
+    ...Fonts.style.h3,
     color: 'white',
-    marginLeft: 20,
-    marginBottom: 20,
+    margin: 20,
+    marginBottom: Metrics.articleTitleMarginBottom
   },
   articleDate: {
     color: 'white',
