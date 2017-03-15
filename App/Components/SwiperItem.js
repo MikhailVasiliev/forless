@@ -10,8 +10,6 @@ import styles from './Styles/SwiperItemStyles'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
 
-const photoPlaceHolder = 'https://2ch.hk/b/arch/2016-03-15/src/120139891/14580644394070.png'
-
 export default class SwiperItem extends React.Component {
 
   render() {
