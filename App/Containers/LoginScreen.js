@@ -15,7 +15,8 @@ import { connect } from 'react-redux'
 
 // External libs
 import * as firebase from 'firebase';
-
+// Services
+import FirebaseDB from '../Services/FirebaseDB'
 // Styles
 import styles from './Styles/LoginScreenStyles'
 
@@ -30,12 +31,16 @@ class LoginScreen extends React.Component {
   }
 
   componentWillMount() {
-    firebase.initializeApp({
-      apiKey: 'AIzaSyAVa9_vTm7U308w4KVwpkwGvXF1xgGIT_o',
-      authDomain: 'numeric-oarlock-144410.firebaseio.com',
-      databaseURL: 'https://numeric-oarlock-144410.firebaseio.com',
-      storageBucket: 'numeric-oarlock-144410.appspot.com'
-    });
+    try {
+      firebase.initializeApp({
+        apiKey: 'AIzaSyAVa9_vTm7U308w4KVwpkwGvXF1xgGIT_o',
+        authDomain: 'numeric-oarlock-144410.firebaseio.com',
+        databaseURL: 'https://numeric-oarlock-144410.firebaseio.com',
+        storageBucket: 'numeric-oarlock-144410.appspot.com'
+      });
+    } catch (err) {
+      console.tron.log(err)
+    }
   }
 
 
@@ -45,16 +50,28 @@ class LoginScreen extends React.Component {
         <Text style={styles.welcomeText}>Please log in</Text>
         <TextInput
           style={styles.loginInput}
+          placeholder={'login'}
           onChangeText={(login) => this.setState({login})}
           value={this.state.login}/>
         <TextInput
           style={styles.passInput}
+          placeholder={'password'}
           onChangeText={(password) => this.setState({password})}
           value={this.state.password}/>
         <TouchableOpacity
           style={styles.loginBtn}
           onPress={() => {this.login('mr.m.vasiliev@gmail.com', '111111')}}>
           <Text style={styles.loginBtnText}>Log in</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.loginGoogleBtn}
+          onPress={() => {this.login('mr.m.vasiliev@gmail.com', '111111')}}>
+          <Text style={styles.loginGoogleBtnText}>Log in with Google</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.loginFbBtn}
+          onPress={() => {this.login('mr.m.vasiliev@gmail.com', '111111')}}>
+          <Text style={styles.loginFbBtnText}>Log in with Facebook</Text>
         </TouchableOpacity>
       </View>
     )
@@ -73,12 +90,17 @@ class LoginScreen extends React.Component {
   async login(email, pass) {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pass);
-      NavigationActions.presentationScreen()
+      FirebaseDB.getAllArticles(this.setArticlesInState.bind(this))
+      // NavigationActions.presentationScreen()
       console.tron.log('Logged In!');
         // Navigate to the Home page
     } catch (error) {
       console.tron.log(error.toString())
     }
+  }
+
+  setArticlesInState (articles) {
+    NavigationActions.presentationScreen({articles})
   }
 
 }

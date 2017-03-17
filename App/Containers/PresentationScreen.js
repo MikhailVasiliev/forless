@@ -26,15 +26,18 @@ import styles from './Styles/PresentationScreenStyles'
 class PresentationScreen extends React.Component {
 
   // this.login('mr.m.vasiliev@gmail.com', '111111')
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
 
     this.state = {
-      articles: []
+      articles: props.articles ? props.articles : []
     }
   }
 
   componentWillMount() {
+    if (!this.props.articles) {
+      FirebaseDB.getAllArticles(this.setArticlesInState.bind(this))
+    }
     // firebase.initializeApp({
     //   apiKey: 'AIzaSyAVa9_vTm7U308w4KVwpkwGvXF1xgGIT_o',
     //   authDomain: 'numeric-oarlock-144410.firebaseio.com',
@@ -42,12 +45,9 @@ class PresentationScreen extends React.Component {
     //   storageBucket: 'numeric-oarlock-144410.appspot.com'
     // });
     //
-    // NavigationActions.refresh({onLeft: () => {
-    //   this.login('mr.m.vasiliev@gmail.com', '111111')
-    FirebaseDB.getAllArticles(this.setArticlesInState.bind(this))
-    //   console.tron.log(this.state.articles)
-    // }
-    // })
+    NavigationActions.refresh({onLeft: () => {
+      NavigationActions.login()
+    }})
   }
 
   setArticlesInState (articles) {
