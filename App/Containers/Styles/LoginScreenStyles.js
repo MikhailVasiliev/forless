@@ -4,11 +4,22 @@ import { StyleSheet } from 'react-native'
 import { Colors, Metrics, Fonts, ApplicationStyles } from '../../Themes/'
 
 export default StyleSheet.create({
+  mainOuter:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   main:{
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'gray'
+    backgroundColor: Colors.overlay
+  },
+  backgroundImage:{
+    flex: 1,
+    width: Metrics.screenWidth,
+    height: Metrics.screenHeight,
+    resizeMode: 'cover'
   },
   welcomeText: {
     ...Fonts.style.h4,
@@ -27,7 +38,6 @@ export default StyleSheet.create({
     paddingRight: 10,
     marginBottom: 5,
     borderRadius: 15
-
   },
   passInput: {
     alignSelf: 'stretch',
