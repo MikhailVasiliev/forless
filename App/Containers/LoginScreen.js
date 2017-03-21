@@ -55,11 +55,16 @@ class LoginScreen extends React.Component {
             <TextInput
               style={styles.loginInput}
               placeholder={'login'}
+              autoCapitalize={'none'}
+              underlineColorAndroid={Colors.transparent}
               onChangeText={(login) => this.setState({login})}
               value={this.state.login}/>
             <TextInput
               style={styles.passInput}
               placeholder={'password'}
+              autoCapitalize={'none'}
+              secureTextEntry={true}
+              underlineColorAndroid={Colors.transparent}
               onChangeText={(password) => this.setState({password})}
               value={this.state.password}/>
             <TouchableOpacity
@@ -69,7 +74,7 @@ class LoginScreen extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.loginGoogleBtn}
-              onPress={() => {this.login('mr.m.vasiliev@gmail.com', '111111')}}>
+              onPress={() => {this.loginGoogle()}}>
               <Text style={styles.loginGoogleBtnText}>Log in with Google</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -100,6 +105,63 @@ class LoginScreen extends React.Component {
       // NavigationActions.presentationScreen()
       console.tron.log('Logged In!');
         // Navigate to the Home page
+    } catch (error) {
+      console.tron.log(error.toString())
+    }
+  }
+
+  async loginGoogle() {
+    try {
+
+      let provider = new firebase.auth.GoogleAuthProvider();
+      provider.addScope('https://www.googleapis.com/auth/plus.login');
+      console.tron.log('provider')
+      console.tron.log(provider)
+
+      // let user = await firebase.auth().currentUser
+      // console.tron.log('user')
+      // console.tron.log(user.getAuthResponse().id_token)
+
+      let idToken = await firebase.auth().currentUser.getToken()
+      console.tron.log('idToken')
+      console.tron.log(idToken)
+      //
+      let credential = await provider.credential('350196186671-v2vsgllehd23v4blh97c823c6lkj4ma1.apps.googleusercontent.com')
+      console.tron.log('credential')
+      console.tron.log(credential)
+
+      // let credentials = firebase.auth.GoogleAuthProvider().getCredential(idToken)
+      // console.tron.log(credentials)
+
+      await firebase.auth().signInWithCredential(credential).then(function(result) {
+  // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+  // The signed-in user info.
+        var user = result.user;
+        console.tron.log('result')
+        console.tron.log(result)
+  // ...
+      }).catch(function(error) {
+  // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+  // The email of the user's account used.
+        var email = error.email;
+  // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+  // ...
+        console.tron.log('error')
+        console.tron.log(error)
+
+      });
+
+      var credential = firebase.auth.GoogleAuthProvider.credential(
+                    googleUser.getAuthResponse().id_token);
+      firebase.auth().signInWithCredential(credential)
+
+  //
+
+      console.tron.log('Logged In with Google!');
     } catch (error) {
       console.tron.log(error.toString())
     }

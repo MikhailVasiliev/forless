@@ -12,10 +12,10 @@ export default {
     height: Metrics.navBarHeight,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingTop: 10,
+    marginTop: 20,
   },
   title: {
-    color: Colors.snow
+    color: Colors.snow,
   },
   leftButton: {
     tintColor: Colors.snow,

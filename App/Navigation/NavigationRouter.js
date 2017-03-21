@@ -19,7 +19,7 @@ class NavigationRouter extends Component {
     return (
       <Router>
           <Scene key="drawerChildrenWrapper" navigationBarStyle={Styles.navBar} titleStyle={Styles.title} leftButtonIconStyle={Styles.leftButton} rightButtonTextStyle={Styles.rightButton}>
-            <Scene initial key="login" type={ActionConst.REPLACE} component={LoginScreen} title="Login" />
+            <Scene initial key="login" hideNavBar type={ActionConst.REPLACE} component={LoginScreen} title="Login" />
             <Scene key="presentationScreen" type={ActionConst.REPLACE} component={PresentationScreen} title="Feed" leftButtonImage={Images.menu} leftButtonIconStyle={Styles.leftButton} onLeft={() => {}} />
             <Scene key="articleScreen" component={ArticleScreen} leftButtonImage={Images.back} leftButtonIconStyle={Styles.leftButton} onLeft={() => {}} />
           </Scene>
