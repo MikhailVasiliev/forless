@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "350196186671-v2vsgllehd23v4blh97c823c6lkj4ma1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vasiliev.forexlessons",
+            "certificate_hash": "e2540cda6c80c5a085adc80bb41cdff1c3f0dfd2"
+          }
+        },
+        {
           "client_id": "350196186671-smt2gvh2gc92d9q7ge5q3t3a74qusm56.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "350196186671-smt2gvh2gc92d9q7ge5q3t3a74qusm56.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
