@@ -2,8 +2,8 @@
 
 const type = {
   base: 'Avenir Next',
-  bold: 'HelveticaNeue-Bold',
-  emphasis: 'HelveticaNeue-Italic'
+  bold: 'Avenir Next-Bold',
+  emphasis: 'Avenir Next-Italic'
 }
 
 const size = {

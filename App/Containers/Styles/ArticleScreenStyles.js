@@ -31,12 +31,10 @@ export default StyleSheet.create({
     fontSize: 23,
     margin: 20,
     marginBottom: 15,
-    fontFamily: 'Avenir Next'
   },
   articleDate: {
     ...Fonts.style.description,
     marginLeft: 20,
-    fontFamily: 'Avenir Next',
     color: 'gray'
   },
   text: {
@@ -46,6 +44,5 @@ export default StyleSheet.create({
     marginBottom: 0,
     lineHeight: 25,
     textAlign: 'justify',
-    fontFamily: 'Avenir Next'
   },
 })
