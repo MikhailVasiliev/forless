@@ -13,17 +13,16 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 
 // Redux
 import { connect } from 'react-redux'
-
 // External libs
 import * as firebase from 'firebase';
+import {GoogleSignin} from 'react-native-google-signin';
+import FireAuth from 'react-native-firebase-auth';
 // Services
 import FirebaseDB from '../Services/FirebaseDB'
 // Styles
 import styles from './Styles/LoginScreenStyles'
 import { Images, Colors } from '../Themes'
 
-import {GoogleSignin} from 'react-native-google-signin';
-import FireAuth from 'react-native-firebase-auth';
 
 class LoginScreen extends React.Component {
   constructor () {
@@ -58,7 +57,6 @@ class LoginScreen extends React.Component {
     }
   }
 
-
   render () {
     return (
       <View style={styles.mainOuter} >
@@ -80,21 +78,23 @@ class LoginScreen extends React.Component {
               underlineColorAndroid={Colors.transparent}
               onChangeText={(password) => this.setState({password})}
               value={this.state.password}/>
-            <TouchableOpacity
-              style={styles.loginBtn}
-              onPress={() => {this.login('mr.m.vasiliev@gmail.com', '111111')}}>
-              <Text style={styles.loginBtnText}>Log in</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.loginGoogleBtn}
-              onPress={() => {this.loginGoogle()}}>
-              <Text style={styles.loginGoogleBtnText}>Log in with Google</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.loginFbBtn}
-              onPress={() => {this.login('mr.m.vasiliev@gmail.com', '111111')}}>
-              <Text style={styles.loginFbBtnText}>Log in with Facebook</Text>
-            </TouchableOpacity>
+            <View style={styles.buttonsContainer}>
+              <TouchableOpacity
+                style={styles.loginBtn}
+                onPress={() => {this.login('mr.m.vasiliev@gmail.com', '111111')}}>
+                <Text style={styles.loginBtnText}>Log in</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.loginGoogleBtn}
+                onPress={() => {this.loginGoogle()}}>
+                <Image style={styles.loginGoogleBtnText} source={Images.g}/>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.loginFbBtn}
+                onPress={() => {this.login('mr.m.vasiliev@gmail.com', '111111')}}>
+                <Image style={styles.loginGoogleBtnText} source={Images.f}/>
+              </TouchableOpacity>
+            </View>
           </View>
         </Image>
       </View>

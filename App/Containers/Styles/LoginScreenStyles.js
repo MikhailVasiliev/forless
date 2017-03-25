@@ -1,7 +1,12 @@
 // @flow
 
 import { StyleSheet } from 'react-native'
-import { Colors, Metrics, Fonts, ApplicationStyles } from '../../Themes/'
+import {
+  Colors,
+  Metrics,
+  Fonts,
+  ApplicationStyles
+} from '../../Themes/'
 
 export default StyleSheet.create({
   mainOuter:{
@@ -27,7 +32,6 @@ export default StyleSheet.create({
     margin: 20,
     color: 'white',
     marginBottom: 15,
-    fontFamily: 'Avenir Next'
   },
   loginInput: {
     alignSelf: 'stretch',
@@ -37,7 +41,7 @@ export default StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     marginBottom: 5,
-    borderRadius: 15
+    borderRadius: 20
   },
   passInput: {
     alignSelf: 'stretch',
@@ -48,54 +52,60 @@ export default StyleSheet.create({
     marginBottom: 0,
     paddingLeft: 10,
     paddingRight: 10,
-    borderRadius: 15
+    borderRadius: 20
   },
   loginBtn: {
+    flex: 1,
     alignSelf: 'stretch',
     height: 40,
-    backgroundColor: 'black',
-    margin: 15,
-    marginTop: 5,
+    backgroundColor: Colors.transparent,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 15,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'white'
   },
   loginBtnText: {
     ...Fonts.style.h4,
     fontSize: 18,
-    fontFamily: 'Avenir Next',
     color: 'white'
   },
   loginGoogleBtn: {
-    alignSelf: 'stretch',
     height: 40,
-    backgroundColor: Colors.google,
-    margin: 15,
-    marginBottom: 0,
+    width: 40,
+    backgroundColor: Colors.transparent,
+    marginLeft: 10,
+    marginRight: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 15
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'white'
   },
   loginGoogleBtnText: {
-    ...Fonts.style.h4,
-    fontSize: 18,
-    fontFamily: 'Avenir Next',
-    color: 'white'
+    width: 20,
+    height: 20,
+    tintColor: 'white'
   },
   loginFbBtn: {
-    alignSelf: 'stretch',
+    width: 40,
     height: 40,
-    backgroundColor: Colors.facebook,
-    margin: 15,
-    marginTop: 5,
+    backgroundColor: Colors.transparent,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 15
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'white'
   },
   loginFbBtnText: {
-    ...Fonts.style.h4,
-    fontSize: 18,
-    fontFamily: 'Avenir Next',
-    color: 'white'
+    width: 20,
+    height: 20,
+    tintColor: 'white'
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: 5,
   },
 })
