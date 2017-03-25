@@ -20,7 +20,8 @@ const colors = {
   ember: 'rgba(164, 0, 48, 0.5)',
   fire: '#e73536',
   drawer: 'rgba(30, 30, 29, 0.95)',
-  overlay: 'rgba(0, 0, 0, 0.5)'
+  overlay: 'rgba(0, 0, 0, 0.5)',
+  google: '#599df0'
 }
 
 export default colors
