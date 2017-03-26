@@ -13,6 +13,7 @@ import SwiperItem from '../Components/SwiperItem'
 import Image from 'react-native-image-progress';
 import Swiper from 'react-native-swiper';
 import * as firebase from 'firebase';
+import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
 
 // Redux
 import { connect } from 'react-redux'
@@ -35,6 +36,7 @@ class PresentationScreen extends React.Component {
   }
 
   componentWillMount() {
+
     if (!this.props.articles) {
       FirebaseDB.getAllArticles(this.setArticlesInState.bind(this))
     }
@@ -48,6 +50,32 @@ class PresentationScreen extends React.Component {
     NavigationActions.refresh({onLeft: () => {
       NavigationActions.login()
     }})
+  }
+
+  componentDidMount(){
+    FCM.requestPermissions(); // for iOS
+
+    FCM.getFCMToken().then(token => {
+      console.tron.log(token)
+            // store fcm token in your server
+    });
+
+    this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) => {
+      console.tron.log('notif')
+            // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
+      if (notif.local_notification){
+              //this is a local notification
+      }
+      if (notif.opened_from_tray){
+              //app is open/resumed because user clicked banner
+      }
+
+    });
+
+    this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, (token) => {
+      console.tron.log(token)
+    // fcm token may not be available on first load, catch it here
+    });
   }
 
   setArticlesInState (articles) {
@@ -107,6 +135,12 @@ class PresentationScreen extends React.Component {
     } catch (error) {
       console.tron.log(error);
     }
+  }
+
+  componentWillUnmount() {
+    // stop listening for events
+    this.notificationListener.remove();
+    this.refreshTokenListener.remove();
   }
 }
 
