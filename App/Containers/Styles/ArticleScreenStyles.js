@@ -1,7 +1,12 @@
 // @flow
 
 import { StyleSheet } from 'react-native'
-import { Colors, Metrics, Fonts, ApplicationStyles } from '../../Themes/'
+import {
+  Colors,
+  Metrics,
+  Fonts,
+  ApplicationStyles
+} from '../../Themes/'
 
 export default StyleSheet.create({
   main:{
@@ -34,7 +39,7 @@ export default StyleSheet.create({
   },
   articleDate: {
     ...Fonts.style.description,
-    marginLeft: 20,
+    marginLeft: 10,
     color: 'gray'
   },
   text: {
@@ -44,5 +49,27 @@ export default StyleSheet.create({
     marginBottom: 0,
     lineHeight: 25,
     textAlign: 'justify',
+  },
+  dateContainer: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingRight: 20,
+    paddingLeft: 20,
+  },
+  themeContainer: {
+    backgroundColor: Colors.skyBlue,
+    justifyContent: 'center',
+    height: 23,
+    alignItems: 'center',
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  articleTheme: {
+    ...Fonts.style.normal,
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 12
   },
 })

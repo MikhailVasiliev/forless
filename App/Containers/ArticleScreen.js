@@ -28,7 +28,13 @@ class ArticleScreen extends React.Component {
           <View style={styles.overlay}/>
         </Image>
         <Text style={styles.articleTitle}>{article.title}</Text>
-        <Text style={styles.articleDate}>{article.date}</Text>
+        <View style={styles.dateContainer}>
+          <View style={styles.themeContainer}>
+            <Text style={styles.articleTheme}>{article.theme}</Text>
+          </View>
+          <Text style={styles.articleDate}>•</Text>
+          <Text style={styles.articleDate}>{article.date}</Text>
+        </View>
         { article.data.map((element, index) => {
           if (element.pic) {
             return (<Image style={styles.image} source={{uri: element.pic}} key={index}/>)

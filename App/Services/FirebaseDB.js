@@ -28,6 +28,7 @@ class Database {
           title: child.val().title,
           data: child.val().data,
           cover: child.val().cover,
+          theme: child.val().theme,
           date: child.key
         });
         console.tron.log(articles)

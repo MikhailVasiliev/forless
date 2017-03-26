@@ -157,6 +157,7 @@ class LoginScreen extends React.Component {
   }
 
   setArticlesInState (articles) {
+
     NavigationActions.presentationScreen({articles})
   }
 
