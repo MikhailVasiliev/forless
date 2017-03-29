@@ -1,5 +1,6 @@
 import { put, call } from 'redux-saga/effects'
 import ArticlesActions from '../Redux/ArticlesRedux'
+import FirebaseDB from '../Services/FirebaseDB'
 
 // External libs
 import { Actions as NavigationActions } from 'react-native-router-flux';
@@ -25,11 +26,14 @@ export function * articleFetchFailure (api, action) {
 }
 
 export function * articlesListFetchAttempt (api, action) {
-  const fetchArticlesListResponse = yield call(api.getPageList, action.path)
-  if (fetchArticlesListResponse.ok) {
-    yield put(ArticlesActions.articlesListFetchSuccess(fetchArticlesListResponse.result))
-  } else {
-    yield put(ArticlesActions.articlesListFetchFailure())
+  // FirebaseDB.getAllArticles(this.setArticlesInState.bind(this))
+  const fetchArticlesListResponse = yield call(FirebaseDB.fetchArticles)
+  if (fetchArticlesListResponse.length > 0) {
+    console.tron.log(fetchArticlesListResponse)
+    yield call(NavigationActions.presentationScreen, {articles: fetchArticlesListResponse})
+  //   yield put(ArticlesActions.articlesListFetchSuccess(fetchArticlesListResponse.result))
+  // } else {
+  //   yield put(ArticlesActions.articlesListFetchFailure())
   }
 }
 

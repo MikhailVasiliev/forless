@@ -9,9 +9,11 @@ const { Types, Creators } = createActions({
   articleFetchAttempt: ['path'],
   articleFetchSuccess: ['article'],
   articleFetchFailure: ['error'],
-  articlesListFetchAttempt: ['path'],
+  articlesListFetchAttempt: null,
   articlesListFetchSuccess: ['article'],
   articlesListFetchFailure: ['error'],
+  storeArticles: ['articles'],
+  filterArticles: ['filter'],
 })
 
 export const ArticlesTypes = Types
@@ -22,7 +24,8 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   data: [],
   currentArticle: {test: 'test'},
-  fetching: false
+  fetching: false,
+  filter: 'all',
 })
 
 /* ------------- Reducers ------------- */
@@ -46,6 +49,15 @@ export const articlesListFetchSuccess = (state) =>
 export const articlesListFetchFailure = (state, {error}) =>
   state
 
+export const storeArticles = (state, { articles }) => {
+  return state.merge({ data: articles })
+}
+
+export const filterArticles = (state, { filter }) => {
+  //TODO - filter articles and save it to the state
+  return state.merge({ filter })
+}
+
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -56,4 +68,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ARTICLES_LIST_FETCH_ATTEMPT]: articlesListFetchAttempt,
   [Types.ARTICLES_LIST_FETCH_SUCCESS]: articlesListFetchSuccess,
   [Types.ARTICLES_LIST_FETCH_FAILURE]: articlesListFetchFailure,
+  [Types.STORE_ARTICLES]: storeArticles,
 })

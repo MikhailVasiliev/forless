@@ -13,6 +13,7 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 
 // Redux
 import { connect } from 'react-redux'
+import ArticlesActions from '../Redux/ArticlesRedux'
 // External libs
 import * as firebase from 'firebase';
 import {GoogleSignin} from 'react-native-google-signin';
@@ -128,8 +129,8 @@ class LoginScreen extends React.Component {
     var provider = firebase.auth.GoogleAuthProvider;
     var credential = provider.credential('350196186671-v2vsgllehd23v4blh97c823c6lkj4ma1.apps.googleusercontent.com');
     firebase.auth().signInWithCredential(credential)
-    .then((data)=>console.tron.log('SUCCESS', data))
-    .catch((error)=>{console.tron.log('ERROR'), console.tron.log(error)});
+      .then((data)=>console.tron.log('SUCCESS', data))
+      .catch((error)=>{console.tron.log('ERROR'), console.tron.log(error)});
   }
 
   async loginGoogle() {
@@ -157,10 +158,9 @@ class LoginScreen extends React.Component {
   }
 
   setArticlesInState (articles) {
-
+    this.props.storeArticles(articles)
     NavigationActions.presentationScreen({articles})
   }
-
 }
 
 const mapStateToProps = (state) => {
@@ -170,6 +170,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    articlesListFetchAttempt: () => dispatch(ArticlesActions.articlesListFetchAttempt()),
+    storeArticles: (articles) => dispatch(ArticlesActions.storeArticles(articles))
   }
 }
 

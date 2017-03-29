@@ -37,16 +37,24 @@ class Database {
     });
   }
 
-  // snapshot.forEach((child) => {
-  //   console.tron.log('child - ' + child.val().title)
-  //   articles.push({
-  //     title: child.val().title,
-  //     data: child.val().data,
-  //     date: child.key
-  //   });
-  // });
+  static fetchArticles() {
 
-
+    const rootRef = firebase.database().ref().child('/articles')
+    var articles = []
+    rootRef.on('value', (snap) => {
+      snap.forEach((child) => {
+        articles.push({
+          title: child.val().title,
+          data: child.val().data,
+          cover: child.val().cover,
+          theme: child.val().theme,
+          date: child.key
+        });
+        console.tron.log(articles)
+      });
+      return articles;
+    });
+  }
 }
 
 module.exports = Database;

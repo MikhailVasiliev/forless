@@ -146,7 +146,7 @@ class PresentationScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    article: state.articles.currentArticle,
+    articles: state.articles.data,
   }
 }
 
