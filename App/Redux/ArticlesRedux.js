@@ -26,6 +26,7 @@ export const INITIAL_STATE = Immutable({
   currentArticle: {test: 'test'},
   fetching: false,
   filter: 'all',
+  filterArticles: [],
 })
 
 /* ------------- Reducers ------------- */
@@ -55,7 +56,15 @@ export const storeArticles = (state, { articles }) => {
 
 export const filterArticles = (state, { filter }) => {
   //TODO - filter articles and save it to the state
-  return state.merge({ filter })
+  let articles = state.data.asMutable()
+
+  filterArticles = articles.filter(function(article) {
+    return filter.some((filterItem)=>{
+      return filterItem === articles.theme
+    })
+  });
+
+  return state.merge({ filter: Immutable(filter), filterArticles: Immutable(filterArticles) })
 }
 
 
@@ -69,4 +78,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ARTICLES_LIST_FETCH_SUCCESS]: articlesListFetchSuccess,
   [Types.ARTICLES_LIST_FETCH_FAILURE]: articlesListFetchFailure,
   [Types.STORE_ARTICLES]: storeArticles,
+  [Types.FILTER_ARTICLES]: filterArticles,
 })
