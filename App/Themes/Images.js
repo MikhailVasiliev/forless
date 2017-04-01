@@ -9,6 +9,7 @@ const images = {
   background3: require('../Images/background3.jpg'),
   g: require('../Images/g.png'),
   f: require('../Images/f.png'),
+  back: require('../Images/back.png'),
 }
 
 export default images

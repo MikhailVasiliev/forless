@@ -18,10 +18,24 @@ class NavigationRouter extends Component {
   render () {
     return (
       <Router>
-          <Scene key="drawerChildrenWrapper" navigationBarStyle={Styles.navBar} titleStyle={Styles.title} leftButtonIconStyle={Styles.leftButton} rightButtonTextStyle={Styles.rightButton}>
-            <Scene initial key="login" hideNavBar type={ActionConst.REPLACE} component={LoginScreen} title="Login" />
-            <Scene key="presentationScreen" type={ActionConst.REPLACE} component={PresentationScreen} title="Feed" leftButtonImage={Images.menu} leftButtonIconStyle={Styles.leftButton} onLeft={() => {}} />
-            <Scene key="articleScreen" component={ArticleScreen} leftButtonImage={Images.back} leftButtonIconStyle={Styles.leftButton} onLeft={() => {}} />
+          <Scene key="drawerChildrenWrapper" navigationBarStyle={Styles.navBar} leftButtonImage={Images.back} backButtonImage={Images.back} titleStyle={Styles.title} leftButtonIconStyle={Styles.leftButton} rightButtonTextStyle={Styles.rightButton}>
+            <Scene initial key="login"
+                   hideNavBar
+                   type={ActionConst.REPLACE}
+                   component={LoginScreen}
+                   title="Login" />
+            <Scene key="presentationScreen"
+                   type={ActionConst.REPLACE}
+                   component={PresentationScreen}
+                   title="Feed"
+                   leftButtonImage={Images.menu}
+                   leftButtonIconStyle={Styles.leftButton}
+                   onLeft={() => {}} />
+            <Scene key="articleScreen"
+                   component={ArticleScreen}
+                   leftButtonImage={Images.back}
+                   leftButtonIconStyle={Styles.leftButton}
+                   onLeft={() => {}} />
           </Scene>
       </Router>
     )

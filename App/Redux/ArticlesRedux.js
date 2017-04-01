@@ -26,7 +26,7 @@ export const INITIAL_STATE = Immutable({
   currentArticle: {test: 'test'},
   fetching: false,
   filter: 'all',
-  filterArticles: [],
+  filteredArticles: [],
 })
 
 /* ------------- Reducers ------------- */
@@ -34,8 +34,6 @@ export const INITIAL_STATE = Immutable({
 export const articleFetchAttempt = (state) => state.merge({ fetching: true })
 
 export const articleFetchSuccess = (state, { article }) => {
-  console.tron.log('redux')
-  console.tron.log(article)
   return state.merge({ currentArticle: article, fetching: false })
 }
 
@@ -55,16 +53,16 @@ export const storeArticles = (state, { articles }) => {
 }
 
 export const filterArticles = (state, { filter }) => {
-  //TODO - filter articles and save it to the state
   let articles = state.data.asMutable()
 
-  filterArticles = articles.filter(function(article) {
+  let filteredArticles = articles.filter(function(article) {
+
     return filter.some((filterItem)=>{
-      return filterItem === articles.theme
+      return filterItem === article.theme
     })
   });
 
-  return state.merge({ filter: Immutable(filter), filterArticles: Immutable(filterArticles) })
+  return state.merge({ filter: Immutable(filter), filteredArticles: Immutable(filteredArticles) })
 }
 
 

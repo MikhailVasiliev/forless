@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { ScrollView, Text, View } from 'react-native'
+import { ScrollView, Text, View, TouchableOpacity } from 'react-native'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import ArticlesActions from '../Redux/ArticlesRedux'
 
@@ -11,14 +11,16 @@ import Image from 'react-native-image-progress';
 // Redux
 import { connect } from 'react-redux'
 // Libs
-import {articleText} from '../Lib/Constants'
-
 // Styles
 import styles from './Styles/ArticleScreenStyles'
 
-const photoPlaceHolder = 'https://2ch.hk/b/arch/2016-03-15/src/120139891/14580644394070.png'
-
 class ArticleScreen extends React.Component {
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.filteredArticles !== nextProps.filteredArticles) {
+      NavigationActions.presentationScreen({filteredArticles: nextProps.filteredArticles})
+    }
+  }
 
   render () {
     var article = this.props.article
@@ -29,9 +31,11 @@ class ArticleScreen extends React.Component {
         </Image>
         <Text style={styles.articleTitle}>{article.title}</Text>
         <View style={styles.dateContainer}>
-          <View style={styles.themeContainer}>
+          <TouchableOpacity style={styles.themeContainer} onPress={()=>{
+            this.props.filterArticles([article.theme])
+          }}>
             <Text style={styles.articleTheme}>{article.theme}</Text>
-          </View>
+          </TouchableOpacity>
           <Text style={styles.articleDate}>•</Text>
           <Text style={styles.articleDate}>{article.date}</Text>
         </View>
@@ -49,12 +53,14 @@ class ArticleScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    filteredArticles: state.articles.filteredArticles
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     articleFetchAttempt: (path) => dispatch(ArticlesActions.articleFetchAttempt(path)),
+    filterArticles: (filter) => dispatch(ArticlesActions.filterArticles(filter)),
   }
 }
 

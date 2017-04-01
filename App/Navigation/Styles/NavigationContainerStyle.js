@@ -20,7 +20,8 @@ export default {
   leftButton: {
     tintColor: Colors.snow,
     width: 30,
-    height: 30
+    height: 30,
+    resizeMode: 'contain'
   },
   rightButton: {
     color: Colors.snow
