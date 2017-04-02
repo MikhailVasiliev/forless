@@ -24,7 +24,8 @@ export default StyleSheet.create({
   },
   articleDate: {
     color: 'white',
-    marginLeft: 20
+    marginLeft: 20,
+    fontFamily: 'Avenir Next'
   },
   themeContainer: {
     backgroundColor: Colors.skyBlue,

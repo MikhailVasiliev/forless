@@ -9,6 +9,7 @@ import { Images } from '../Themes'
 import PresentationScreen from '../Containers/PresentationScreen'
 import ArticleScreen from '../Containers/ArticleScreen'
 import LoginScreen from '../Containers/LoginScreen'
+import SettingsScreen from '../Containers/SettingsScreen'
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -30,9 +31,18 @@ class NavigationRouter extends Component {
                    title="Feed"
                    leftButtonImage={Images.menu}
                    leftButtonIconStyle={Styles.leftButton}
-                   onLeft={() => {}} />
+                   rightButtonImage={Images.settings}
+                   rightButtonIconStyle={Styles.rightButton}
+                   onLeft={() => {}}
+                   onRight={() => {}} />
             <Scene key="articleScreen"
                    component={ArticleScreen}
+                   leftButtonImage={Images.back}
+                   leftButtonIconStyle={Styles.leftButton}
+                   onLeft={() => {}} />
+            <Scene key="settings"
+                   title="Settings"
+                   component={SettingsScreen}
                    leftButtonImage={Images.back}
                    leftButtonIconStyle={Styles.leftButton}
                    onLeft={() => {}} />

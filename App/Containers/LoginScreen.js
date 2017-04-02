@@ -14,10 +14,9 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 // Redux
 import { connect } from 'react-redux'
 import ArticlesActions from '../Redux/ArticlesRedux'
+import NotificationActions from '../Redux/NotificationRedux'
 // External libs
 import * as firebase from 'firebase';
-import {GoogleSignin} from 'react-native-google-signin';
-import FireAuth from 'react-native-firebase-auth';
 // Services
 import FirebaseDB from '../Services/FirebaseDB'
 // Styles
@@ -115,7 +114,7 @@ class LoginScreen extends React.Component {
   async login(email, pass) {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pass);
-      FirebaseDB.getAllArticles(this.setArticlesInState.bind(this))
+      FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes)
       // NavigationActions.presentationScreen()
       console.tron.log('Logged In!');
         // Navigate to the Home page
@@ -135,43 +134,46 @@ class LoginScreen extends React.Component {
 
   async loginGoogle() {
 
-    try {
-
-      GoogleSignin.hasPlayServices({ autoResolve: true })
-        .then(() => {
-          GoogleSignin.configure(this.KEYS)
-             .then(() => {
-               GoogleSignin.signIn()
-                 .then((user) => {this.onGoogleLoginSuccess(user)})
-                 .catch(error=>{})
-                 .done();
-             });
-        })
-        .catch((err) => {
-          console.log('Play services error', err.code, err.message);
-        })
-
-      console.tron.log('Logged In with Google!');
-    } catch (error) {
-      console.tron.log(error.toString())
-    }
+    // try {
+    //
+    //   GoogleSignin.hasPlayServices({ autoResolve: true })
+    //     .then(() => {
+    //       GoogleSignin.configure(this.KEYS)
+    //          .then(() => {
+    //            GoogleSignin.signIn()
+    //              .then((user) => {this.onGoogleLoginSuccess(user)})
+    //              .catch(error=>{})
+    //              .done();
+    //          });
+    //     })
+    //     .catch((err) => {
+    //       console.log('Play services error', err.code, err.message);
+    //     })
+    //
+    //   console.tron.log('Logged In with Google!');
+    // } catch (error) {
+    //   console.tron.log(error.toString())
+    // }
   }
 
-  setArticlesInState (articles) {
+  setArticlesInState (articles, themes) {
     this.props.storeArticles(articles)
+    this.props.storeThemes(themes)
     NavigationActions.presentationScreen({articles})
   }
 }
 
 const mapStateToProps = (state) => {
   return {
+    allThemes: state.notification.allThemes
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     articlesListFetchAttempt: () => dispatch(ArticlesActions.articlesListFetchAttempt()),
-    storeArticles: (articles) => dispatch(ArticlesActions.storeArticles(articles))
+    storeArticles: (articles) => dispatch(ArticlesActions.storeArticles(articles)),
+    storeThemes: (themes) => dispatch(NotificationActions.storeThemes(themes)),
   }
 }
 

@@ -18,10 +18,11 @@ class Database {
 
   }
 
-  static async getAllArticles(callback) {
+  static async getAllArticles(callback, themes) {
 
     const rootRef = firebase.database().ref().child('/articles')
     var articles = []
+    themes = themes.asMutable()
     rootRef.on('value', (snap) => {
       snap.forEach((child) => {
         articles.push({
@@ -29,11 +30,23 @@ class Database {
           data: child.val().data,
           cover: child.val().cover,
           theme: child.val().theme,
+          topic: child.val().topic,
           date: child.key
         });
-        console.tron.log(articles)
+
+        let uniqueTheme = {
+          name: child.val().theme,
+          topic: child.val().topic,
+          enabled: true
+        }
+
+        if (!themes.some((theme)=>{return theme.name === uniqueTheme.name}) ) {
+          themes.push(uniqueTheme)
+        }
       });
-      callback(articles)
+      // console.tron.log(articles)
+      // console.tron.log(themes)
+      callback(articles, themes)
     });
   }
 

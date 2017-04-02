@@ -9,6 +9,7 @@ export default () => {
   const rootReducer = combineReducers({
     login: require('./LoginRedux').reducer,
     articles: require('./ArticlesRedux').reducer,
+    notification: require('./NotificationRedux').reducer,
   })
 
   return configureStore(rootReducer, rootSaga)

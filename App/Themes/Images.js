@@ -10,6 +10,7 @@ const images = {
   g: require('../Images/g.png'),
   f: require('../Images/f.png'),
   back: require('../Images/back.png'),
+  settings: require('../Images/settings.png'),
 }
 
 export default images

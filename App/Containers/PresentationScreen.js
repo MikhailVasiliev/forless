@@ -41,9 +41,14 @@ class PresentationScreen extends React.Component {
       FirebaseDB.getAllArticles(this.setArticlesInState.bind(this))
     }
 
-    NavigationActions.refresh({onLeft: () => {
-      NavigationActions.login()
-    }})
+    NavigationActions.refresh({
+      onLeft: () => {
+        NavigationActions.login()
+      },
+      onRight: () => {
+        NavigationActions.settings()
+      },
+    })
   }
 
   componentDidMount(){
@@ -55,6 +60,7 @@ class PresentationScreen extends React.Component {
 
     this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) => {
       console.tron.log('notif')
+      console.tron.log(notif)
             // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
       if (notif.local_notification){
               //this is a local notification

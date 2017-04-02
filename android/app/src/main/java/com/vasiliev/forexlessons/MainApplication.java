@@ -3,7 +3,6 @@ package com.vasiliev.forexlessons;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.i18n.reactnativei18n.ReactNativeI18n;
@@ -18,7 +17,7 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
-import co.apptailor.googlesignin.RNGoogleSigninPackage;
+
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -32,13 +31,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNGoogleSigninPackage(),
             new FIRMessagingPackage(),
             new VectorIconsPackage(),
             new ReactNativeI18n(),
             new RNDeviceInfo(),
-            new ReactNativeConfigPackage(),
-            new RNGoogleSigninPackage()
+            new ReactNativeConfigPackage()
       );
     }
   };
