@@ -18,6 +18,9 @@ export default class SwiperItem extends React.Component {
       <View style={styles.main} >
         <Image style={styles.main} source={{uri: article.cover}}>
           <TouchableOpacity activeOpacity={0.95} style={styles.overlay} onPress={() => {NavigationActions.articleScreen({article})}}>
+            <View style={styles.themeContainer}>
+              <Text style={styles.articleTheme}>{article.theme}</Text>
+            </View>
             <Text style={styles.articleDate}>{article.date}</Text>
             <Text style={styles.articleTitle}>{article.title}</Text>
           </TouchableOpacity>

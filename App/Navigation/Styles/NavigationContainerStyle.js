@@ -16,13 +16,18 @@ export default {
   },
   title: {
     color: Colors.snow,
+    fontFamily: 'Avenir Next',
   },
   leftButton: {
     tintColor: Colors.snow,
     width: 30,
-    height: 30
+    height: 30,
+    resizeMode: 'contain'
   },
   rightButton: {
-    color: Colors.snow
+    tintColor: Colors.snow,
+    width: 30,
+    height: 30,
+    resizeMode: 'contain'
   }
 }

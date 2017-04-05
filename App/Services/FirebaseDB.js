@@ -18,7 +18,39 @@ class Database {
 
   }
 
-  static async getAllArticles(callback) {
+  static async getAllArticles(callback, themes) {
+
+    const rootRef = firebase.database().ref().child('/articles')
+    var articles = []
+    themes = themes.asMutable()
+    rootRef.on('value', (snap) => {
+      snap.forEach((child) => {
+        articles.push({
+          title: child.val().title,
+          data: child.val().data,
+          cover: child.val().cover,
+          theme: child.val().theme,
+          topic: child.val().topic,
+          date: child.key
+        });
+
+        let uniqueTheme = {
+          name: child.val().theme,
+          topic: child.val().topic,
+          enabled: true
+        }
+
+        if (!themes.some((theme)=>{return theme.name === uniqueTheme.name}) ) {
+          themes.push(uniqueTheme)
+        }
+      });
+      // console.tron.log(articles)
+      // console.tron.log(themes)
+      callback(articles, themes)
+    });
+  }
+
+  static fetchArticles() {
 
     const rootRef = firebase.database().ref().child('/articles')
     var articles = []
@@ -28,24 +60,14 @@ class Database {
           title: child.val().title,
           data: child.val().data,
           cover: child.val().cover,
+          theme: child.val().theme,
           date: child.key
         });
         console.tron.log(articles)
       });
-      callback(articles)
+      return articles;
     });
   }
-
-  // snapshot.forEach((child) => {
-  //   console.tron.log('child - ' + child.val().title)
-  //   articles.push({
-  //     title: child.val().title,
-  //     data: child.val().data,
-  //     date: child.key
-  //   });
-  // });
-
-
 }
 
 module.exports = Database;

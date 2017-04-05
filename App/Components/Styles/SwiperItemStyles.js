@@ -24,6 +24,22 @@ export default StyleSheet.create({
   },
   articleDate: {
     color: 'white',
-    marginLeft: 20
+    marginLeft: 20,
+    fontFamily: 'Avenir Next'
+  },
+  themeContainer: {
+    backgroundColor: Colors.skyBlue,
+    justifyContent: 'center',
+    height: 23,
+    margin: 20,
+    alignItems: 'center',
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  articleTheme: {
+    ...Fonts.style.normal,
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 12
   },
 })

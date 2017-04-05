@@ -40,28 +40,29 @@ class PresentationScreen extends React.Component {
     if (!this.props.articles) {
       FirebaseDB.getAllArticles(this.setArticlesInState.bind(this))
     }
-    // firebase.initializeApp({
-    //   apiKey: 'AIzaSyAVa9_vTm7U308w4KVwpkwGvXF1xgGIT_o',
-    //   authDomain: 'numeric-oarlock-144410.firebaseio.com',
-    //   databaseURL: 'https://numeric-oarlock-144410.firebaseio.com',
-    //   storageBucket: 'numeric-oarlock-144410.appspot.com'
-    // });
-    //
-    NavigationActions.refresh({onLeft: () => {
-      NavigationActions.login()
-    }})
+
+    NavigationActions.refresh({
+      onLeft: () => {
+        NavigationActions.login()
+      },
+      onRight: () => {
+        NavigationActions.settings()
+      },
+    })
   }
 
   componentDidMount(){
     FCM.requestPermissions(); // for iOS
 
     FCM.getFCMToken().then(token => {
-      console.tron.log(token)
-            // store fcm token in your server
+      console.log(token)
     });
 
-    this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) => {
+    FCM.getInitialNotification().then( notif => {console.tron.log('getInitialNotification'); console.tron.log(notif) } );
+
+    this.notificationListener = FCM.on(FCMEvent.Notification,  notif => {
       console.tron.log('notif')
+      console.tron.log(notif)
             // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
       if (notif.local_notification){
               //this is a local notification
@@ -83,7 +84,7 @@ class PresentationScreen extends React.Component {
   }
 
   render () {
-    let articles = this.state.articles
+    let articles = this.props.filteredArticles ? this.props.filteredArticles : this.state.articles
 
     if (articles.length > 0) {
       return (
@@ -146,7 +147,7 @@ class PresentationScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    article: state.articles.currentArticle,
+    articles: state.articles.data,
   }
 }
 

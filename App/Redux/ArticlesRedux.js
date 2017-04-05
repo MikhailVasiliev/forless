@@ -9,9 +9,11 @@ const { Types, Creators } = createActions({
   articleFetchAttempt: ['path'],
   articleFetchSuccess: ['article'],
   articleFetchFailure: ['error'],
-  articlesListFetchAttempt: ['path'],
+  articlesListFetchAttempt: null,
   articlesListFetchSuccess: ['article'],
   articlesListFetchFailure: ['error'],
+  storeArticles: ['articles'],
+  filterArticles: ['filter'],
 })
 
 export const ArticlesTypes = Types
@@ -22,7 +24,9 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   data: [],
   currentArticle: {test: 'test'},
-  fetching: false
+  fetching: false,
+  filter: 'all',
+  filteredArticles: [],
 })
 
 /* ------------- Reducers ------------- */
@@ -30,8 +34,6 @@ export const INITIAL_STATE = Immutable({
 export const articleFetchAttempt = (state) => state.merge({ fetching: true })
 
 export const articleFetchSuccess = (state, { article }) => {
-  console.tron.log('redux')
-  console.tron.log(article)
   return state.merge({ currentArticle: article, fetching: false })
 }
 
@@ -46,6 +48,23 @@ export const articlesListFetchSuccess = (state) =>
 export const articlesListFetchFailure = (state, {error}) =>
   state
 
+export const storeArticles = (state, { articles }) => {
+  return state.merge({ data: articles })
+}
+
+export const filterArticles = (state, { filter }) => {
+  let articles = state.data.asMutable()
+
+  let filteredArticles = articles.filter(function(article) {
+
+    return filter.some((filterItem)=>{
+      return filterItem === article.theme
+    })
+  });
+
+  return state.merge({ filter: Immutable(filter), filteredArticles: Immutable(filteredArticles) })
+}
+
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -56,4 +75,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ARTICLES_LIST_FETCH_ATTEMPT]: articlesListFetchAttempt,
   [Types.ARTICLES_LIST_FETCH_SUCCESS]: articlesListFetchSuccess,
   [Types.ARTICLES_LIST_FETCH_FAILURE]: articlesListFetchFailure,
+  [Types.STORE_ARTICLES]: storeArticles,
+  [Types.FILTER_ARTICLES]: filterArticles,
 })
