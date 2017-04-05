@@ -58,7 +58,9 @@ class PresentationScreen extends React.Component {
       console.log(token)
     });
 
-    this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) => {
+    FCM.getInitialNotification().then( notif => {console.tron.log('getInitialNotification'); console.tron.log(notif) } );
+
+    this.notificationListener = FCM.on(FCMEvent.Notification,  notif => {
       console.tron.log('notif')
       console.tron.log(notif)
             // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload

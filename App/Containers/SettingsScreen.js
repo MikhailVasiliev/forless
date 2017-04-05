@@ -75,11 +75,9 @@ class SettingsScreen extends React.Component {
 
   handleCheckboxClick(theme){
     if (theme.enabled){
-      FCM.unsubscribeFromTopic('/topics/$(theme.topic)');
-      console.tron.log('unsubscribeFromTopic(/topics/$(theme.topic))')
+      FCM.unsubscribeFromTopic('/topics/' + theme.topic);
     } else {
-      FCM.subscribeToTopic('/topics/$(theme.topic)');
-      console.tron.log('subscribeFromTopic(/topics/$(theme.topic))')
+      FCM.subscribeToTopic('/topics/' + theme.topic);
     }
     this.props.toggleThemeNotification(theme.name, theme.enabled)
   }

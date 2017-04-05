@@ -32,18 +32,14 @@ export const addToSubscribe = (state, { theme }) => {
 }
 
 export const toggleThemeNotification = (state, { name, enabled }) => {
-  let allThemes = state.allThemes.asMutable()
+  var allThemes = state.allThemes
   allThemes.map((theme, index)=>{
-    console.tron.log('22222222')
-    //TODO - find error below and fix it
-    console.tron.log(theme.name === name)
     if (theme.name === name){
-      console.tron.log(allThemes[index].enabled)
-      allThemes[index].enabled = enabled
-      console.tron.log(allThemes[index].enabled)
+      var selectedTheme = Immutable.set(theme, 'enabled', !enabled)
+      allThemes = Immutable.setIn(allThemes, [index], selectedTheme);
     }
   })
-  return state.merge({ allThemes: Immutable(allThemes) })
+  return state.merge({ allThemes })
 }
 
 
