@@ -38,7 +38,7 @@ class RootContainer extends Component {
       // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
       if (!notif.opened_from_tray){
         //this is a local notification
-        this.dropdown.alertWithType('info', 'New article in feed', notif.articleTitle)
+        this.dropdown.alertWithType('info', notif.notification.title, notif.articleTitle)
       }
       if (notif.opened_from_tray){
         //app is open/resumed because user clicked banner
