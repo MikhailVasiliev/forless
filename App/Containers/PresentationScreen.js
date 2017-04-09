@@ -14,6 +14,7 @@ import Image from 'react-native-image-progress';
 import Swiper from 'react-native-swiper';
 import * as firebase from 'firebase';
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
+// import DropdownAlert from 'react-native-dropdownalert'
 
 // Redux
 import { connect } from 'react-redux'
@@ -36,7 +37,6 @@ class PresentationScreen extends React.Component {
   }
 
   componentWillMount() {
-
     if (!this.props.articles) {
       FirebaseDB.getAllArticles(this.setArticlesInState.bind(this))
     }
@@ -52,31 +52,6 @@ class PresentationScreen extends React.Component {
   }
 
   componentDidMount(){
-    FCM.requestPermissions(); // for iOS
-
-    FCM.getFCMToken().then(token => {
-      console.log(token)
-    });
-
-    FCM.getInitialNotification().then( notif => {console.tron.log('getInitialNotification'); console.tron.log(notif) } );
-
-    this.notificationListener = FCM.on(FCMEvent.Notification,  notif => {
-      console.tron.log('notif')
-      console.tron.log(notif)
-            // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
-      if (notif.local_notification){
-              //this is a local notification
-      }
-      if (notif.opened_from_tray){
-              //app is open/resumed because user clicked banner
-      }
-
-    });
-
-    this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, (token) => {
-      console.tron.log(token)
-    // fcm token may not be available on first load, catch it here
-    });
   }
 
   setArticlesInState (articles) {
@@ -109,6 +84,13 @@ class PresentationScreen extends React.Component {
     }
   }
 
+  onClose(data) {
+  // data = {type, title, message, action}
+  // action means how the alert was dismissed. returns: automatic, programmatic, tap, pan or cancel
+    console.tron.log('data');
+    console.tron.log(data);
+  }
+
   async signup(email, pass) {
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, pass);
@@ -138,11 +120,6 @@ class PresentationScreen extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    // stop listening for events
-    this.notificationListener.remove();
-    this.refreshTokenListener.remove();
-  }
 }
 
 const mapStateToProps = (state) => {
