@@ -9,6 +9,7 @@ const { Types, Creators } = createActions({
   storeThemes: ['themes'],
   addToSubscribe: ['theme'],
   toggleThemeNotification: ['name', 'enabled'],
+  toggleNotifications: ['enabled'],
 })
 
 export const NotificationTypes = Types
@@ -19,6 +20,7 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   allThemes: [],
   subscribedThemes: [],
+  notificationsEnabled: true,
 })
 
 /* ------------- Reducers ------------- */
@@ -42,6 +44,7 @@ export const toggleThemeNotification = (state, { name, enabled }) => {
   return state.merge({ allThemes })
 }
 
+export const toggleNotifications = (state, {enabled}) => state.merge({ notificationsEnabled: enabled })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -49,4 +52,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.STORE_THEMES]: storeThemes,
   [Types.ADD_TO_SUBSCRIBE]: addToSubscribe,
   [Types.TOGGLE_THEME_NOTIFICATION]: toggleThemeNotification,
+  [Types.TOGGLE_NOTIFICATIONS]: toggleNotifications,
 })

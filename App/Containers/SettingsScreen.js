@@ -45,7 +45,7 @@ class SettingsScreen extends React.Component {
         <View style={styles.switchContainer} >
           <Text style={styles.switchComponentText}>Enable notifications</Text>
           <Switch
-              onValueChange={(notificationsEnabled) => this.setState({notificationsEnabled})}
+              onValueChange={(notificationsEnabled) => this.handleSwitchToggle(notificationsEnabled)}
               style={styles.switchComponent}
               value={this.state.notificationsEnabled}
               />
@@ -73,6 +73,20 @@ class SettingsScreen extends React.Component {
     )
   }
 
+  handleSwitchToggle(enabled){
+    this.setState({notificationsEnabled: enabled})
+    this.props.toggleNotifications(enabled)
+    this.props.allThemes.map((theme)=> {
+      if (theme.enabled) {
+        if (enabled){
+          FCM.subscribeToTopic('/topics/' + theme.topic);
+        } else {
+          FCM.unsubscribeFromTopic('/topics/' + theme.topic);
+        }
+      }
+    })
+  }
+
   handleCheckboxClick(theme){
     if (theme.enabled){
       FCM.unsubscribeFromTopic('/topics/' + theme.topic);
@@ -94,6 +108,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     filterArticles: (filter) => dispatch(ArticlesActions.filterArticles(filter)),
     toggleThemeNotification: (name, enabled) => dispatch(NotificationActions.toggleThemeNotification(name, enabled)),
+    toggleNotifications: (enabled) => dispatch(NotificationActions.toggleNotifications(enabled)),
   }
 }
 
