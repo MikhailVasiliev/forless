@@ -11,12 +11,47 @@ import ReduxPersist from '../Config/ReduxPersist'
 import styles from './Styles/RootContainerStyles'
 import { Colors } from '../Themes'
 
+// External libs
+import DropdownAlert from 'react-native-dropdownalert'
+import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
+import { Actions as NavigationActions } from 'react-native-router-flux'
+
 class RootContainer extends Component {
   componentDidMount () {
     // if redux persist is not active fire startup action
     if (!ReduxPersist.active) {
       this.props.startup()
     }
+
+    FCM.requestPermissions(); // for iOS
+
+    FCM.getFCMToken().then(token => {
+      console.log(token)
+    });
+
+    FCM.getInitialNotification().then( notif => {console.tron.log('getInitialNotification'); console.tron.log(notif) } );
+
+    this.notificationListener = FCM.on(FCMEvent.Notification,  notif => {
+      console.tron.log('notif')
+      console.tron.log(notif)
+
+      // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
+      if (!notif.opened_from_tray){
+        //this is a local notification
+        this.dropdown.alertWithType('info', 'New article in feed', notif.articleTitle)
+      }
+      if (notif.opened_from_tray){
+        //app is open/resumed because user clicked banner
+        let newArticle = this.findArticleInState(notif.articleTitle)
+        NavigationActions.articleScreen({article: newArticle})
+      }
+    });
+
+    this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, (token) => {
+      console.tron.log(token)
+    // fcm token may not be available on first load, catch it here
+    });
+
   }
 
   render () {
@@ -24,8 +59,41 @@ class RootContainer extends Component {
       <View style={styles.applicationView}>
         <StatusBar barStyle="light-content" translucent={true} backgroundColor={Colors.transparent}/>
         <NavigationRouter />
+        <DropdownAlert
+          ref={(ref) => this.dropdown = ref}
+          onClose={(data) => this.onClose(data)}/>
       </View>
     )
+  }
+
+  onClose(data) {
+    // data = {type, title, message, action}
+    // action means how the alert was dismissed. returns: automatic, programmatic, tap, pan or cancel
+    console.tron.log('data');
+    console.tron.log(data);
+    if (data.action === 'tap') {
+      let newArticle = this.findArticleInState(data.message)
+      NavigationActions.articleScreen({article: newArticle})
+    }
+  }
+
+  findArticleInState(title) {
+    let articles = this.props.articles.asMutable()
+    return articles.sort((article)=> {
+      return article.title === title
+    })[0]
+  }
+
+  componentWillUnmount() {
+    // stop listening for events
+    this.notificationListener.remove();
+    this.refreshTokenListener.remove();
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    articles: state.articles.data,
   }
 }
 
@@ -34,4 +102,4 @@ const mapDispatchToProps = (dispatch) => ({
   startup: () => dispatch(StartupActions.startup())
 })
 
-export default connect(null, mapDispatchToProps)(RootContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(RootContainer)
