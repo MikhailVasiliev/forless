@@ -39,7 +39,7 @@ class NavigationRouter extends Component {
                    component={ArticleScreen}
                    leftButtonImage={Images.back}
                    leftButtonIconStyle={Styles.leftButton}
-                   onLeft={() => {console.tron.log('onBack')}} />
+                   onLeft={() => {}} />
             <Scene key="settings"
                    title="Settings"
                    component={SettingsScreen}

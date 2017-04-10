@@ -1,5 +1,5 @@
 // @flow
-
+import {Platform} from 'react-native'
 import {Colors, Metrics} from '../../Themes/'
 
 export default {
@@ -17,6 +17,13 @@ export default {
   title: {
     color: Colors.snow,
     fontFamily: 'Avenir Next',
+    ...Platform.select({
+      ios: {
+      },
+      android: {
+        marginTop: 10
+      }
+    })
   },
   leftButton: {
     tintColor: Colors.snow,

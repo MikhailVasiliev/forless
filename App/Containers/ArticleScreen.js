@@ -7,6 +7,7 @@ import ArticlesActions from '../Redux/ArticlesRedux'
 
 // External libs
 import Image from 'react-native-image-progress';
+import LinearGradient from 'react-native-linear-gradient';
 
 // Redux
 import { connect } from 'react-redux'
@@ -16,19 +17,34 @@ import styles from './Styles/ArticleScreenStyles'
 
 class ArticleScreen extends React.Component {
 
+  componentWillMount() {
+    NavigationActions.refresh({
+      onBack: () => {
+        NavigationActions.popTo('presentationScreen')
+      }
+    })
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.filteredArticles !== nextProps.filteredArticles) {
       NavigationActions.presentationScreen({filteredArticles: nextProps.filteredArticles})
     }
   }
+  // <View style={styles.overlay}/>
 
   render () {
     var article = this.props.article
     return (
+      <View style={{flex: 1}}>
+      <LinearGradient
+        colors={[
+          'rgba(0, 0, 0, 0.7)',
+          'rgba(0, 0, 0, 0.5)',
+          'rgba(0, 0, 0, 0.2)',
+          'rgba(0, 0, 0, 0)']}
+        style={styles.linearGradient}/>
       <ScrollView style={styles.main} >
-        <Image style={styles.cover} source={{uri: article.cover}}>
-          <View style={styles.overlay}/>
-        </Image>
+        <Image style={styles.cover} source={{uri: article.cover}} />
         <Text style={styles.articleTitle}>{article.title}</Text>
         <View style={styles.dateContainer}>
           <TouchableOpacity style={styles.themeContainer} onPress={()=>{
@@ -47,6 +63,7 @@ class ArticleScreen extends React.Component {
           }
         }) }
       </ScrollView>
+      </View>
     )
   }
 }

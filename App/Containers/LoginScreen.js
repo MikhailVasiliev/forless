@@ -17,6 +17,8 @@ import ArticlesActions from '../Redux/ArticlesRedux'
 import NotificationActions from '../Redux/NotificationRedux'
 // External libs
 import * as firebase from 'firebase';
+import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
+
 // Services
 import FirebaseDB from '../Services/FirebaseDB'
 // Styles
@@ -115,6 +117,7 @@ class LoginScreen extends React.Component {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pass);
       FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes)
+
       // NavigationActions.presentationScreen()
       console.tron.log('Logged In!');
         // Navigate to the Home page
@@ -159,13 +162,23 @@ class LoginScreen extends React.Component {
   setArticlesInState (articles, themes) {
     this.props.storeArticles(articles)
     this.props.storeThemes(themes)
+    this.subscribeToTopics(themes)
     NavigationActions.presentationScreen({articles})
+  }
+
+  subscribeToTopics(themes) {
+    themes.map((theme) => {
+      if (theme.enabled && this.props.notificationsEnabled) {
+        FCM.subscribeToTopic('/topics/' + theme.topic);
+      }
+    })
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    allThemes: state.notification.allThemes
+    allThemes: state.notification.allThemes,
+    notificationsEnabled: state.notification.notificationsEnabled
   }
 }
 

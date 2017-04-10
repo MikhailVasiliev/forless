@@ -10,6 +10,7 @@ export default StyleSheet.create({
   },
   switchContainer: {
     marginTop: Metrics.navBarHeight + Metrics.statusBarHeight * 2,
+    marginBottom: 20,
     flexDirection: 'row',
     height: 50,
     alignSelf: 'stretch',
@@ -21,19 +22,22 @@ export default StyleSheet.create({
   },
   switchComponentText: {
     ...Fonts.style.h5,
-    marginLeft: 20,
+    marginLeft: 25,
     color: 'white'
   },
   containerStyle: {
     flex: 1,
     flexDirection: 'row',
-    padding: 20,
-    alignItems: 'center'
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    alignItems: 'center',
   },
   labelStyle: {
     flex: 1,
     color: 'white',
-    fontFamily: 'Avenir Next'
+    fontFamily: 'Avenir Next',
+    textAlign: 'right',
+    marginRight: 30,
   },
   checkboxStyle: {
     width: 26,

@@ -1,5 +1,6 @@
 import * as firebase from 'firebase';
 
+
 class Database {
 
     /**
@@ -44,8 +45,6 @@ class Database {
           themes.push(uniqueTheme)
         }
       });
-      // console.tron.log(articles)
-      // console.tron.log(themes)
       callback(articles, themes)
     });
   }
@@ -63,7 +62,6 @@ class Database {
           theme: child.val().theme,
           date: child.key
         });
-        console.tron.log(articles)
       });
       return articles;
     });

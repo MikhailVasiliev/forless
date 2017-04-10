@@ -17,6 +17,7 @@ import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, 
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
 class RootContainer extends Component {
+
   componentDidMount () {
     // if redux persist is not active fire startup action
     if (!ReduxPersist.active) {

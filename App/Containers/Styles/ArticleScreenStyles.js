@@ -58,6 +58,14 @@ export default StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 20,
   },
+  linearGradient: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 100,
+    zIndex: 1
+  },
   themeContainer: {
     backgroundColor: Colors.skyBlue,
     justifyContent: 'center',
