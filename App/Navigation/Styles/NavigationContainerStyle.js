@@ -16,12 +16,12 @@ export default {
   },
   title: {
     color: Colors.snow,
-    fontFamily: 'Avenir Next',
+    fontFamily: 'Avenir Next Regular',
     ...Platform.select({
       ios: {
       },
       android: {
-        marginTop: 10
+        marginTop: 4
       }
     })
   },

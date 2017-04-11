@@ -18,7 +18,7 @@ export default StyleSheet.create({
   footerButtonText: {
     color: 'white',
     margin: 20,
-    fontFamily: 'Avenir Next'
+    fontFamily: 'Avenir Next Regular'
   },
   footer: {
     position: 'absolute',
