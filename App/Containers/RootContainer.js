@@ -63,7 +63,8 @@ class RootContainer extends Component {
         <NavigationRouter />
         <DropdownAlert
           ref={(ref) => this.dropdown = ref}
-          onClose={(data) => this.onClose(data)}/>
+          onClose={(data) => this.onClose(data)}
+          translucent={true}/>
       </View>
     )
   }
