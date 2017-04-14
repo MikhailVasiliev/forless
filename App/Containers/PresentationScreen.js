@@ -56,6 +56,7 @@ class PresentationScreen extends React.Component {
   }
 
   render () {
+    console.tron.log(this.state.index)
     let articles = this.props.filteredArticles ? this.props.filteredArticles : this.props.articles
 
     if (articles.length > 0) {
@@ -65,25 +66,42 @@ class PresentationScreen extends React.Component {
                    activeDotColor={Colors.skyBlue}
                    dot={this.renderDot('rgba(0, 0, 0, 0.2)')}
                    activeDot={this.renderDot(Colors.skyBlue)}
+                   showsButtons={true}
+                   buttonWrapperStyle={styles.footer}
+                   nextButton={this.renderFooterButton('След.')}
+                   prevButton={this.renderFooterButton('Назад')}
                    >
             { articles.map((article, index) => {
               return (<SwiperItem article={article} key={index}/>)
             }) }
           </Swiper>
-          <View style={styles.footer}>
-            <TouchableOpacity style={styles.footerButtons} onPress={() => {console.tron.log('Footer buttom pressed')}}>
-              <Text style={styles.footerButtonText}>Read</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.footerButtons} onPress={() => {console.tron.log('Footer buttom pressed')}}>
-              <Text style={styles.footerButtonText}>Next</Text>
-            </TouchableOpacity>
-          </View>
         </View>
       )
     } else {
       return (<View style={{flex: 1, backgroundColor: 'green'}}/>)
     }
   }
+
+  // <TouchableOpacity style={styles.footerButtonRead} onPress={() => {NavigationActions.articleScreen({article: articles[this.state.index]})}}>
+  //   <Text style={styles.footerButtonText}>Читать</Text>
+  // </TouchableOpacity>
+
+
+  renderFooterButton(text){
+    return (
+          <Text style={styles.footerButtonText}>{text}</Text>
+    )
+  }
+
+  // <View style={styles.footer}>
+  //   <TouchableOpacity style={styles.footerButtons} onPress={() => {console.tron.log('Footer buttom pressed')}}>
+  //     <Text style={styles.footerButtonText}>Read</Text>
+  //   </TouchableOpacity>
+  //   <TouchableOpacity style={styles.footerButtons} onPress={() => {console.tron.log('Footer buttom pressed')}}>
+  //     <Text style={styles.footerButtonText}>Next</Text>
+  //   </TouchableOpacity>
+  // </View>
+
 
   renderDot(color) {
     return (

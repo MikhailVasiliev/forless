@@ -43,8 +43,8 @@ const style = {
     fontSize: size.h5
   },
   h6: {
-    fontFamily: type.emphasis,
-    fontSize: size.h6
+    fontFamily: type.base,
+    fontSize: size.input
   },
   normal: {
     fontFamily: type.base,

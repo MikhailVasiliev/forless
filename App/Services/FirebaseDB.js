@@ -45,6 +45,16 @@ class Database {
           themes.push(uniqueTheme)
         }
       });
+
+      let newTheme = {
+        name: 'Новые темы',
+        topic: 'new',
+        enabled: true
+      }
+
+      if (!themes.some((theme)=>{return theme.name === newTheme.name}) ) {
+        themes.push(newTheme)
+      }
       callback(articles, themes)
     });
   }

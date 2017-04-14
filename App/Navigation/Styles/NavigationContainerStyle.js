@@ -31,6 +31,12 @@ export default {
     height: 30,
     resizeMode: 'contain'
   },
+  backButton: {
+    tintColor: Colors.snow,
+    width: 30,
+    height: 21,
+    resizeMode: 'contain'
+  },
   rightButton: {
     tintColor: Colors.snow,
     width: 30,

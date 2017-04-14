@@ -21,17 +21,16 @@ class NavigationRouter extends Component {
       <Router>
           <Scene key="drawerChildrenWrapper"
                  navigationBarStyle={Styles.navBar}
-                 leftButtonImage={Images.back}
                  backButtonImage={Images.back}
                  titleStyle={Styles.title}
                  leftButtonIconStyle={Styles.leftButton}
                  rightButtonTextStyle={Styles.rightButton}>
-            <Scene key="login"
+            <Scene initial key="login"
                    hideNavBar
                    type={ActionConst.REPLACE}
                    component={LoginScreen}
                    title="Login" />
-            <Scene initial key="presentationScreen"
+            <Scene key="presentationScreen"
                    type={ActionConst.REPLACE}
                    component={PresentationScreen}
                    title="Feed"
@@ -44,13 +43,13 @@ class NavigationRouter extends Component {
             <Scene key="articleScreen"
                    component={ArticleScreen}
                    leftButtonImage={Images.back}
-                   leftButtonIconStyle={Styles.leftButton}
+                   leftButtonIconStyle={Styles.backButton}
                    onLeft={() => {}} />
             <Scene key="settings"
                    title="Settings"
                    component={SettingsScreen}
                    leftButtonImage={Images.back}
-                   leftButtonIconStyle={Styles.leftButton}
+                   leftButtonIconStyle={Styles.backButton}
                    onLeft={() => {}} />
           </Scene>
       </Router>

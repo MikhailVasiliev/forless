@@ -10,12 +10,31 @@ export default StyleSheet.create({
   },
   switchContainer: {
     marginTop: Metrics.navBarHeight + Metrics.statusBarHeight * 2,
-    marginBottom: 20,
     flexDirection: 'row',
     height: 50,
     alignSelf: 'stretch',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  gradient: {
+    margin: 20,
+    height: 70,
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  topicsStickerContainer: {
+    margin: 20,
+    height: 70,
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'grey'
+  },
+  topicsSticker: {
+    ...Fonts.style.h6,
+    backgroundColor: Colors.transparent,
+    color: 'white'
   },
   switchComponent: {
     margin: 10,

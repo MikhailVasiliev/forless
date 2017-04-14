@@ -1,15 +1,16 @@
 // @flow
 
 import React from 'react'
-import { ScrollView, Text, View, TouchableOpacity, Switch } from 'react-native'
+import { ScrollView, Text, View, Switch } from 'react-native'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import ArticlesActions from '../Redux/ArticlesRedux'
 import NotificationActions from '../Redux/NotificationRedux'
 
 // External libs
-import Image from 'react-native-image-progress';
 import { CheckboxField, Checkbox } from 'react-native-checkbox-field';
 import FCM from 'react-native-fcm'
+import LinearGradient from 'react-native-linear-gradient';
+
 // Redux
 import { connect } from 'react-redux'
 // Libs
@@ -50,7 +51,20 @@ class SettingsScreen extends React.Component {
               value={this.state.notificationsEnabled}
               />
         </View>
+        <LinearGradient
+          colors={[
+            'rgba(50, 50, 50, 0)',
+            'rgba(50, 50, 50, 0.4)',
+            'rgba(50, 50, 50, 0.7)',
+            'rgba(50, 50, 50, 0.7)',
+            'rgba(50, 50, 50, 0.4)',
+            'rgba(50, 50, 50, 0)']}
+          locations={[0, 0.2, 0.45, 0.55, 0.8, 1]}
+          style={styles.gradient}>
+          <Text style={styles.topicsSticker}>Subscribe to topics:</Text>
+        </LinearGradient>
         { allThemes.map((theme, index) => {
+          if (theme.enabled){ var yn = 'Y' } else { yn = 'N' }
           return <View style={styles.checkboxContainer} key={index}>
             <CheckboxField
                 label={theme.name}
@@ -64,7 +78,7 @@ class SettingsScreen extends React.Component {
                 labelStyle={styles.labelStyle}
                 checkboxStyle={styles.checkboxStyle}
                 labelSide="left">
-                <Text style={{ color: 'white' }}>Y</Text>
+                <Text style={{ color: 'white' }}>{yn}</Text>
             </CheckboxField>
           </View>
         })
