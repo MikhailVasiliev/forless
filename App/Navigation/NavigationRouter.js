@@ -26,12 +26,12 @@ class NavigationRouter extends Component {
                  titleStyle={Styles.title}
                  leftButtonIconStyle={Styles.leftButton}
                  rightButtonTextStyle={Styles.rightButton}>
-            <Scene initial key="login"
+            <Scene key="login"
                    hideNavBar
                    type={ActionConst.REPLACE}
                    component={LoginScreen}
                    title="Login" />
-            <Scene key="presentationScreen"
+            <Scene initial key="presentationScreen"
                    type={ActionConst.REPLACE}
                    component={PresentationScreen}
                    title="Feed"

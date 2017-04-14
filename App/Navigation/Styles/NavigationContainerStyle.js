@@ -16,7 +16,7 @@ export default {
   },
   title: {
     color: Colors.snow,
-    fontFamily: 'Avenir Next Regular',
+    fontFamily: 'Avenir Next',
     ...Platform.select({
       ios: {
       },

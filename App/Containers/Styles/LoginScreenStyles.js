@@ -42,7 +42,7 @@ export default StyleSheet.create({
     paddingRight: 10,
     marginBottom: 5,
     borderRadius: 20,
-    fontFamily: 'Avenir Next Regular'
+    fontFamily: 'Avenir Next'
   },
   passInput: {
     alignSelf: 'stretch',
@@ -54,7 +54,7 @@ export default StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     borderRadius: 20,
-    fontFamily: 'Avenir Next Regular'
+    fontFamily: 'Avenir Next'
   },
   loginBtn: {
     flex: 1,

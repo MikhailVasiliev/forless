@@ -1,10 +1,12 @@
 package com.vasiliev.forexlessons;
 
 import android.app.Application;
+import android.graphics.Color;
 
 import com.facebook.react.ReactApplication;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
+import com.facebook.react.ReactRootView;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.i18n.reactnativei18n.ReactNativeI18n;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;

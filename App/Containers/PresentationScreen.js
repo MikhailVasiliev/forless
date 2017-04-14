@@ -1,8 +1,7 @@
 // @flow
 
 import React from 'react'
-import { ScrollView, Text, View, ListView, TouchableOpacity } from 'react-native'
-import { Images, Metrics } from '../Themes'
+import { Text, View, TouchableOpacity } from 'react-native'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import ArticlesActions from '../Redux/ArticlesRedux'
 
@@ -10,11 +9,8 @@ import ArticlesActions from '../Redux/ArticlesRedux'
 import SwiperItem from '../Components/SwiperItem'
 
 // External libs
-import Image from 'react-native-image-progress';
 import Swiper from 'react-native-swiper';
 import * as firebase from 'firebase';
-import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
-// import DropdownAlert from 'react-native-dropdownalert'
 
 // Redux
 import { connect } from 'react-redux'
@@ -24,6 +20,7 @@ import FirebaseDB from '../Services/FirebaseDB'
 
 // Styles
 import styles from './Styles/PresentationScreenStyles'
+import { Colors } from '../Themes'
 
 class PresentationScreen extends React.Component {
 
@@ -59,12 +56,16 @@ class PresentationScreen extends React.Component {
   }
 
   render () {
-    let articles = this.props.filteredArticles ? this.props.filteredArticles : this.state.articles
+    let articles = this.props.filteredArticles ? this.props.filteredArticles : this.props.articles
 
     if (articles.length > 0) {
       return (
         <View style={styles.main}>
-          <Swiper horizontal={false}  >
+          <Swiper horizontal={false}
+                   activeDotColor={Colors.skyBlue}
+                   dot={this.renderDot('rgba(0, 0, 0, 0.2)')}
+                   activeDot={this.renderDot(Colors.skyBlue)}
+                   >
             { articles.map((article, index) => {
               return (<SwiperItem article={article} key={index}/>)
             }) }
@@ -84,11 +85,16 @@ class PresentationScreen extends React.Component {
     }
   }
 
-  onClose(data) {
-  // data = {type, title, message, action}
-  // action means how the alert was dismissed. returns: automatic, programmatic, tap, pan or cancel
-    console.tron.log('data');
-    console.tron.log(data);
+  renderDot(color) {
+    return (
+      <View style={{
+        backgroundColor: color,
+        width: 6,
+        height: 6,
+        borderRadius: 2,
+        margin: 2,
+      }}/>
+    )
   }
 
   async signup(email, pass) {

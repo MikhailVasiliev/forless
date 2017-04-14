@@ -35,7 +35,7 @@ export default StyleSheet.create({
   labelStyle: {
     flex: 1,
     color: 'white',
-    fontFamily: 'Avenir Next Regular',
+    fontFamily: 'Avenir Next',
     textAlign: 'right',
     marginRight: 30,
   },

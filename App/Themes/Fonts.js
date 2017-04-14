@@ -1,7 +1,7 @@
 // @flow
 
 const type = {
-  base: 'Avenir Next Regular',
+  base: 'Avenir Next',
   thin: 'Avenir Next',
   bold: 'Avenir Next-Bold',
   emphasis: 'Avenir Next-Italic'
