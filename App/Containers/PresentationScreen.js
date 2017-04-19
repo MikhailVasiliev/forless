@@ -68,8 +68,8 @@ class PresentationScreen extends React.Component {
                    activeDot={this.renderDot(Colors.skyBlue)}
                    showsButtons={true}
                    buttonWrapperStyle={styles.footer}
-                   nextButton={this.renderFooterButton('След.')}
-                   prevButton={this.renderFooterButton('Назад')}
+                   nextButton={this.renderFooterButton('След. >')}
+                   prevButton={this.renderFooterButton('< Назад')}
                    >
             { articles.map((article, index) => {
               return (<SwiperItem article={article} key={index}/>)

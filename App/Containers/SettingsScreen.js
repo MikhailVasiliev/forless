@@ -43,6 +43,18 @@ class SettingsScreen extends React.Component {
     let allThemes = this.props.allThemes
     return (
       <ScrollView style={styles.main}  >
+        <LinearGradient
+          colors={[
+            'rgba(50, 50, 50, 0)',
+            'rgba(50, 50, 50, 0.4)',
+            'rgba(50, 50, 50, 0.7)',
+            'rgba(50, 50, 50, 0.7)',
+            'rgba(50, 50, 50, 0.4)',
+            'rgba(50, 50, 50, 0)']}
+          locations={[0, 0.2, 0.45, 0.55, 0.8, 1]}
+          style={styles.gradientFirst}>
+          <Text style={styles.topicsSticker}>New article notifications</Text>
+        </LinearGradient>
         <View style={styles.switchContainer} >
           <Text style={styles.switchComponentText}>Enable notifications</Text>
           <Switch

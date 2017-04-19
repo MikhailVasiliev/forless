@@ -9,11 +9,20 @@ export default StyleSheet.create({
     backgroundColor: 'black',
   },
   switchContainer: {
-    marginTop: Metrics.navBarHeight + Metrics.statusBarHeight * 2,
+    // marginTop: Metrics.navBarHeight + Metrics.statusBarHeight * 2,
     flexDirection: 'row',
+    marginHorizontal: 20,
     height: 50,
     alignSelf: 'stretch',
     justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  gradientFirst: {
+    marginTop: Metrics.navBarHeight + Metrics.statusBarHeight * 2,
+    margin: 20,
+    height: 70,
+    alignSelf: 'stretch',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   gradient: {
