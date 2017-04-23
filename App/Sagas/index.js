@@ -11,7 +11,7 @@ import { ArticlesTypes } from '../Redux/ArticlesRedux'
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
-import { login } from './LoginSagas'
+import { storeUser } from './LoginSagas'
 import {
   articleFetchAttempt,
   articleFetchSuccess,

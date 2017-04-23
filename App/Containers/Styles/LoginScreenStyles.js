@@ -77,7 +77,6 @@ export default StyleSheet.create({
     width: 40,
     backgroundColor: Colors.transparent,
     marginLeft: 10,
-    marginRight: 10,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
@@ -93,6 +92,7 @@ export default StyleSheet.create({
     width: 40,
     height: 40,
     backgroundColor: Colors.transparent,
+    marginLeft: 10,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
@@ -103,6 +103,22 @@ export default StyleSheet.create({
     width: 20,
     height: 20,
     tintColor: 'white'
+  },
+  loginSmsBtn: {
+    width: 40,
+    height: 40,
+    backgroundColor: Colors.transparent,
+    marginLeft: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'white'
+  },
+  loginSmsBtnText: {
+    width: 20,
+    height: 20,
+    color: 'white'
   },
   buttonsContainer: {
     flexDirection: 'row',

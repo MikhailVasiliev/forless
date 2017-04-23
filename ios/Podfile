@@ -9,5 +9,4 @@ target 'ForexLessons' do
   pod 'Google/SignIn'
   pod 'Firebase/Messaging'
 
-
 end

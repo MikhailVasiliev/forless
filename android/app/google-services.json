@@ -15,6 +15,18 @@
       },
       "oauth_client": [
         {
+          "client_id": "350196186671-nmd2vtijo3jpfsnt595aitqs539e2mpm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vasiliev.forexlessons",
+            "certificate_hash": "e0609fa32198a34ca0bbd56af0446afa7297e558"
+          }
+        },
+        {
+          "client_id": "350196186671-ckn9u519anj4pr0f1inb4r45763cb60v.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
           "client_id": "350196186671-v2vsgllehd23v4blh97c823c6lkj4ma1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -40,8 +52,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "350196186671-smt2gvh2gc92d9q7ge5q3t3a74qusm56.apps.googleusercontent.com",
+              "client_id": "350196186671-ckn9u519anj4pr0f1inb4r45763cb60v.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "350196186671-c7hi3nigtp9101q5b1cb6o2uuqh785lr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vasiliev.forexlessons"
+              }
             }
           ]
         },

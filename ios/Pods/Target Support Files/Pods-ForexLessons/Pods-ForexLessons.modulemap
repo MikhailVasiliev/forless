@@ -1,0 +1,6 @@
+framework module Pods_ForexLessons {
+  umbrella header "Pods-ForexLessons-umbrella.h"
+
+  export *
+  module * { export * }
+}
