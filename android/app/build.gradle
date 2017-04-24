@@ -96,6 +96,12 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+
     signingConfigs {
         release {
             if(project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
@@ -138,7 +144,16 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
+    compile project(':react-native-lock')
+    compile(project(":react-native-google-signin")){
+        exclude group: "com.google.android.gms" // very important
+    }
+    compile project(':react-native-fbsdk')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-fcm')
     compile project(':react-native-vector-icons')

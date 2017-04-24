@@ -10,15 +10,19 @@ import {
 } from 'react-native'
 
 import { Actions as NavigationActions } from 'react-native-router-flux'
-
+import LoadingIndicator from '../Components/LoadingIndicator'
 // Redux
 import { connect } from 'react-redux'
 import ArticlesActions from '../Redux/ArticlesRedux'
+import LoginActions from '../Redux/LoginRedux'
 import NotificationActions from '../Redux/NotificationRedux'
 // External libs
 import * as firebase from 'firebase';
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
-
+import FBSDK, { LoginManager, AccessToken } from 'react-native-fbsdk';
+import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
+import Auth0Lock from 'react-native-lock'
+var lock = new Auth0Lock({clientId: '350196186671-v2vsgllehd23v4blh97c823c6lkj4ma1.apps.googleusercontent.com', domain: 'numeric-oarlock-144410.firebaseio.com'});
 // Services
 import FirebaseDB from '../Services/FirebaseDB'
 // Styles
@@ -32,17 +36,18 @@ class LoginScreen extends React.Component {
 
     this.state = {
       login: '',
-      password: ''
+      password: '',
+      user: {},
+      loading: false,
     }
 
     this.KEYS = {
-      scopes: ['https://www.googleapis.com/auth/plus.login'], // what API you want to access on behalf of the user, default is email and profile
-      iosClientId: '<FROM DEVELOPER CONSOLE>', // only for iOS
-      webClientId: '350196186671-smt2gvh2gc92d9q7ge5q3t3a74qusm56.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+      // scopes: ['email', 'profile', 'https://www.googleapis.com/auth/plus.login'], // what API you want to access on behalf of the user, default is email and profile
+      iosClientId: '350196186671-c7hi3nigtp9101q5b1cb6o2uuqh785lr.apps.googleusercontent.com', // only for iOS
+      webClientId: '350196186671-ckn9u519anj4pr0f1inb4r45763cb60v.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
       offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-      forceConsentPrompt: true, // [Android] if you want to show the authorization prompt at each login
-      accountName: '', // [Android] specifies an account name on the device that should be used
-      hostedDomain: 'numeric-oarlock-144410.firebaseapp.com' // [Android] specifies a hosted domain restriction
+      // forceConsentPrompt: true, // [Android] if you want to show the authorization prompt at each login
+      // accountName: '', // [Android] specifies an account name on the device that should be used
     }
   }
 
@@ -57,6 +62,16 @@ class LoginScreen extends React.Component {
     } catch (err) {
       console.tron.log(err)
     }
+  }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user){
+        console.tron.log('onAuthStateChanged')
+        console.tron.log(user)
+        this.onLoggedIn()
+      }
+    })
   }
 
   render () {
@@ -93,12 +108,20 @@ class LoginScreen extends React.Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.loginFbBtn}
-                onPress={() => {this.login('mr.m.vasiliev@gmail.com', '111111')}}>
+                onPress={() => {this.loginFacebook()}}>
                 <Image style={styles.loginGoogleBtnText} source={Images.f}/>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.loginSmsBtn}
+                onPress={() => {this.loginSms()}}>
+                <Text style={styles.loginSmsBtnText}>SMS</Text>
               </TouchableOpacity>
             </View>
           </View>
         </Image>
+        <LoadingIndicator
+          active={this.state.loading}
+          text={'Logging in...'}/>
       </View>
     )
   }
@@ -116,53 +139,104 @@ class LoginScreen extends React.Component {
   async login(email, pass) {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pass);
-      FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes)
-
-      // NavigationActions.presentationScreen()
+      this.onLoggedIn()
       console.tron.log('Logged In!');
-        // Navigate to the Home page
     } catch (error) {
       console.tron.log(error.toString())
     }
   }
 
-  onGoogleLoginSuccess(user) {
-    var token = user.idToken;
-    var provider = firebase.auth.GoogleAuthProvider;
-    var credential = provider.credential('350196186671-v2vsgllehd23v4blh97c823c6lkj4ma1.apps.googleusercontent.com');
-    firebase.auth().signInWithCredential(credential)
-      .then((data)=>console.tron.log('SUCCESS', data))
-      .catch((error)=>{console.tron.log('ERROR'), console.tron.log(error)});
+  onLoggedIn(){
+    this.setState({loading: true})
+    FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes)
   }
 
-  async loginGoogle() {
+  loginSms() {
+    lock.show({
+      connections: ['sms']
+    }, (err, profile, token) => {
+      console.tron.log('Logged in with sms!');
+    });
+  }
 
-    // try {
-    //
-    //   GoogleSignin.hasPlayServices({ autoResolve: true })
-    //     .then(() => {
-    //       GoogleSignin.configure(this.KEYS)
-    //          .then(() => {
-    //            GoogleSignin.signIn()
-    //              .then((user) => {this.onGoogleLoginSuccess(user)})
-    //              .catch(error=>{})
-    //              .done();
-    //          });
-    //     })
-    //     .catch((err) => {
-    //       console.log('Play services error', err.code, err.message);
-    //     })
-    //
-    //   console.tron.log('Logged In with Google!');
-    // } catch (error) {
-    //   console.tron.log(error.toString())
-    // }
+  loginFacebook() {
+    LoginManager.logInWithReadPermissions(['public_profile', 'email']).then(
+      (result) => {
+        if (result.isCancelled) {
+          alert('Login cancelled');
+        } else {
+          AccessToken.getCurrentAccessToken().then((accessTokenData) => {
+            const credential = firebase.auth.FacebookAuthProvider.credential(accessTokenData.accessToken)
+            firebase.auth().signInWithCredential(credential).then((loginResult) => {
+              console.tron.log('Logged in with Facebook')
+              let userProfile = loginResult.providerData[0]
+              console.tron.log(loginResult)
+
+              this.props.storeUser(userProfile)
+              this.onLoggedIn()
+            }, (error) => {
+              console.tron.log('error1')
+              console.tron.log(error)
+            })
+          }, (error) => {
+            console.tron.log('error2')
+            console.tron.log(error)
+          })
+        }
+      },
+      function(error) {
+        alert('Login fail with error: ' + error);
+        console.tron.log(error)
+      }
+    );
+  }
+
+  loginGoogle() {
+
+    try {
+
+      GoogleSignin.hasPlayServices({ autoResolve: true })
+        .then(() => {
+          GoogleSignin.configure(this.KEYS)
+             .then(() => {
+               GoogleSignin.signIn()
+                 .then((user) => {
+                   console.tron.log('Logged In with Google!');
+                   const credential = firebase.auth.GoogleAuthProvider.credential(null, user.accessToken)
+                   firebase.auth().signInWithCredential(credential).then((loginResult) => {
+                     console.tron.log('Logged in with Google')
+                     let userProfile = loginResult.providerData[0]
+                     console.tron.log(loginResult)
+
+                     this.props.storeUser(userProfile)
+                     this.onLoggedIn()
+                   }, (error) => {
+                     console.tron.log('error logging into Firebase')
+                     console.tron.log(error)
+                   })
+                 })
+                 .catch(error=>{
+                   console.tron.log('Error while logging with Google');
+                   console.tron.log(error);
+                 })
+                 .done();
+             });
+        })
+        .catch((err) => {
+          console.tron.log('Play services error - ');
+          console.tron.log(err);
+        })
+
+    } catch (error) {
+      console.tron.log(error.toString())
+    }
   }
 
   setArticlesInState (articles, themes) {
     this.props.storeArticles(articles)
     this.props.storeThemes(themes)
     this.subscribeToTopics(themes)
+    this.setState({loading: false})
     NavigationActions.presentationScreen({articles})
   }
 
@@ -187,6 +261,7 @@ const mapDispatchToProps = (dispatch) => {
     articlesListFetchAttempt: () => dispatch(ArticlesActions.articlesListFetchAttempt()),
     storeArticles: (articles) => dispatch(ArticlesActions.storeArticles(articles)),
     storeThemes: (themes) => dispatch(NotificationActions.storeThemes(themes)),
+    storeUser: (user) => dispatch(LoginActions.storeUser(user)),
   }
 }
 
