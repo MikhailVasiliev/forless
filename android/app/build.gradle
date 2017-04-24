@@ -96,6 +96,12 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+
     signingConfigs {
         release {
             if(project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
@@ -143,6 +149,7 @@ repositories {
 }
 
 dependencies {
+    compile project(':react-native-lock')
     compile(project(":react-native-google-signin")){
         exclude group: "com.google.android.gms" // very important
     }

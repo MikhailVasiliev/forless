@@ -1,11 +1,14 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
-
 target 'ForexLessons' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   use_frameworks!
 
-  # Pods for ForexLessons
+  # Auth0 Lock
+
+  pod 'Lock', '~> 1.29'
+  pod 'Lock/TouchID'
+  pod 'Lock/SMS'
+  pod 'Lock/Email'
+  pod 'Lock/Safari'
   pod 'Google/SignIn'
   pod 'Firebase/Messaging'
 

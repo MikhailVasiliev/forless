@@ -116,8 +116,6 @@ export default StyleSheet.create({
     borderColor: 'white'
   },
   loginSmsBtnText: {
-    width: 20,
-    height: 20,
     color: 'white'
   },
   buttonsContainer: {

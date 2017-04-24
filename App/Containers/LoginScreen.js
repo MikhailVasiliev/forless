@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 
 import { Actions as NavigationActions } from 'react-native-router-flux'
-
+import LoadingIndicator from '../Components/LoadingIndicator'
 // Redux
 import { connect } from 'react-redux'
 import ArticlesActions from '../Redux/ArticlesRedux'
@@ -21,6 +21,8 @@ import * as firebase from 'firebase';
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
 import FBSDK, { LoginManager, AccessToken } from 'react-native-fbsdk';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
+import Auth0Lock from 'react-native-lock'
+var lock = new Auth0Lock({clientId: '350196186671-v2vsgllehd23v4blh97c823c6lkj4ma1.apps.googleusercontent.com', domain: 'numeric-oarlock-144410.firebaseio.com'});
 // Services
 import FirebaseDB from '../Services/FirebaseDB'
 // Styles
@@ -35,7 +37,8 @@ class LoginScreen extends React.Component {
     this.state = {
       login: '',
       password: '',
-      user: {}
+      user: {},
+      loading: false,
     }
 
     this.KEYS = {
@@ -62,11 +65,13 @@ class LoginScreen extends React.Component {
   }
 
   componentDidMount() {
-    GoogleSignin.currentUserAsync().then((user) => {
-      console.tron.log('USER');
-      console.tron.log(user);
-      this.setState({user: user});
-    }).done();
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user){
+        console.tron.log('onAuthStateChanged')
+        console.tron.log(user)
+        this.onLoggedIn()
+      }
+    })
   }
 
   render () {
@@ -108,12 +113,15 @@ class LoginScreen extends React.Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.loginSmsBtn}
-                onPress={() => {console.tron.log('sms')}}>
+                onPress={() => {this.loginSms()}}>
                 <Text style={styles.loginSmsBtnText}>SMS</Text>
               </TouchableOpacity>
             </View>
           </View>
         </Image>
+        <LoadingIndicator
+          active={this.state.loading}
+          text={'Logging in...'}/>
       </View>
     )
   }
@@ -131,11 +139,24 @@ class LoginScreen extends React.Component {
   async login(email, pass) {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pass);
-      FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes)
+      this.onLoggedIn()
       console.tron.log('Logged In!');
     } catch (error) {
       console.tron.log(error.toString())
     }
+  }
+
+  onLoggedIn(){
+    this.setState({loading: true})
+    FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes)
+  }
+
+  loginSms() {
+    lock.show({
+      connections: ['sms']
+    }, (err, profile, token) => {
+      console.tron.log('Logged in with sms!');
+    });
   }
 
   loginFacebook() {
@@ -152,7 +173,7 @@ class LoginScreen extends React.Component {
               console.tron.log(loginResult)
 
               this.props.storeUser(userProfile)
-              FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes)
+              this.onLoggedIn()
             }, (error) => {
               console.tron.log('error1')
               console.tron.log(error)
@@ -188,7 +209,7 @@ class LoginScreen extends React.Component {
                      console.tron.log(loginResult)
 
                      this.props.storeUser(userProfile)
-                     FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes)
+                     this.onLoggedIn()
                    }, (error) => {
                      console.tron.log('error logging into Firebase')
                      console.tron.log(error)
@@ -215,6 +236,7 @@ class LoginScreen extends React.Component {
     this.props.storeArticles(articles)
     this.props.storeThemes(themes)
     this.subscribeToTopics(themes)
+    this.setState({loading: false})
     NavigationActions.presentationScreen({articles})
   }
 
