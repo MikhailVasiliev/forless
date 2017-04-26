@@ -23,6 +23,6 @@ export default StyleSheet.create({
     elevation: 10
   },
   loadingAlertText: {
-    textAlign: 'center',
+    textAlign: 'center'
   },
 });

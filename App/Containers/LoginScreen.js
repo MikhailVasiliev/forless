@@ -18,9 +18,9 @@ import LoginActions from '../Redux/LoginRedux'
 import NotificationActions from '../Redux/NotificationRedux'
 // External libs
 import * as firebase from 'firebase';
-import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
+import FCM from 'react-native-fcm';
 import FBSDK, { LoginManager, AccessToken } from 'react-native-fbsdk';
-import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
+import {GoogleSignin} from 'react-native-google-signin';
 import Auth0Lock from 'react-native-lock'
 var lock = new Auth0Lock({clientId: '350196186671-v2vsgllehd23v4blh97c823c6lkj4ma1.apps.googleusercontent.com', domain: 'numeric-oarlock-144410.firebaseio.com'});
 // Services
@@ -67,8 +67,6 @@ class LoginScreen extends React.Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user){
-        console.tron.log('onAuthStateChanged')
-        console.tron.log(user)
         this.onLoggedIn()
       }
     })
@@ -147,8 +145,7 @@ class LoginScreen extends React.Component {
   }
 
   onLoggedIn(){
-    this.setState({loading: true})
-    FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes)
+    NavigationActions.presentationScreen()
   }
 
   loginSms() {
@@ -192,9 +189,7 @@ class LoginScreen extends React.Component {
   }
 
   loginGoogle() {
-
     try {
-
       GoogleSignin.hasPlayServices({ autoResolve: true })
         .then(() => {
           GoogleSignin.configure(this.KEYS)
@@ -230,22 +225,6 @@ class LoginScreen extends React.Component {
     } catch (error) {
       console.tron.log(error.toString())
     }
-  }
-
-  setArticlesInState (articles, themes) {
-    this.props.storeArticles(articles)
-    this.props.storeThemes(themes)
-    this.subscribeToTopics(themes)
-    this.setState({loading: false})
-    NavigationActions.presentationScreen({articles})
-  }
-
-  subscribeToTopics(themes) {
-    themes.map((theme) => {
-      if (theme.enabled && this.props.notificationsEnabled) {
-        FCM.subscribeToTopic('/topics/' + theme.topic);
-      }
-    })
   }
 }
 
