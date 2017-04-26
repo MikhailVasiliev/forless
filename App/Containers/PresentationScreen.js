@@ -1,19 +1,22 @@
 // @flow
 
 import React from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View } from 'react-native'
 import { Actions as NavigationActions } from 'react-native-router-flux'
-import ArticlesActions from '../Redux/ArticlesRedux'
 
 // Components
 import SwiperItem from '../Components/SwiperItem'
+import LoadingIndicator from '../Components/LoadingIndicator'
 
 // External libs
 import Swiper from 'react-native-swiper';
 import * as firebase from 'firebase';
+import FCM from 'react-native-fcm';
 
 // Redux
 import { connect } from 'react-redux'
+import ArticlesActions from '../Redux/ArticlesRedux'
+import NotificationActions from '../Redux/NotificationRedux'
 
 // Redux
 import FirebaseDB from '../Services/FirebaseDB'
@@ -34,10 +37,6 @@ class PresentationScreen extends React.Component {
   }
 
   componentWillMount() {
-    if (!this.props.articles) {
-      FirebaseDB.getAllArticles(this.setArticlesInState.bind(this))
-    }
-
     NavigationActions.refresh({
       onLeft: () => {
         NavigationActions.login()
@@ -49,14 +48,24 @@ class PresentationScreen extends React.Component {
   }
 
   componentDidMount(){
+    FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.props.articles)
   }
 
-  setArticlesInState (articles) {
-    this.setState({articles})
+  setArticlesInState (articles, themes) {
+    this.props.storeArticles(articles)
+    this.props.storeThemes(themes)
+    this.subscribeToTopics(themes)
+  }
+
+  subscribeToTopics(themes) {
+    themes.map((theme) => {
+      if (theme.enabled && this.props.notificationsEnabled) {
+        FCM.subscribeToTopic('/topics/' + theme.topic);
+      }
+    })
   }
 
   render () {
-    console.tron.log(this.state.index)
     let articles = this.props.filteredArticles ? this.props.filteredArticles : this.props.articles
 
     if (articles.length > 0) {
@@ -78,30 +87,21 @@ class PresentationScreen extends React.Component {
         </View>
       )
     } else {
-      return (<View style={{flex: 1, backgroundColor: 'green'}}/>)
+      return (
+        <View style={{flex: 1, backgroundColor: 'grey'}}>
+          <LoadingIndicator
+            active={true}
+            text={'Идет синхронизация с сервером...'}/>
+        </View>
+      )
     }
   }
-
-  // <TouchableOpacity style={styles.footerButtonRead} onPress={() => {NavigationActions.articleScreen({article: articles[this.state.index]})}}>
-  //   <Text style={styles.footerButtonText}>Читать</Text>
-  // </TouchableOpacity>
-
 
   renderFooterButton(text){
     return (
           <Text style={styles.footerButtonText}>{text}</Text>
     )
   }
-
-  // <View style={styles.footer}>
-  //   <TouchableOpacity style={styles.footerButtons} onPress={() => {console.tron.log('Footer buttom pressed')}}>
-  //     <Text style={styles.footerButtonText}>Read</Text>
-  //   </TouchableOpacity>
-  //   <TouchableOpacity style={styles.footerButtons} onPress={() => {console.tron.log('Footer buttom pressed')}}>
-  //     <Text style={styles.footerButtonText}>Next</Text>
-  //   </TouchableOpacity>
-  // </View>
-
 
   renderDot(color) {
     return (
@@ -149,12 +149,17 @@ class PresentationScreen extends React.Component {
 const mapStateToProps = (state) => {
   return {
     articles: state.articles.data,
+    allThemes: state.notification.allThemes,
+    notificationsEnabled: state.notification.notificationsEnabled
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     articleFetchAttempt: (path) => dispatch(ArticlesActions.articleFetchAttempt(path)),
+    articlesListFetchAttempt: () => dispatch(ArticlesActions.articlesListFetchAttempt()),
+    storeArticles: (articles) => dispatch(ArticlesActions.storeArticles(articles)),
+    storeThemes: (themes) => dispatch(NotificationActions.storeThemes(themes)),
   }
 }
 
