@@ -19,45 +19,43 @@ class Database {
 
   }
 
-  static async getAllArticles(callback, themes, storedArticles) {
+  static async getAllArticles(callback, themes) {
 
     const rootRef = firebase.database().ref().child('/articles')
     var articles = []
     themes = themes.asMutable()
     rootRef.on('value', (snap) => {
-      if (storedArticles.length !== snap.numChildren()) {
-        snap.forEach((child) => {
-          articles.push({
-            title: child.val().title,
-            data: child.val().data,
-            cover: child.val().cover,
-            theme: child.val().theme,
-            topic: child.val().topic,
-            date: child.key
-          });
-
-          let uniqueTheme = {
-            name: child.val().theme,
-            topic: child.val().topic,
-            enabled: true
-          }
-
-          if (!themes.some((theme)=>{return theme.name === uniqueTheme.name}) ) {
-            themes.push(uniqueTheme)
-          }
+      snap.forEach((child) => {
+        articles.push({
+          title: child.val().title,
+          data: child.val().data,
+          cover: child.val().cover,
+          theme: child.val().theme,
+          topic: child.val().topic,
+          date: child.key
         });
 
-        let newTheme = {
-          name: 'Новые темы',
-          topic: 'new',
+        let uniqueTheme = {
+          name: child.val().theme,
+          topic: child.val().topic,
           enabled: true
         }
 
-        if (!themes.some((theme)=>{return theme.name === newTheme.name}) ) {
-          themes.push(newTheme)
+        if (!themes.some((theme)=>{return theme.name === uniqueTheme.name}) ) {
+          themes.push(uniqueTheme)
         }
-        callback(articles, themes)
+      });
+
+      let newTheme = {
+        name: 'Новые темы',
+        topic: 'new',
+        enabled: true
       }
+
+      if (!themes.some((theme)=>{return theme.name === newTheme.name}) ) {
+        themes.push(newTheme)
+      }
+      callback(articles, themes)
     });
   }
 
