@@ -28,7 +28,7 @@ import FirebaseDB from '../Services/FirebaseDB'
 // Styles
 import styles from './Styles/LoginScreenStyles'
 import { Images, Colors } from '../Themes'
-
+import Toast from 'react-native-root-toast'
 
 class LoginScreen extends React.Component {
   constructor () {
@@ -80,7 +80,8 @@ class LoginScreen extends React.Component {
             <Text style={styles.welcomeText}>Please log in</Text>
             <TextInput
               style={styles.loginInput}
-              placeholder={'login'}
+              placeholder={'email'}
+              keyboardType={'email-address'}
               autoCapitalize={'none'}
               underlineColorAndroid={Colors.transparent}
               onChangeText={(login) => this.setState({login})}
@@ -96,7 +97,9 @@ class LoginScreen extends React.Component {
             <View style={styles.buttonsContainer}>
               <TouchableOpacity
                 style={styles.loginBtn}
-                onPress={() => {this.login('mr.m.vasiliev@gmail.com', '111111')}}>
+                onPress={() => {
+                  this.login(this.state.login, this.state.password)
+                }}>
                 <Text style={styles.loginBtnText}>Log in</Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -130,6 +133,7 @@ class LoginScreen extends React.Component {
       console.tron.log('Account created');
         // Navigate to the Home page, the user is auto logged in
     } catch (error) {
+      Toast.show(error.toString())
       console.tron.log(error.toString())
     }
   }
@@ -138,9 +142,12 @@ class LoginScreen extends React.Component {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pass);
       this.onLoggedIn()
-      console.tron.log('Logged In!');
     } catch (error) {
-      console.tron.log(error.toString())
+      if (email === '' || pass === '') {
+        Toast.show('Заполните оба поля')
+      } else {
+        Toast.show(error.toString())
+      }
     }
   }
 
