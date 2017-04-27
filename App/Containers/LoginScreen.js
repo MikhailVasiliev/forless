@@ -82,6 +82,7 @@ class LoginScreen extends React.Component {
               style={styles.loginInput}
               placeholder={'email'}
               keyboardType={'email-address'}
+              autoCorrect={false}
               autoCapitalize={'none'}
               underlineColorAndroid={Colors.transparent}
               onChangeText={(login) => this.setState({login})}
@@ -91,6 +92,7 @@ class LoginScreen extends React.Component {
               placeholder={'password'}
               autoCapitalize={'none'}
               secureTextEntry={true}
+              autoCorrect={false}
               underlineColorAndroid={Colors.transparent}
               onChangeText={(password) => this.setState({password})}
               value={this.state.password}/>
