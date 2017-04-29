@@ -130,6 +130,7 @@ class LoginScreen extends React.Component {
   }
 
   async signup(email, pass) {
+    email = email.trim()
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, pass);
       console.tron.log('Account created');
@@ -141,8 +142,10 @@ class LoginScreen extends React.Component {
   }
 
   async login(email, pass) {
+    email = email.trim()
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pass);
+      this.props.storeUser(email)
       this.onLoggedIn()
     } catch (error) {
       if (email === '' || pass === '') {

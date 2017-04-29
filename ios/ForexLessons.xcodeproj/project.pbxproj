@@ -14,6 +14,12 @@
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* ForexLessonsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ForexLessonsTests.m */; };
 		0C345F6F1EACBBA800B475DB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C345F6E1EACBBA800B475DB /* GoogleService-Info.plist */; };
+		0C3EE35C1EB28D9600751668 /* Avenir Next-Demi.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C3EE3591EB28D9600751668 /* Avenir Next-Demi.otf */; };
+		0C3EE35D1EB28D9600751668 /* Avenir Next-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C3EE35A1EB28D9600751668 /* Avenir Next-Light.otf */; };
+		0C3EE35E1EB28D9600751668 /* Avenir Next-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C3EE35B1EB28D9600751668 /* Avenir Next-Thin.otf */; };
+		0C685EC01EB48E18003A2E32 /* Avenir Next-Extralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C685EBD1EB48E18003A2E32 /* Avenir Next-Extralight.otf */; };
+		0C685EC11EB48E18003A2E32 /* Avenir Next-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C685EBE1EB48E18003A2E32 /* Avenir Next-Medium.otf */; };
+		0C685EC21EB48E18003A2E32 /* Avenir Next-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C685EBF1EB48E18003A2E32 /* Avenir Next-Regular.otf */; };
 		0C8560A21EA9379300520336 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8560A11EA9379300520336 /* Bolts.framework */; };
 		0C8560A41EA937A000520336 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8560A31EA937A000520336 /* FBSDKCoreKit.framework */; };
 		0C8560A61EA937AA00520336 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8560A51EA937AA00520336 /* FBSDKLoginKit.framework */; };
@@ -348,6 +354,12 @@
 		00E356F21AD99517003FC87E /* ForexLessonsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForexLessonsTests.m; sourceTree = "<group>"; };
 		0A2CCA5FCEA44D20B1427544 /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/RNI18n.xcodeproj"; sourceTree = "<group>"; };
 		0C345F6E1EACBBA800B475DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0C3EE3591EB28D9600751668 /* Avenir Next-Demi.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Avenir Next-Demi.otf"; path = "../android/app/src/main/assets/fonts/Avenir Next-Demi.otf"; sourceTree = "<group>"; };
+		0C3EE35A1EB28D9600751668 /* Avenir Next-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Avenir Next-Light.otf"; path = "../android/app/src/main/assets/fonts/Avenir Next-Light.otf"; sourceTree = "<group>"; };
+		0C3EE35B1EB28D9600751668 /* Avenir Next-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Avenir Next-Thin.otf"; path = "../android/app/src/main/assets/fonts/Avenir Next-Thin.otf"; sourceTree = "<group>"; };
+		0C685EBD1EB48E18003A2E32 /* Avenir Next-Extralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Avenir Next-Extralight.otf"; path = "../android/app/src/main/assets/fonts/Avenir Next-Extralight.otf"; sourceTree = "<group>"; };
+		0C685EBE1EB48E18003A2E32 /* Avenir Next-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Avenir Next-Medium.otf"; path = "../android/app/src/main/assets/fonts/Avenir Next-Medium.otf"; sourceTree = "<group>"; };
+		0C685EBF1EB48E18003A2E32 /* Avenir Next-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Avenir Next-Regular.otf"; path = "../android/app/src/main/assets/fonts/Avenir Next-Regular.otf"; sourceTree = "<group>"; };
 		0C8560A11EA9379300520336 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
 		0C8560A31EA937A000520336 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		0C8560A51EA937AA00520336 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -790,6 +802,9 @@
 		D3E8F73ADCE148CBB9E2FD70 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0C685EBD1EB48E18003A2E32 /* Avenir Next-Extralight.otf */,
+				0C685EBE1EB48E18003A2E32 /* Avenir Next-Medium.otf */,
+				0C685EBF1EB48E18003A2E32 /* Avenir Next-Regular.otf */,
 				7C529CAE2B1049FE8FF96D7E /* Entypo.ttf */,
 				A5567B1B8C94485C95793700 /* EvilIcons.ttf */,
 				EF1A59C9DE8F4C54A1B8363C /* FontAwesome.ttf */,
@@ -800,6 +815,9 @@
 				4AB3EAD8C66C4B409DEFC6D4 /* SimpleLineIcons.ttf */,
 				422C5E448B8942168B104A93 /* Zocial.ttf */,
 				9273D8FBE13B4555B782E400 /* MaterialCommunityIcons.ttf */,
+				0C3EE3591EB28D9600751668 /* Avenir Next-Demi.otf */,
+				0C3EE35A1EB28D9600751668 /* Avenir Next-Light.otf */,
+				0C3EE35B1EB28D9600751668 /* Avenir Next-Thin.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1281,15 +1299,21 @@
 				2D3C5883158540EA9BF2C2EE /* Entypo.ttf in Resources */,
 				A28F12A96C28457982016100 /* EvilIcons.ttf in Resources */,
 				AAF31D14B7E943DA8F03B196 /* FontAwesome.ttf in Resources */,
+				0C685EC21EB48E18003A2E32 /* Avenir Next-Regular.otf in Resources */,
+				0C3EE35D1EB28D9600751668 /* Avenir Next-Light.otf in Resources */,
 				7D1B59DFFA3345DD8938960A /* Foundation.ttf in Resources */,
 				365641D07D184F5686E5C2B1 /* Ionicons.ttf in Resources */,
 				D3194F4DCD804DDBB7B5191F /* MaterialIcons.ttf in Resources */,
 				DCE4871E706C424EBEAC1F56 /* Octicons.ttf in Resources */,
+				0C3EE35E1EB28D9600751668 /* Avenir Next-Thin.otf in Resources */,
 				61B89ACE5DEF4612BF7836D5 /* SimpleLineIcons.ttf in Resources */,
+				0C685EC11EB48E18003A2E32 /* Avenir Next-Medium.otf in Resources */,
+				0C685EC01EB48E18003A2E32 /* Avenir Next-Extralight.otf in Resources */,
 				1AB6221305B646EF8E6B0698 /* Zocial.ttf in Resources */,
 				0CE64D041E87B247003B8C40 /* GoogleSignIn.bundle in Resources */,
 				930F9FBB44F545FB968248F0 /* MaterialCommunityIcons.ttf in Resources */,
 				0C345F6F1EACBBA800B475DB /* GoogleService-Info.plist in Resources */,
+				0C3EE35C1EB28D9600751668 /* Avenir Next-Demi.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

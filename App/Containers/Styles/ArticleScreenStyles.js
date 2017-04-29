@@ -4,8 +4,7 @@ import { StyleSheet } from 'react-native'
 import {
   Colors,
   Metrics,
-  Fonts,
-  ApplicationStyles
+  Fonts
 } from '../../Themes/'
 
 export default StyleSheet.create({
@@ -32,10 +31,11 @@ export default StyleSheet.create({
     resizeMode: 'contain'
   },
   articleTitle: {
-    ...Fonts.style.h4,
-    fontSize: 23,
+    ...Fonts.style.articleTitle,
+    color: '#303030',
+    fontSize: 28,
     margin: 20,
-    marginBottom: 15,
+    marginBottom: 25,
   },
   articleDate: {
     ...Fonts.style.description,
@@ -45,9 +45,10 @@ export default StyleSheet.create({
   text: {
     ...Fonts.style.normal,
     margin: 20,
+    color: '#303030',
     marginTop: 15,
     marginBottom: 0,
-    lineHeight: 25,
+    lineHeight: Metrics.lineHeight,
     textAlign: 'justify',
   },
   dateContainer: {
@@ -71,13 +72,13 @@ export default StyleSheet.create({
     justifyContent: 'center',
     height: 23,
     alignItems: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   articleTheme: {
     ...Fonts.style.normal,
     color: 'white',
     textAlign: 'center',
-    fontSize: 12
+    fontSize: 14
   },
 })

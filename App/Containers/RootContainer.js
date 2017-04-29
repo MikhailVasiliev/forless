@@ -62,9 +62,14 @@ class RootContainer extends Component {
         <StatusBar barStyle="light-content" translucent={true} backgroundColor={Colors.transparent}/>
         <NavigationRouter />
         <DropdownAlert
+          closeInterval={160000}
           ref={(ref) => this.dropdown = ref}
           onClose={(data) => this.onClose(data)}
-          translucent={true}/>
+          translucent={true}
+          titleStyle={styles.alertTitle}
+          messageStyle={styles.alertMessage}
+          imageStyle={styles.alertIcon}
+          />
       </View>
     )
   }

@@ -17,7 +17,7 @@ export default StyleSheet.create({
     paddingBottom: Metrics.footerHeight,
   },
   articleTitle: {
-    ...Fonts.style.h3,
+    ...Fonts.style.articleTitle,
     color: 'white',
     margin: 20,
     marginBottom: Metrics.articleTitleMarginBottom

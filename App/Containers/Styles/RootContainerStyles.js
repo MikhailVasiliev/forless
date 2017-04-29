@@ -23,5 +23,25 @@ export default StyleSheet.create({
     width: 200,
     height: 200,
     alignSelf: 'center'
-  }
+  },
+  alertTitle: {
+    ...Fonts.style.alertTitle,
+    marginLeft: Metrics.baseMargin,
+    color: 'white',
+    textAlign: 'left',
+  },
+  alertMessage: {
+    ...Fonts.style.alertMessage,
+    marginLeft: Metrics.baseMargin,
+    color: 'white',
+    textAlign: 'left',
+  },
+  alertIcon: {
+    marginLeft: 10,
+    padding: 8,
+    width: 36,
+    height:
+    36,
+    alignSelf: 'center'
+  },
 })

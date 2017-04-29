@@ -30,7 +30,6 @@ class ArticleScreen extends React.Component {
       NavigationActions.presentationScreen({filteredArticles: nextProps.filteredArticles})
     }
   }
-  // <View style={styles.overlay}/>
 
   render () {
     var article = this.props.article
@@ -52,14 +51,14 @@ class ArticleScreen extends React.Component {
           }}>
             <Text style={styles.articleTheme}>{article.theme}</Text>
           </TouchableOpacity>
-          <Text style={styles.articleDate}>•</Text>
+          <Text style={styles.articleDate}>  •  </Text>
           <Text style={styles.articleDate}>{article.date}</Text>
         </View>
         { article.data.map((element, index) => {
           if (element.pic) {
             return (<Image style={styles.image} source={{uri: element.pic}} key={index}/>)
           } else {
-            return (<Text style={styles.text} key={index}>  {element.text}</Text>)
+            return (<Text style={styles.text} key={index}>{element.text}</Text>)
           }
         }) }
       </ScrollView>

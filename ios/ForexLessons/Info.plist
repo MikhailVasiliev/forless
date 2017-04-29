@@ -106,6 +106,9 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 		<string>MaterialCommunityIcons.ttf</string>
+		<string>Avenir Next-Light.otf</string>
+		<string>Avenir Next-Thin.otf</string>
+		<string>Avenir Next-Demi.otf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
