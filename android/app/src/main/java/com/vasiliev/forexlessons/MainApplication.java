@@ -4,6 +4,7 @@ import android.app.Application;
 import android.graphics.Color;
 
 import com.facebook.react.ReactApplication;
+import cl.json.RNSharePackage;
 import com.auth0.lock.react.LockReactPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -48,7 +49,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new LockReactPackage(),
+          new RNSharePackage(),
+          new LockReactPackage(),
           new RNGoogleSigninPackage(),
           new LinearGradientPackage(),
           new FIRMessagingPackage(),

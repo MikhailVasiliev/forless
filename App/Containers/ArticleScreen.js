@@ -8,7 +8,7 @@ import ArticlesActions from '../Redux/ArticlesRedux'
 // External libs
 import Image from 'react-native-image-progress';
 import LinearGradient from 'react-native-linear-gradient';
-
+import Share, {ShareSheet, Button} from 'react-native-share';
 // Redux
 import { connect } from 'react-redux'
 // Libs
@@ -21,8 +21,23 @@ class ArticleScreen extends React.Component {
     NavigationActions.refresh({
       onBack: () => {
         NavigationActions.popTo('presentationScreen')
+      },
+      onRight: () => {
+        this.onShare()
       }
     })
+  }
+
+  onShare(){
+    var article = this.props.article
+
+    let shareOptions = {
+      title: article.title,
+      message: 'Советую прочесть - "' + article.title + '"',
+      url: article.cover,
+      subject: 'Subject' //  for email
+    };
+    Share.open(shareOptions).catch((error) => console.tron.log(error));
   }
 
   componentWillReceiveProps(nextProps) {
