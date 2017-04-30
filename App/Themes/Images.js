@@ -11,6 +11,7 @@ const images = {
   f: require('../Images/f.png'),
   back: require('../Images/back.png'),
   settings: require('../Images/settings.png'),
+  share: require('../Images/share.png'),
 }
 
 export default images
