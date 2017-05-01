@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { ScrollView, Text, View, Switch } from 'react-native'
+import { ScrollView, Text, View, Switch, TouchableOpacity } from 'react-native'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import ArticlesActions from '../Redux/ArticlesRedux'
 import NotificationActions from '../Redux/NotificationRedux'
@@ -14,6 +14,8 @@ import LinearGradient from 'react-native-linear-gradient';
 // Redux
 import { connect } from 'react-redux'
 // Libs
+import FirebaseDB from '../Services/FirebaseDB'
+
 // Styles
 import styles from './Styles/SettingsScreenStyles'
 
@@ -95,8 +97,16 @@ class SettingsScreen extends React.Component {
           </View>
         })
         }
+        <TouchableOpacity onPress={this.fetchNewArticle.bind(this)} style={styles.applyButton}>
+          <Text style={styles.btnText}>OPEN TEST VIEW SCREEN</Text>
+        </TouchableOpacity>
       </ScrollView>
     )
+  }
+
+  fetchNewArticle(){
+    let callback = (article) => NavigationActions.newArticle({article})
+    FirebaseDB.getNewArticle(callback)
   }
 
   handleSwitchToggle(enabled){

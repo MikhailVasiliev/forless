@@ -8,6 +8,7 @@ import { Images } from '../Themes'
 // screens identified by the router
 import PresentationScreen from '../Containers/PresentationScreen'
 import ArticleScreen from '../Containers/ArticleScreen'
+import NewArticleScreen from '../Containers/NewArticleScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import SettingsScreen from '../Containers/SettingsScreen'
 
@@ -52,6 +53,11 @@ class NavigationRouter extends Component {
             <Scene key="settings"
                    title="Settings"
                    component={SettingsScreen}
+                   leftButtonImage={Images.back}
+                   leftButtonIconStyle={Styles.backButton}
+                   onLeft={() => {}} />
+            <Scene key="newArticle"
+                   component={NewArticleScreen}
                    leftButtonImage={Images.back}
                    leftButtonIconStyle={Styles.backButton}
                    onLeft={() => {}} />

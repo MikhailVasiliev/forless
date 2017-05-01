@@ -51,6 +51,15 @@ export default StyleSheet.create({
     lineHeight: Metrics.lineHeight,
     textAlign: 'justify',
   },
+  lastTextElement: {
+    ...Fonts.style.normal,
+    margin: 20,
+    color: '#303030',
+    marginTop: 15,
+    marginBottom: 15,
+    lineHeight: Metrics.lineHeight,
+    textAlign: 'justify',
+  },
   dateContainer: {
     flexDirection: 'row',
     alignSelf: 'stretch',
@@ -80,5 +89,20 @@ export default StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 14
+  },
+  applyButton: {
+    backgroundColor: Colors.skyBlue,
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    height: 50,
+    alignItems: 'center',
+    marginHorizontal: 1,
+    width: Metrics.screenWidth / 2
+  },
+  buttonsContainer: {
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row'
   },
 })
