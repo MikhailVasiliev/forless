@@ -44,3 +44,39 @@ export function * articlesListFetchSuccess (api, action) {
 export function * articlesListFetchFailure (api, action) {
   yield call(Toast.show, 'Failed to fetch article', { duration: 6000 })
 }
+
+export function * sendFcmNotification (api, action) {
+  console.tron.log(action.article)
+  const sendMessageResponse = yield call(api.sendRemote, action.article, action.topic)
+  if (sendMessageResponse.status === 200) {
+    console.tron.log('success')
+    // yield put(AccountsActions.registerSuccess(account))
+  } else {
+    console.tron.log('failure')
+    // yield put(AccountsActions.registerFailure(sendMessageResponse.status))
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//asdasd

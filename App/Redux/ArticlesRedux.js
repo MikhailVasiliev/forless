@@ -12,6 +12,7 @@ const { Types, Creators } = createActions({
   articlesListFetchAttempt: null,
   articlesListFetchSuccess: ['article'],
   articlesListFetchFailure: ['error'],
+  sendFcmNotification: ['article', 'topic'],
   storeArticles: ['articles'],
   filterArticles: ['filter'],
 })
@@ -43,6 +44,9 @@ export const articleFetchFailure = (state, {error}) =>
 export const articlesListFetchAttempt = (state) => state
 
 export const articlesListFetchSuccess = (state) =>
+  state
+
+export const sendFcmNotification = (state, {article, topic}) =>
   state
 
 export const articlesListFetchFailure = (state, {error}) =>
@@ -77,4 +81,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ARTICLES_LIST_FETCH_FAILURE]: articlesListFetchFailure,
   [Types.STORE_ARTICLES]: storeArticles,
   [Types.FILTER_ARTICLES]: filterArticles,
+  [Types.SEND_FCM_NOTIFICATION]: sendFcmNotification,
 })

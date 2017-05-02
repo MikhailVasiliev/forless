@@ -83,18 +83,25 @@ class NewArticleScreen extends React.Component {
           <TouchableOpacity onPress={()=>FirebaseDB.approveNewArticle(this.props.article)} style={styles.applyButton}>
             <Text style={styles.btnText}>PUBLISH ARTICLE</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=>console.tron.log('sendnotification')} style={styles.applyButton}>
+          <TouchableOpacity onPress={()=>this.sendFcmNotification()} style={styles.applyButton}>
             <Text style={styles.btnText}>SEND NOTIFICATION</Text>
         </TouchableOpacity>
         </View>
       </View>
     )
   }
+
+  sendFcmNotification(){
+    let notificationTheme = this.props.allThemes.filter((theme) => {return theme.topic === this.props.article.topic})
+    let topic = notificationTheme.length > 0 ? notificationTheme[0].topic : 'new'
+    this.props.sendFcmNotification(this.props.article, topic)
+  }
 }
 
 const mapStateToProps = (state) => {
   return {
-    filteredArticles: state.articles.filteredArticles
+    filteredArticles: state.articles.filteredArticles,
+    allThemes: state.notification.allThemes,
   }
 }
 
@@ -102,6 +109,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     articleFetchAttempt: (path) => dispatch(ArticlesActions.articleFetchAttempt(path)),
     filterArticles: (filter) => dispatch(ArticlesActions.filterArticles(filter)),
+    sendFcmNotification: (article, topic) => dispatch(ArticlesActions.sendFcmNotification(article, topic)),
   }
 }
 

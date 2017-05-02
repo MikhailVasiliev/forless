@@ -18,7 +18,8 @@ import {
   articleFetchFailure,
   articlesListFetchAttempt,
   articlesListFetchSuccess,
-  articlesListFetchFailure
+  articlesListFetchFailure,
+  sendFcmNotification
 } from './ArticlesSagas'
 
 /* ------------- API ------------- */
@@ -37,5 +38,6 @@ export default function * root () {
     takeLatest(ArticlesTypes.ARTICLES_LIST_FETCH_ATTEMPT, articlesListFetchAttempt, api),
     takeLatest(ArticlesTypes.ARTICLES_LIST_FETCH_SUCCESS, articlesListFetchSuccess, api),
     takeLatest(ArticlesTypes.ARTICLES_LIST_FETCH_FAILURE, articlesListFetchFailure, api),
+    takeLatest(ArticlesTypes.SEND_FCM_NOTIFICATION, sendFcmNotification, api),
   ]
 }

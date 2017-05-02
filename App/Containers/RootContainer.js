@@ -87,7 +87,7 @@ class RootContainer extends Component {
 
   findArticleInState(title) {
     let articles = this.props.articles.asMutable()
-    return articles.sort((article)=> {
+    return articles.filter((article)=> {
       return article.title === title
     })[0]
   }

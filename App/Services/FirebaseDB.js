@@ -56,6 +56,7 @@ class Database {
         themes.push(newTheme)
       }
       callback(articles, themes)
+      articles = []
     });
   }
 
