@@ -73,6 +73,9 @@ class ArticleScreen extends React.Component {
           if (element.pic) {
             return (<Image style={styles.image} source={{uri: element.pic}} key={index}/>)
           } else {
+            if (index === article.data.length - 1){
+              return (<Text style={styles.lastTextElement} key={index}>{element.text}</Text>)
+            }
             return (<Text style={styles.text} key={index}>{element.text}</Text>)
           }
         }) }

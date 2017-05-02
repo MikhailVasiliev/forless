@@ -73,5 +73,12 @@ export default StyleSheet.create({
     borderWidth: 2,
     borderColor: 'green',
     borderRadius: 5
-  }
+  },
+  applyButton: {
+    backgroundColor: Colors.skyBlue,
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    height: 50,
+    alignItems: 'center',
+  },
 })

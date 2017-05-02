@@ -2,7 +2,7 @@
 import apisauce from 'apisauce'
 
 // our "constructor"
-const create = (baseURL = 'https://api.telegra.ph/') => {
+const create = (baseURL = 'https://fcm.googleapis.com/fcm/') => {
   // ------
   // STEP 1
   // ------
@@ -14,7 +14,8 @@ const create = (baseURL = 'https://api.telegra.ph/') => {
     baseURL,
     // here are some default headers
     headers: {
-      'Cache-Control': 'no-cache'
+      'Cache-Control': 'no-cache',
+      'Content-Type': 'application/json'
     },
     // 10 second timeout...
     timeout: 10000
@@ -44,6 +45,30 @@ const create = (baseURL = 'https://api.telegra.ph/') => {
   const getPage = (path) => api.get('getPage/' + path, {return_content: true})
   const getPageList = (token) => api.get('getPageList?', {access_token: token})
 
+  const sendRemote = (article, topic) => {
+    //TODO - check for topic (article.topic or 'new')
+    let messageObject = {
+      'to': '/topics/' + topic,
+      'message_id': 'm-1366082849205',
+      'fcm': {
+        'action': 'fcm.ACTION.HELLO',
+        'title': article.title,
+        'pic': article.cover
+      },
+      'data': {
+        'articleDate': article.date,
+        'articleTitle': article.title
+      },
+      'notification': {
+        'message': 'This is a Firebase Cloud Messaging Topic Message!',
+        'title': 'Новая статья для Вас!',
+        'body': article.title
+      },
+      'priority': 'high'
+    }
+    return api.post('send', messageObject, {headers: {'Authorization': 'key=AAAAUYlRvi8:APA91bF-PzHQY9siktqpzRwP779CpTyKXL11fcF_YVRo3Qtmxtu_81uqan9UNI-ooh_Azb5gG7tifBuHFMRscCIyvxJ6e6uXGK0LavzIuvyxjg_8NvFDbfjYQrvHTUkXVNqVH1eP0OKS'}})
+  }
+
   // ------
   // STEP 3
   // ------
@@ -59,7 +84,8 @@ const create = (baseURL = 'https://api.telegra.ph/') => {
   return {
     // a list of the API functions from step 2
     getPage,
-    getPageList
+    getPageList,
+    sendRemote
   }
 }
 

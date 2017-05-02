@@ -56,6 +56,7 @@ class Database {
         themes.push(newTheme)
       }
       callback(articles, themes)
+      articles = []
     });
   }
 
@@ -75,6 +76,32 @@ class Database {
       });
       return articles;
     });
+  }
+
+  static async getNewArticle(callback) {
+
+    const rootRef = firebase.database().ref().child('/newArticle')
+    var articles = []
+
+    rootRef.once('value', (snap) => {
+      snap.forEach((child) => {
+        articles.push({
+          title: child.val().title,
+          data: child.val().data,
+          cover: child.val().cover,
+          theme: child.val().theme,
+          topic: child.val().topic,
+          date: child.key
+        });
+      });
+
+      callback(articles[0]);
+    });
+  }
+
+  static async approveNewArticle(article) {
+    const ref = firebase.database().ref().child('/articles/' + article.date)
+    ref.set(article)
   }
 }
 

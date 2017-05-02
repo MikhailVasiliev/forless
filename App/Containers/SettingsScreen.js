@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { ScrollView, Text, View, Switch } from 'react-native'
+import { ScrollView, Text, View, Switch, TouchableOpacity } from 'react-native'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import ArticlesActions from '../Redux/ArticlesRedux'
 import NotificationActions from '../Redux/NotificationRedux'
@@ -14,6 +14,8 @@ import LinearGradient from 'react-native-linear-gradient';
 // Redux
 import { connect } from 'react-redux'
 // Libs
+import FirebaseDB from '../Services/FirebaseDB'
+
 // Styles
 import styles from './Styles/SettingsScreenStyles'
 
@@ -42,61 +44,71 @@ class SettingsScreen extends React.Component {
   render () {
     let allThemes = this.props.allThemes
     return (
-      <ScrollView style={styles.main}  >
-        <LinearGradient
-          colors={[
-            'rgba(50, 50, 50, 0)',
-            'rgba(50, 50, 50, 0.4)',
-            'rgba(50, 50, 50, 0.7)',
-            'rgba(50, 50, 50, 0.7)',
-            'rgba(50, 50, 50, 0.4)',
-            'rgba(50, 50, 50, 0)']}
-          locations={[0, 0.2, 0.45, 0.55, 0.8, 1]}
-          style={styles.gradientFirst}>
-          <Text style={styles.topicsSticker}>New article notifications</Text>
-        </LinearGradient>
-        <View style={styles.switchContainer} >
-          <Text style={styles.switchComponentText}>Enable notifications</Text>
-          <Switch
-              onValueChange={(notificationsEnabled) => this.handleSwitchToggle(notificationsEnabled)}
-              style={styles.switchComponent}
-              value={this.state.notificationsEnabled}
-              />
-        </View>
-        <LinearGradient
-          colors={[
-            'rgba(50, 50, 50, 0)',
-            'rgba(50, 50, 50, 0.4)',
-            'rgba(50, 50, 50, 0.7)',
-            'rgba(50, 50, 50, 0.7)',
-            'rgba(50, 50, 50, 0.4)',
-            'rgba(50, 50, 50, 0)']}
-          locations={[0, 0.2, 0.45, 0.55, 0.8, 1]}
-          style={styles.gradient}>
-          <Text style={styles.topicsSticker}>Subscribe to topics:</Text>
-        </LinearGradient>
-        { allThemes.map((theme, index) => {
-          if (theme.enabled){ var yn = 'Y' } else { yn = 'N' }
-          return <View style={styles.checkboxContainer} key={index}>
-            <CheckboxField
-                label={theme.name}
-                onSelect={()=>{this.handleCheckboxClick(theme)}}
-                disabled={!this.state.notificationsEnabled}
-                disabledColor="grey"
-                selected={theme.enabled}
-                defaultColor={'white'}
-                selectedColor="green"
-                containerStyle={styles.containerStyle}
-                labelStyle={styles.labelStyle}
-                checkboxStyle={styles.checkboxStyle}
-                labelSide="left">
-                <Text style={{ color: 'white' }}>{yn}</Text>
-            </CheckboxField>
+      <View style={styles.main}>
+        <ScrollView style={styles.main}  >
+          <LinearGradient
+            colors={[
+              'rgba(50, 50, 50, 0)',
+              'rgba(50, 50, 50, 0.4)',
+              'rgba(50, 50, 50, 0.7)',
+              'rgba(50, 50, 50, 0.7)',
+              'rgba(50, 50, 50, 0.4)',
+              'rgba(50, 50, 50, 0)']}
+            locations={[0, 0.2, 0.45, 0.55, 0.8, 1]}
+            style={styles.gradientFirst}>
+            <Text style={styles.topicsSticker}>New article notifications</Text>
+          </LinearGradient>
+          <View style={styles.switchContainer} >
+            <Text style={styles.switchComponentText}>Enable notifications</Text>
+            <Switch
+                onValueChange={(notificationsEnabled) => this.handleSwitchToggle(notificationsEnabled)}
+                style={styles.switchComponent}
+                value={this.state.notificationsEnabled}
+                />
           </View>
-        })
-        }
-      </ScrollView>
+          <LinearGradient
+            colors={[
+              'rgba(50, 50, 50, 0)',
+              'rgba(50, 50, 50, 0.4)',
+              'rgba(50, 50, 50, 0.7)',
+              'rgba(50, 50, 50, 0.7)',
+              'rgba(50, 50, 50, 0.4)',
+              'rgba(50, 50, 50, 0)']}
+            locations={[0, 0.2, 0.45, 0.55, 0.8, 1]}
+            style={styles.gradient}>
+            <Text style={styles.topicsSticker}>Subscribe to topics:</Text>
+          </LinearGradient>
+          { allThemes.map((theme, index) => {
+            if (theme.enabled){ var yn = 'Y' } else { yn = 'N' }
+            return <View style={styles.checkboxContainer} key={index}>
+              <CheckboxField
+                  label={theme.name}
+                  onSelect={()=>{this.handleCheckboxClick(theme)}}
+                  disabled={!this.state.notificationsEnabled}
+                  disabledColor="grey"
+                  selected={theme.enabled}
+                  defaultColor={'white'}
+                  selectedColor="green"
+                  containerStyle={styles.containerStyle}
+                  labelStyle={styles.labelStyle}
+                  checkboxStyle={styles.checkboxStyle}
+                  labelSide="left">
+                  <Text style={{ color: 'white' }}>{yn}</Text>
+              </CheckboxField>
+            </View>
+          })
+          }
+        </ScrollView>
+        <TouchableOpacity onPress={this.fetchNewArticle.bind(this)} style={styles.applyButton}>
+          <Text style={styles.btnText}>OPEN TEST VIEW SCREEN</Text>
+        </TouchableOpacity>
+      </View>
     )
+  }
+
+  fetchNewArticle(){
+    let callback = (article) => NavigationActions.newArticle({article})
+    FirebaseDB.getNewArticle(callback)
   }
 
   handleSwitchToggle(enabled){
