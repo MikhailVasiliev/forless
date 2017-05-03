@@ -99,9 +99,9 @@ class SettingsScreen extends React.Component {
           })
           }
         </ScrollView>
-        <TouchableOpacity onPress={this.fetchNewArticle.bind(this)} style={styles.applyButton}>
+        {this.props.user === 'mr.m.vasiliev@gmail.com' && <TouchableOpacity onPress={this.fetchNewArticle.bind(this)} style={styles.applyButton}>
           <Text style={styles.btnText}>OPEN TEST VIEW SCREEN</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>}
       </View>
     )
   }
@@ -139,6 +139,7 @@ const mapStateToProps = (state) => {
   return {
     filter: state.articles.filter,
     allThemes: state.notification.allThemes,
+    user: state.login.user,
   }
 }
 
