@@ -39,8 +39,8 @@ class NavigationRouter extends Component {
                    leftButtonIconStyle={Styles.leftButton}
                    rightButtonImage={Images.settings}
                    rightButtonIconStyle={Styles.rightButton}
-                   onLeft={() => {Actions.login()}}
-                   onRight={() => {Actions.settings()}} />
+                   onLeft={() => {}}
+                   onRight={() => {}} />
             <Scene key="articleScreen"
                    component={ArticleScreen}
                    leftButtonImage={Images.back}

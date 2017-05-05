@@ -30,34 +30,33 @@ class PresentationScreen extends React.Component {
   // this.login('mr.m.vasiliev@gmail.com', '111111')
   constructor (props) {
     super(props)
-
     this.state = {
       articles: props.articles ? props.articles : []
     }
   }
 
   componentWillMount() {
-
     // firebase.auth().onAuthStateChanged((user) => {
     //   if (user){
     //     this.onLoggedIn()
     //   }
     // })
 
-    // NavigationActions.refresh({
-    //   onLeft: () => {
-    //     NavigationActions.login()
-    //   },
-    //   onRight: () => {
-    //     NavigationActions.settings()
-    //   },
-    // })
-    //
+    NavigationActions.refresh({
+      onLeft: () => {
+        NavigationActions.login()
+      },
+      onRight: () => {
+        NavigationActions.settings()
+      },
+    })
+
     FirebaseDB.getUser()
+    FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.props.articles)
   }
 
   componentDidMount(){
-    FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.props.articles)
+    // FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.props.articles)
   }
 
   setArticlesInState (articles, themes) {
