@@ -99,7 +99,9 @@ class SettingsScreen extends React.Component {
           })
           }
         </ScrollView>
-        {this.props.user === 'mr.m.vasiliev@gmail.com' && <TouchableOpacity onPress={this.fetchNewArticle.bind(this)} style={styles.applyButton}>
+        {this.props.user && (this.props.user === 'mr.m.vasiliev@gmail.com'
+        || this.props.user.email === 'mr.m.vasiliev@gmail.com')
+        && <TouchableOpacity onPress={this.fetchNewArticle.bind(this)} style={styles.applyButton}>
           <Text style={styles.btnText}>OPEN TEST VIEW SCREEN</Text>
         </TouchableOpacity>}
       </View>

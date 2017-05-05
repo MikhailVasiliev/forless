@@ -37,6 +37,7 @@ class ArticleScreen extends React.Component {
       url: article.cover,
       subject: 'Subject' //  for email
     };
+
     Share.open(shareOptions).catch((error) => console.tron.log(error));
   }
 
@@ -50,36 +51,36 @@ class ArticleScreen extends React.Component {
     var article = this.props.article
     return (
       <View style={{flex: 1}}>
-      <LinearGradient
-        colors={[
-          'rgba(0, 0, 0, 0.7)',
-          'rgba(0, 0, 0, 0.5)',
-          'rgba(0, 0, 0, 0.2)',
-          'rgba(0, 0, 0, 0)']}
-        style={styles.linearGradient}/>
-      <ScrollView style={styles.main} >
-        <Image style={styles.cover} source={{uri: article.cover}} />
-        <Text style={styles.articleTitle}>{article.title}</Text>
-        <View style={styles.dateContainer}>
-          <TouchableOpacity style={styles.themeContainer} onPress={()=>{
-            this.props.filterArticles([article.theme])
-          }}>
-            <Text style={styles.articleTheme}>{article.theme}</Text>
-          </TouchableOpacity>
-          <Text style={styles.articleDate}>  •  </Text>
-          <Text style={styles.articleDate}>{article.date}</Text>
-        </View>
-        { article.data.map((element, index) => {
-          if (element.pic) {
-            return (<Image style={styles.image} source={{uri: element.pic}} key={index}/>)
-          } else {
-            if (index === article.data.length - 1){
-              return (<Text style={styles.lastTextElement} key={index}>{element.text}</Text>)
+        <LinearGradient
+          colors={[
+            'rgba(0, 0, 0, 0.7)',
+            'rgba(0, 0, 0, 0.5)',
+            'rgba(0, 0, 0, 0.2)',
+            'rgba(0, 0, 0, 0)']}
+          style={styles.linearGradient}/>
+        <ScrollView style={styles.main} >
+          <Image style={styles.cover} source={{uri: article.cover}} />
+          <Text style={styles.articleTitle}>{article.title}</Text>
+          <View style={styles.dateContainer}>
+            <TouchableOpacity style={styles.themeContainer} onPress={()=>{
+              this.props.filterArticles([article.theme])
+            }}>
+              <Text style={styles.articleTheme}>{article.theme}</Text>
+            </TouchableOpacity>
+            <Text style={styles.articleDate}>  •  </Text>
+            <Text style={styles.articleDate}>{article.date}</Text>
+          </View>
+          { article.data.map((element, index) => {
+            if (element.pic) {
+              return (<Image style={styles.image} source={{uri: element.pic}} key={index}/>)
+            } else {
+              if (index === article.data.length - 1){
+                return (<Text style={styles.lastTextElement} key={index}>{element.text}</Text>)
+              }
+              return (<Text style={styles.text} key={index}>{element.text}</Text>)
             }
-            return (<Text style={styles.text} key={index}>{element.text}</Text>)
-          }
-        }) }
-      </ScrollView>
+          }) }
+        </ScrollView>
       </View>
     )
   }

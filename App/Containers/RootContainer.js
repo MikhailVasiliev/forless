@@ -19,6 +19,7 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 class RootContainer extends Component {
 
   componentDidMount () {
+    console.tron.log('1')
     // if redux persist is not active fire startup action
     if (!ReduxPersist.active) {
       this.props.startup()
@@ -30,23 +31,12 @@ class RootContainer extends Component {
       console.log(token)
     });
 
-    FCM.getInitialNotification().then( notif => {console.tron.log('getInitialNotification'); console.tron.log(notif) } );
+    FCM.getInitialNotification().then( notif => this.handleNotification(notif) );
 
     this.notificationListener = FCM.on(FCMEvent.Notification,  notif => {
       console.tron.log('notif')
       console.tron.log(notif)
-
-      // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
-      if (!notif.opened_from_tray){
-        //this is a local notification
-        Platform.OS === 'ios' ? this.dropdown.alertWithType('info', notif.notification.title, notif.articleTitle) :
-        this.dropdown.alertWithType('info', notif.fcm.title, notif.articleTitle)
-      }
-      if (notif.opened_from_tray){
-        //app is open/resumed because user clicked banner
-        let newArticle = this.findArticleInState(notif.articleTitle)
-        NavigationActions.articleScreen({article: newArticle})
-      }
+      this.handleNotification(notif)
     });
 
     this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, (token) => {
@@ -54,6 +44,20 @@ class RootContainer extends Component {
     // fcm token may not be available on first load, catch it here
     });
 
+  }
+
+  handleNotification(notif){
+    if (notif && !notif.opened_from_tray){
+      //this is a local notification
+      Platform.OS === 'ios' ? this.dropdown.alertWithType('info', notif.notification.title, notif.articleTitle) :
+      this.dropdown.alertWithType('info', notif.fcm.title, notif.articleTitle)
+    }
+    if (notif && notif.opened_from_tray){
+      console.tron.log('open new screen')
+      //app is open/resumed because user clicked banner
+      let newArticle = this.findArticleInState(notif.articleTitle)
+      NavigationActions.articleScreen({article: newArticle})
+    }
   }
 
   render () {

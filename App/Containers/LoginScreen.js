@@ -42,34 +42,31 @@ class LoginScreen extends React.Component {
     }
 
     this.KEYS = {
-      // scopes: ['email', 'profile', 'https://www.googleapis.com/auth/plus.login'], // what API you want to access on behalf of the user, default is email and profile
       iosClientId: '350196186671-c7hi3nigtp9101q5b1cb6o2uuqh785lr.apps.googleusercontent.com', // only for iOS
       webClientId: '350196186671-ckn9u519anj4pr0f1inb4r45763cb60v.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
       offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-      // forceConsentPrompt: true, // [Android] if you want to show the authorization prompt at each login
-      // accountName: '', // [Android] specifies an account name on the device that should be used
     }
   }
 
   componentWillMount() {
-    try {
-      firebase.initializeApp({
-        apiKey: 'AIzaSyAVa9_vTm7U308w4KVwpkwGvXF1xgGIT_o',
-        authDomain: 'numeric-oarlock-144410.firebaseio.com',
-        databaseURL: 'https://numeric-oarlock-144410.firebaseio.com',
-        storageBucket: 'numeric-oarlock-144410.appspot.com'
-      });
-    } catch (err) {
-      console.tron.log(err)
-    }
+    // try {
+    //   // firebase.initializeApp({
+    //   //   apiKey: 'AIzaSyAVa9_vTm7U308w4KVwpkwGvXF1xgGIT_o',
+    //   //   authDomain: 'numeric-oarlock-144410.firebaseio.com',
+    //   //   databaseURL: 'https://numeric-oarlock-144410.firebaseio.com',
+    //   //   storageBucket: 'numeric-oarlock-144410.appspot.com'
+    //   // });
+    // } catch (err) {
+    //   console.tron.log(err)
+    // }
   }
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user){
-        this.onLoggedIn()
-      }
-    })
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   if (user){
+    //     this.onLoggedIn()
+    //   }
+    // })
   }
 
   render () {
