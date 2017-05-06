@@ -30,13 +30,18 @@ class PresentationScreen extends React.Component {
   // this.login('mr.m.vasiliev@gmail.com', '111111')
   constructor (props) {
     super(props)
-
     this.state = {
       articles: props.articles ? props.articles : []
     }
   }
 
   componentWillMount() {
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   if (user){
+    //     this.onLoggedIn()
+    //   }
+    // })
+
     NavigationActions.refresh({
       onLeft: () => {
         NavigationActions.login()
@@ -45,10 +50,13 @@ class PresentationScreen extends React.Component {
         NavigationActions.settings()
       },
     })
+
+    FirebaseDB.getUser()
+    FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.props.articles)
   }
 
   componentDidMount(){
-    FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.props.articles)
+    // FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.props.articles)
   }
 
   setArticlesInState (articles, themes) {
@@ -91,7 +99,7 @@ class PresentationScreen extends React.Component {
         <View style={{flex: 1, backgroundColor: 'grey'}}>
           <LoadingIndicator
             active={true}
-            text={'Идет синхронизация с сервером...'}/>
+            text={'Загружаем данные...'}/>
         </View>
       )
     }
@@ -114,36 +122,6 @@ class PresentationScreen extends React.Component {
       }}/>
     )
   }
-
-  async signup(email, pass) {
-    try {
-      await firebase.auth().createUserWithEmailAndPassword(email, pass);
-      console.tron.log('Account created');
-        // Navigate to the Home page, the user is auto logged in
-    } catch (error) {
-      console.tron.log(error.toString())
-    }
-  }
-
-  async login(email, pass) {
-    try {
-      await firebase.auth().signInWithEmailAndPassword(email, pass);
-      console.tron.log('Logged In!');
-        // Navigate to the Home page
-    } catch (error) {
-      console.tron.log(error.toString())
-    }
-  }
-
-  async logout() {
-    try {
-      await firebase.auth().signOut();
-        // Navigate to login view
-    } catch (error) {
-      console.tron.log(error);
-    }
-  }
-
 }
 
 const mapStateToProps = (state) => {

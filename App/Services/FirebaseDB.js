@@ -1,5 +1,12 @@
 import * as firebase from 'firebase';
+import { Actions as NavigationActions } from 'react-native-router-flux'
 
+const firebaseApp = firebase.initializeApp({
+  apiKey: 'AIzaSyAVa9_vTm7U308w4KVwpkwGvXF1xgGIT_o',
+  authDomain: 'numeric-oarlock-144410.firebaseio.com',
+  databaseURL: 'https://numeric-oarlock-144410.firebaseio.com',
+  storageBucket: 'numeric-oarlock-144410.appspot.com'
+});
 
 class Database {
 
@@ -13,15 +20,16 @@ class Database {
 
     let userMobilePath = '/user/' + userId + '/details';
 
-    return firebase.database().ref(userMobilePath).set({
+    return firebaseApp.database().ref(userMobilePath).set({
       mobile: mobile
     })
 
   }
 
   static async getAllArticles(callback, themes) {
+    console.tron.log('getAllArticles')
 
-    const rootRef = firebase.database().ref().child('/articles')
+    const rootRef = firebaseApp.database().ref().child('/articles')
     var articles = []
     themes = themes.asMutable()
     rootRef.on('value', (snap) => {
@@ -62,7 +70,7 @@ class Database {
 
   static fetchArticles() {
 
-    const rootRef = firebase.database().ref().child('/articles')
+    const rootRef = firebaseApp.database().ref().child('/articles')
     var articles = []
     rootRef.on('value', (snap) => {
       snap.forEach((child) => {
@@ -80,7 +88,7 @@ class Database {
 
   static async getNewArticle(callback) {
 
-    const rootRef = firebase.database().ref().child('/newArticle')
+    const rootRef = firebaseApp.database().ref().child('/newArticle')
     var articles = []
 
     rootRef.once('value', (snap) => {
@@ -100,8 +108,19 @@ class Database {
   }
 
   static async approveNewArticle(article) {
-    const ref = firebase.database().ref().child('/articles/' + article.date)
+    const ref = firebaseApp.database().ref().child('/articles/' + article.date)
     ref.set(article)
+  }
+
+  static async getUser() {
+    console.tron.log('user')
+    firebaseApp.auth().onAuthStateChanged((user) => {
+      if (!user){
+        console.tron.log('user')
+        console.tron.log(user)
+        NavigationActions.login()
+      }
+    })
   }
 }
 

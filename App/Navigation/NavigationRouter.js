@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import { Scene, Router, ActionConst } from 'react-native-router-flux'
+import { Scene, Router, ActionConst, Actions } from 'react-native-router-flux'
 import Styles from './Styles/NavigationContainerStyle'
 import { Images } from '../Themes'
 
@@ -26,12 +26,12 @@ class NavigationRouter extends Component {
                  titleStyle={Styles.title}
                  leftButtonIconStyle={Styles.leftButton}
                  rightButtonTextStyle={Styles.rightButton}>
-            <Scene initial key="login"
+            <Scene key="login"
                    hideNavBar
                    type={ActionConst.REPLACE}
                    component={LoginScreen}
                    title="Login" />
-            <Scene key="presentationScreen"
+            <Scene initial key="presentationScreen"
                    type={ActionConst.REPLACE}
                    component={PresentationScreen}
                    title="Feed"
