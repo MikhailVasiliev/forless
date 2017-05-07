@@ -1,0 +1,74 @@
+{
+  "project_info": {
+    "project_number": "350196186671",
+    "firebase_url": "https://numeric-oarlock-144410.firebaseio.com",
+    "project_id": "numeric-oarlock-144410",
+    "storage_bucket": "numeric-oarlock-144410.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350196186671:android:834635fb4ab82c07",
+        "android_client_info": {
+          "package_name": "com.vasiliev.forexlessons"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "350196186671-nmd2vtijo3jpfsnt595aitqs539e2mpm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vasiliev.forexlessons",
+            "certificate_hash": "e0609fa32198a34ca0bbd56af0446afa7297e558"
+          }
+        },
+        {
+          "client_id": "350196186671-ckn9u519anj4pr0f1inb4r45763cb60v.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "350196186671-v2vsgllehd23v4blh97c823c6lkj4ma1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vasiliev.forexlessons",
+            "certificate_hash": "e2540cda6c80c5a085adc80bb41cdff1c3f0dfd2"
+          }
+        },
+        {
+          "client_id": "350196186671-smt2gvh2gc92d9q7ge5q3t3a74qusm56.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGbuB-ennM8xeHMochViTxqTZ1BUkT_KI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "350196186671-ckn9u519anj4pr0f1inb4r45763cb60v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "350196186671-c7hi3nigtp9101q5b1cb6o2uuqh785lr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vasiliev.forexlessons"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
