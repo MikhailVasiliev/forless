@@ -1,6 +1,15 @@
 import * as firebase from 'firebase';
 
 
+const firebaseConfig = {
+  apiKey: 'AIzaSyAVa9_vTm7U308w4KVwpkwGvXF1xgGIT_o',
+  authDomain: 'numeric-oarlock-144410.firebaseio.com',
+  databaseURL: 'https://numeric-oarlock-144410.firebaseio.com',
+  storageBucket: 'numeric-oarlock-144410.appspot.com'
+};
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+
 class Database {
 
     /**
@@ -9,11 +18,13 @@ class Database {
      * @param mobile
      * @returns {firebase.Promise<any>|!firebase.Promise.<void>}
      */
+
+
   static setUserMobile(userId, mobile) {
 
     let userMobilePath = '/user/' + userId + '/details';
 
-    return firebase.database().ref(userMobilePath).set({
+    return firebaseApp.database().ref(userMobilePath).set({
       mobile: mobile
     })
 
@@ -21,7 +32,7 @@ class Database {
 
   static async getAllArticles(callback, themes) {
 
-    const rootRef = firebase.database().ref().child('/articles')
+    const rootRef = firebaseApp.database().ref().child('/articles')
     var articles = []
     themes = themes.asMutable()
     rootRef.on('value', (snap) => {
@@ -62,7 +73,7 @@ class Database {
 
   static fetchArticles() {
 
-    const rootRef = firebase.database().ref().child('/articles')
+    const rootRef = firebaseApp.database().ref().child('/articles')
     var articles = []
     rootRef.on('value', (snap) => {
       snap.forEach((child) => {
@@ -80,7 +91,7 @@ class Database {
 
   static async getNewArticle(callback) {
 
-    const rootRef = firebase.database().ref().child('/newArticle')
+    const rootRef = firebaseApp.database().ref().child('/newArticle')
     var articles = []
 
     rootRef.once('value', (snap) => {
@@ -100,8 +111,16 @@ class Database {
   }
 
   static async approveNewArticle(article) {
-    const ref = firebase.database().ref().child('/articles/' + article.date)
+    const ref = firebaseApp.database().ref().child('/articles/' + article.date)
     ref.set(article)
+  }
+
+  static async checkForUser(callback) {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user){
+        this.callback()
+      }
+    })
   }
 }
 

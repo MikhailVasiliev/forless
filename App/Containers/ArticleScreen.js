@@ -49,7 +49,7 @@ class ArticleScreen extends React.Component {
   render () {
     var article = this.props.article
     return (
-      <View style={{flex: 1}}>
+      <View style={styles.mainContainer}>
       <LinearGradient
         colors={[
           'rgba(0, 0, 0, 0.7)',

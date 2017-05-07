@@ -12,6 +12,9 @@ export default StyleSheet.create({
     flex: 1,
     paddingBottom: 15
   },
+  mainContainer:{
+    flex: 1
+  },
   cover:{
     height: Metrics.screenHeight / 3,
     resizeMode: 'cover'

@@ -15,6 +15,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux'
 // Libs
 import FirebaseDB from '../Services/FirebaseDB'
+import { adminEmail } from '../Lib/Constants'
 
 // Styles
 import styles from './Styles/SettingsScreenStyles'
@@ -43,6 +44,7 @@ class SettingsScreen extends React.Component {
 
   render () {
     let allThemes = this.props.allThemes
+    let isAdmin = this.props.user && (this.props.user.email === adminEmail)
     return (
       <View style={styles.main}>
         <ScrollView style={styles.main}  >
@@ -93,13 +95,13 @@ class SettingsScreen extends React.Component {
                   labelStyle={styles.labelStyle}
                   checkboxStyle={styles.checkboxStyle}
                   labelSide="left">
-                  <Text style={{ color: 'white' }}>{yn}</Text>
+                  <Text style={styles.checkboxText}>{yn}</Text>
               </CheckboxField>
             </View>
           })
           }
         </ScrollView>
-        {this.props.user === 'mr.m.vasiliev@gmail.com' && <TouchableOpacity onPress={this.fetchNewArticle.bind(this)} style={styles.applyButton}>
+        {isAdmin && <TouchableOpacity onPress={this.fetchNewArticle.bind(this)} style={styles.applyButton}>
           <Text style={styles.btnText}>OPEN TEST VIEW SCREEN</Text>
         </TouchableOpacity>}
       </View>

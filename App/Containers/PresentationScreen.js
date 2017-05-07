@@ -88,7 +88,7 @@ class PresentationScreen extends React.Component {
       )
     } else {
       return (
-        <View style={{flex: 1, backgroundColor: 'grey'}}>
+        <View style={styles.noArticlesContainer}>
           <LoadingIndicator
             active={true}
             text={'Идет синхронизация с сервером...'}/>
@@ -99,51 +99,15 @@ class PresentationScreen extends React.Component {
 
   renderFooterButton(text){
     return (
-          <Text style={styles.footerButtonText}>{text}</Text>
+        <Text style={styles.footerButtonText}>{text}</Text>
     )
   }
 
   renderDot(color) {
     return (
-      <View style={{
-        backgroundColor: color,
-        width: 6,
-        height: 6,
-        borderRadius: 2,
-        margin: 2,
-      }}/>
+        <View style={[styles.dot, {backgroundColor: color}]}/>
     )
   }
-
-  async signup(email, pass) {
-    try {
-      await firebase.auth().createUserWithEmailAndPassword(email, pass);
-      console.tron.log('Account created');
-        // Navigate to the Home page, the user is auto logged in
-    } catch (error) {
-      console.tron.log(error.toString())
-    }
-  }
-
-  async login(email, pass) {
-    try {
-      await firebase.auth().signInWithEmailAndPassword(email, pass);
-      console.tron.log('Logged In!');
-        // Navigate to the Home page
-    } catch (error) {
-      console.tron.log(error.toString())
-    }
-  }
-
-  async logout() {
-    try {
-      await firebase.auth().signOut();
-        // Navigate to login view
-    } catch (error) {
-      console.tron.log(error);
-    }
-  }
-
 }
 
 const mapStateToProps = (state) => {

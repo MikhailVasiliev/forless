@@ -1,11 +1,15 @@
 // @flow
 
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles, Colors } from '../../Themes/'
+import { Metrics, Colors } from '../../Themes/'
 
 export default StyleSheet.create({
   main: {
     flex: 1
+  },
+  noArticlesContainer: {
+    flex: 1,
+    backgroundColor: 'grey'
   },
   logo: {
     height: Metrics.images.logo,
@@ -44,4 +48,9 @@ export default StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: 'white'
   },
+  dot: {
+    width: 6,
+    height: 6,
+    borderRadius: 2,
+  }
 })
