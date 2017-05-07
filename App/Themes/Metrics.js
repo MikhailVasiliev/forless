@@ -42,7 +42,10 @@ const metrics = {
   feedPhoto: 40,
   feedIcon: 12,
   borderRadius: 20,
-  footerHeight: 80
+  footerHeight: 80,
+  oneLineTextInput: 40,
+  smallBorderRadius: 5,
+  messageInput: height * 0.5
 }
 
 export default metrics

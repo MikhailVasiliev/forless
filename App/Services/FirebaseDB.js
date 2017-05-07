@@ -115,6 +115,14 @@ class Database {
     ref.set(article)
   }
 
+  static async sendFeedback(feedback) {
+    let date = (new Date()).toISOString()
+    let dateID = date.replace('.', ' ')
+
+    let ref = firebaseApp.database().ref('feedback/' + dateID);
+    ref.set(feedback)
+  }
+
   static checkForUser(callback) {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user){
