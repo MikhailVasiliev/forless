@@ -115,10 +115,10 @@ class Database {
     ref.set(article)
   }
 
-  static async checkForUser(callback) {
+  static checkForUser(callback) {
     firebase.auth().onAuthStateChanged((user) => {
-      if (user){
-        this.callback()
+      if (!user){
+        callback()
       }
     })
   }

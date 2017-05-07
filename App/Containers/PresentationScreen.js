@@ -8,22 +8,22 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 import SwiperItem from '../Components/SwiperItem'
 import LoadingIndicator from '../Components/LoadingIndicator'
 
-// External libs
-import Swiper from 'react-native-swiper';
-import * as firebase from 'firebase';
-import FCM from 'react-native-fcm';
-
 // Redux
 import { connect } from 'react-redux'
 import ArticlesActions from '../Redux/ArticlesRedux'
 import NotificationActions from '../Redux/NotificationRedux'
 
-// Redux
+// services
 import FirebaseDB from '../Services/FirebaseDB'
 
 // Styles
 import styles from './Styles/PresentationScreenStyles'
 import { Colors } from '../Themes'
+
+// External libs
+import Swiper from 'react-native-swiper';
+import FCM from 'react-native-fcm';
+
 
 class PresentationScreen extends React.Component {
 
@@ -37,17 +37,8 @@ class PresentationScreen extends React.Component {
   }
 
   componentWillMount() {
-    NavigationActions.refresh({
-      onLeft: () => {
-        NavigationActions.login()
-      },
-      onRight: () => {
-        NavigationActions.settings()
-      },
-    })
-  }
-
-  componentDidMount(){
+    //TODO - hide splash screen after timeout to change screen if no-auth
+    FirebaseDB.checkForUser(() => NavigationActions.login())
     FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.props.articles)
   }
 
@@ -91,7 +82,7 @@ class PresentationScreen extends React.Component {
         <View style={styles.noArticlesContainer}>
           <LoadingIndicator
             active={true}
-            text={'Идет синхронизация с сервером...'}/>
+            text={'Загружаем данные...'}/>
         </View>
       )
     }
