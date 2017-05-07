@@ -17,7 +17,6 @@ import ArticlesActions from '../Redux/ArticlesRedux'
 import LoginActions from '../Redux/LoginRedux'
 import NotificationActions from '../Redux/NotificationRedux'
 // External libs
-import FCM from 'react-native-fcm';
 import FBSDK, { LoginManager, AccessToken } from 'react-native-fbsdk';
 import {GoogleSignin} from 'react-native-google-signin';
 import Auth0Lock from 'react-native-lock'
@@ -43,35 +42,12 @@ class LoginScreen extends React.Component {
     }
 
     this.KEYS = {
-      // scopes: ['email', 'profile', 'https://www.googleapis.com/auth/plus.login'], // what API you want to access on behalf of the user, default is email and profile
       iosClientId: '350196186671-c7hi3nigtp9101q5b1cb6o2uuqh785lr.apps.googleusercontent.com', // only for iOS
       webClientId: '350196186671-ckn9u519anj4pr0f1inb4r45763cb60v.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
       offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-      // forceConsentPrompt: true, // [Android] if you want to show the authorization prompt at each login
-      // accountName: '', // [Android] specifies an account name on the device that should be used
     }
   }
 
-  componentWillMount() {
-    try {
-      firebase.initializeApp({
-        apiKey: 'AIzaSyAVa9_vTm7U308w4KVwpkwGvXF1xgGIT_o',
-        authDomain: 'numeric-oarlock-144410.firebaseio.com',
-        databaseURL: 'https://numeric-oarlock-144410.firebaseio.com',
-        storageBucket: 'numeric-oarlock-144410.appspot.com'
-      });
-    } catch (err) {
-      console.tron.log(err)
-    }
-  }
-
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user){
-        this.onLoggedIn()
-      }
-    })
-  }
 
   render () {
     return (
@@ -81,7 +57,7 @@ class LoginScreen extends React.Component {
             <Text style={styles.welcomeText}>Please log in</Text>
             <TextInput
               style={styles.loginInput}
-              placeholder={'email'}
+              placeholder={'адрес эл.почты'}
               keyboardType={'email-address'}
               autoCorrect={false}
               autoCapitalize={'none'}
@@ -90,7 +66,7 @@ class LoginScreen extends React.Component {
               value={this.state.login}/>
             <TextInput
               style={styles.passInput}
-              placeholder={'password'}
+              placeholder={'пароль'}
               autoCapitalize={'none'}
               secureTextEntry={true}
               autoCorrect={false}
@@ -125,7 +101,7 @@ class LoginScreen extends React.Component {
         </Image>
         <LoadingIndicator
           active={this.state.loading}
-          text={'Logging in...'}/>
+          text={'Входим в систему...'}/>
       </View>
     )
   }
@@ -146,8 +122,7 @@ class LoginScreen extends React.Component {
     email = email.trim()
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pass);
-      this.props.storeUser(email)
-      this.onLoggedIn()
+      this.onLoggedIn({email})
     } catch (error) {
       if (email === '' || pass === '') {
         Toast.show('Заполните оба поля')
@@ -157,7 +132,8 @@ class LoginScreen extends React.Component {
     }
   }
 
-  onLoggedIn(){
+  onLoggedIn(userProfile){
+    this.props.storeUser(userProfile)
     NavigationActions.presentationScreen()
   }
 
@@ -173,23 +149,17 @@ class LoginScreen extends React.Component {
     LoginManager.logInWithReadPermissions(['public_profile', 'email']).then(
       (result) => {
         if (result.isCancelled) {
-          alert('Login cancelled');
+          alert('Отмена авторизации');
         } else {
           AccessToken.getCurrentAccessToken().then((accessTokenData) => {
             const credential = firebase.auth.FacebookAuthProvider.credential(accessTokenData.accessToken)
             firebase.auth().signInWithCredential(credential).then((loginResult) => {
-              console.tron.log('Logged in with Facebook')
               let userProfile = loginResult.providerData[0]
-              console.tron.log(loginResult)
-
-              this.props.storeUser(userProfile)
-              this.onLoggedIn()
+              this.onLoggedIn(userProfile)
             }, (error) => {
-              console.tron.log('error1')
               console.tron.log(error)
             })
           }, (error) => {
-            console.tron.log('error2')
             console.tron.log(error)
           })
         }
@@ -209,22 +179,15 @@ class LoginScreen extends React.Component {
              .then(() => {
                GoogleSignin.signIn()
                  .then((user) => {
-                   console.tron.log('Logged In with Google!');
                    const credential = firebase.auth.GoogleAuthProvider.credential(null, user.accessToken)
                    firebase.auth().signInWithCredential(credential).then((loginResult) => {
-                     console.tron.log('Logged in with Google')
                      let userProfile = loginResult.providerData[0]
-                     console.tron.log(loginResult)
-
-                     this.props.storeUser(userProfile)
-                     this.onLoggedIn()
+                     this.onLoggedIn(userProfile)
                    }, (error) => {
-                     console.tron.log('error logging into Firebase')
                      console.tron.log(error)
                    })
                  })
                  .catch(error=>{
-                   console.tron.log('Error while logging with Google');
                    console.tron.log(error);
                  })
                  .done();

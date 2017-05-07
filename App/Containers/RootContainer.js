@@ -16,7 +16,15 @@ import DropdownAlert from 'react-native-dropdownalert'
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
+// services
+import FirebaseDB from '../Services/FirebaseDB'
+
 class RootContainer extends Component {
+
+  componentWillMount() {
+    //TODO - hide splash screen after timeout to change screen if no-auth
+    FirebaseDB.checkForUser(() => NavigationActions.login())
+  }
 
   componentDidMount () {
     // if redux persist is not active fire startup action

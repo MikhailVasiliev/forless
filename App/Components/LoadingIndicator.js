@@ -6,18 +6,12 @@ import {
 } from 'react-native';
 
 // Configs
-
 // Redux
-
 // Components
-
 // Styles
 import styles from './Styles/LoadingIndicatorStyles.js';
-
 // Libs
-
 // External Libs
-
 
 class LoadingIndicator extends Component {
   render() {

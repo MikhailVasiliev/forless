@@ -1,7 +1,7 @@
 // @flow
 
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles, Colors, Fonts } from '../../Themes/'
+import { Metrics, Colors, Fonts } from '../../Themes/'
 
 export default StyleSheet.create({
   main: {
@@ -80,5 +80,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     height: 50,
     alignItems: 'center',
+  },
+  checkboxText: {
+    color: 'white'
   },
 })
