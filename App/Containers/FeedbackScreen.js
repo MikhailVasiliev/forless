@@ -3,7 +3,7 @@ import { View, TextInput, TouchableOpacity, Text } from 'react-native'
 // Configs
 
 // Redux
-
+import { connect } from 'react-redux'
 // Components
 // Styles
 import styles from './Styles/FeedbackScreenStyles'
@@ -15,7 +15,7 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 //Services
 import FirebaseDB from '../Services/FirebaseDB'
 
-export default class FeedbackScreen extends React.Component {
+class FeedbackScreen extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -56,6 +56,7 @@ export default class FeedbackScreen extends React.Component {
       let feedback = {
         topic: this.state.topic,
         message: this.state.message,
+        sender: this.props.user.email
       }
       FirebaseDB.sendFeedback(feedback)
       NavigationActions.presentationScreen()
@@ -65,3 +66,11 @@ export default class FeedbackScreen extends React.Component {
     }
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.login.user
+  }
+}
+
+export default connect(mapStateToProps, null)(FeedbackScreen)
