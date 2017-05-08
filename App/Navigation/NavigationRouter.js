@@ -11,6 +11,7 @@ import ArticleScreen from '../Containers/ArticleScreen'
 import NewArticleScreen from '../Containers/NewArticleScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import SettingsScreen from '../Containers/SettingsScreen'
+import FeedbackScreen from '../Containers/FeedbackScreen'
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -39,7 +40,7 @@ class NavigationRouter extends Component {
                    leftButtonIconStyle={Styles.leftButton}
                    rightButtonImage={Images.settings}
                    rightButtonIconStyle={Styles.rightButton}
-                   onLeft={() => {Actions.login()}}
+                   onLeft={() => {Actions.feedback()}}
                    onRight={() => {Actions.settings()}} />
             <Scene key="articleScreen"
                    component={ArticleScreen}
@@ -58,6 +59,12 @@ class NavigationRouter extends Component {
                    onLeft={() => {}} />
             <Scene key="newArticle"
                    component={NewArticleScreen}
+                   leftButtonImage={Images.back}
+                   leftButtonIconStyle={Styles.backButton}
+                   onLeft={() => {}} />
+            <Scene key="feedback"
+                   title="Обратная связь"
+                   component={FeedbackScreen}
                    leftButtonImage={Images.back}
                    leftButtonIconStyle={Styles.backButton}
                    onLeft={() => {}} />

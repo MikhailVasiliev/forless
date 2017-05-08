@@ -6,7 +6,7 @@ import { View, TextInput, TouchableOpacity, Text } from 'react-native'
 
 // Components
 // Styles
-import styles from './FeedbackScreenStyles'
+import styles from './Styles/FeedbackScreenStyles'
 import { Colors } from '../Themes'
 // Libs
 // External Libs
@@ -33,7 +33,6 @@ export default class FeedbackScreen extends React.Component {
             autoCapitalize={'sentences'}
             autoCorrect={true}
             placeholder={'Тема'}
-            placeholderTextColor={Colors.occurrenceSkip}
             underlineColorAndroid={Colors.transparent}
             />
         <TextInput style={styles.messageInput}
@@ -42,12 +41,11 @@ export default class FeedbackScreen extends React.Component {
             autoCapitalize={'sentences'}
             autoCorrect={true}
             placeholder={'Отзыв'}
-            placeholderTextColor={Colors.occurrenceSkip}
             multiline={true}
             underlineColorAndroid={Colors.transparent}
             />
         <TouchableOpacity style={styles.sendButton} onPress={()=> this.onSend()}>
-          <Text style={styles.buttonText}>Отрправить</Text>
+          <Text style={styles.buttonText}>Отправить</Text>
         </TouchableOpacity>
       </View>
     );
@@ -61,7 +59,7 @@ export default class FeedbackScreen extends React.Component {
       }
       FirebaseDB.sendFeedback(feedback)
       NavigationActions.presentationScreen()
-      Toast.show('Отзыв оптравлен')
+      Toast.show('Отзыв отправлен')
     } else {
       Toast.show('Заполните оба поля')
     }

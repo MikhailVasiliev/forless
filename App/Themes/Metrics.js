@@ -45,7 +45,8 @@ const metrics = {
   footerHeight: 80,
   oneLineTextInput: 40,
   smallBorderRadius: 5,
-  messageInput: height * 0.5
+  messageInput: height * 0.5,
+  buttonHeight: 50
 }
 
 export default metrics
