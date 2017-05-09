@@ -6,7 +6,15 @@ import { Metrics, Colors, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: Colors.transparent,
+  },
+  blur: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    alignItems: 'center'
   },
   switchContainer: {
     // marginTop: Metrics.navBarHeight + Metrics.statusBarHeight * 2,

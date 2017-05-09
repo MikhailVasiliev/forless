@@ -5,17 +5,17 @@ import { ScrollView, Text, View, Switch, TouchableOpacity } from 'react-native'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import ArticlesActions from '../Redux/ArticlesRedux'
 import NotificationActions from '../Redux/NotificationRedux'
-
-// External libs
-import { CheckboxField, Checkbox } from 'react-native-checkbox-field';
-import FCM from 'react-native-fcm'
-import LinearGradient from 'react-native-linear-gradient';
-
 // Redux
 import { connect } from 'react-redux'
 // Libs
 import FirebaseDB from '../Services/FirebaseDB'
 import { adminEmail } from '../Lib/Constants'
+
+// External libs
+import { CheckboxField, Checkbox } from 'react-native-checkbox-field';
+import FCM from 'react-native-fcm'
+import LinearGradient from 'react-native-linear-gradient';
+import { BlurView, VibrancyView } from 'react-native-blur';
 
 // Styles
 import styles from './Styles/SettingsScreenStyles'
@@ -47,6 +47,10 @@ class SettingsScreen extends React.Component {
     let isAdmin = this.props.user && (this.props.user.email === adminEmail)
     return (
       <View style={styles.main}>
+        <BlurView
+          style={styles.blur}
+          blurType="dark"
+          blurAmount={10}/>
         <ScrollView style={styles.main}  >
           <LinearGradient
             colors={[

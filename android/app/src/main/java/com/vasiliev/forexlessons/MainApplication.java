@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.ReactApplication;
+import com.cmcewen.blurview.BlurViewPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
 import com.auth0.lock.react.LockReactPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
@@ -38,6 +39,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new BlurViewPackage(),
           new FIRMessagingPackage(),
           new LockReactPackage(),
           new RNGoogleSigninPackage(),

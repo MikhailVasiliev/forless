@@ -4,12 +4,20 @@ import { Colors, Metrics } from '../../Themes/'
 export default StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: Colors.transparent,
     flexDirection: 'column',
     alignItems: 'center'
   },
+  blur: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    alignItems: 'center'
+  },
   topicInput: {
-    marginTop: Metrics.navBarHeight + Metrics.statusBarHeight,
+    marginTop: Metrics.navBarHeight + Metrics.statusBarHeight + Metrics.baseMargin,
     margin: Metrics.baseMargin,
     paddingLeft: Metrics.baseMargin,
     backgroundColor: Colors.loadingIndicatorBackground,
