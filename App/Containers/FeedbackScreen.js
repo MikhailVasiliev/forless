@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TextInput, TouchableOpacity, Text } from 'react-native'
+import { View, TextInput, TouchableOpacity, Text, ScrollView } from 'react-native'
 // Configs
 
 // Redux
@@ -27,32 +27,34 @@ class FeedbackScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.main}>
-          <BlurView
-            style={styles.blur}
-            blurType="dark"
-            blurAmount={10}/>
-          <TextInput style={styles.topicInput}
-              onChangeText={(topic) => this.setState({topic})}
-              value={this.state.topic}
-              autoCapitalize={'sentences'}
-              autoCorrect={true}
-              placeholder={'Тема'}
-              underlineColorAndroid={Colors.transparent}
-              />
-          <TextInput style={styles.messageInput}
-              onChangeText={(message) => this.setState({message})}
-              value={this.state.message}
-              autoCapitalize={'sentences'}
-              autoCorrect={true}
-              placeholder={'Отзыв'}
-              multiline={true}
-              underlineColorAndroid={Colors.transparent}
-              />
-          <TouchableOpacity style={styles.sendButton} onPress={()=> this.onSend()}>
-            <Text style={styles.buttonText}>Отправить</Text>
-          </TouchableOpacity>
-      </View>
+      <ScrollView style={styles.scrollview}>
+        <View style={styles.main}>
+            <BlurView
+              style={styles.blur}
+              blurType="dark"
+              blurAmount={10}/>
+            <TextInput style={styles.topicInput}
+                onChangeText={(topic) => this.setState({topic})}
+                value={this.state.topic}
+                autoCapitalize={'sentences'}
+                autoCorrect={true}
+                placeholder={'Тема'}
+                underlineColorAndroid={Colors.transparent}
+                />
+            <TextInput style={styles.messageInput}
+                onChangeText={(message) => this.setState({message})}
+                value={this.state.message}
+                autoCapitalize={'sentences'}
+                autoCorrect={true}
+                placeholder={'Отзыв'}
+                multiline={true}
+                underlineColorAndroid={Colors.transparent}
+                />
+            <TouchableOpacity style={styles.sendButton} onPress={()=> this.onSend()}>
+              <Text style={styles.buttonText}>Отправить</Text>
+            </TouchableOpacity>
+        </View>
+      </ScrollView>
     );
   }
 

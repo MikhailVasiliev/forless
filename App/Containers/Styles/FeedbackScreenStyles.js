@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Colors, Metrics } from '../../Themes/'
+import { Colors, Metrics, Fonts } from '../../Themes/'
 
 export default StyleSheet.create({
   main: {
@@ -20,24 +20,28 @@ export default StyleSheet.create({
     marginTop: Metrics.navBarHeight + Metrics.statusBarHeight + Metrics.baseMargin,
     margin: Metrics.baseMargin,
     paddingLeft: Metrics.baseMargin,
-    backgroundColor: Colors.loadingIndicatorBackground,
+    backgroundColor: 'rgba(255,255,255, 0.10)',
     height: Metrics.oneLineTextInput,
     alignSelf: 'stretch',
     borderRadius: Metrics.smallBorderRadius,
     borderColor: Colors.loadingIndicatorBackground,
     borderWidth: 1,
+    ...Fonts.style.normal,
+    color: 'white'
   },
   messageInput: {
     marginTop: 0,
     margin: Metrics.baseMargin,
     paddingLeft: Metrics.baseMargin,
-    backgroundColor: Colors.loadingIndicatorBackground,
+    backgroundColor: 'rgba(255,255,255, 0.10)',
     height: Metrics.messageInput,
     alignSelf: 'stretch',
     textAlignVertical: 'top',
     borderRadius: Metrics.smallBorderRadius,
     borderColor: Colors.loadingIndicatorBackground,
     borderWidth: 1,
+    ...Fonts.style.normal,
+    color: 'white'
   },
   sendButton: {
     width: Metrics.screenWidth - ( Metrics.baseMargin * 2 ),
