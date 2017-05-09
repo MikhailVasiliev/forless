@@ -30,9 +30,9 @@ class FeedbackScreen extends React.Component {
       <ScrollView style={styles.scrollview}>
         <View style={styles.main}>
             <BlurView
-              style={styles.blur}
-              blurType="dark"
-              blurAmount={10}/>
+                style={styles.blur}
+                blurType="dark"
+                blurAmount={10}/>
             <TextInput style={styles.topicInput}
                 onChangeText={(topic) => this.setState({topic})}
                 value={this.state.topic}

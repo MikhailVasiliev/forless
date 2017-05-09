@@ -23,7 +23,8 @@ const colors = {
   overlay: 'rgba(0, 0, 0, 0.5)',
   google: '#599df0',
   skyBlue: '#6bcbda',
-  loadingIndicatorBackground: 'lightgrey'
+  loadingIndicatorBackground: 'lightgrey',
+  textInput: 'rgba(255,255,255, 0.10)'
 }
 
 export default colors
