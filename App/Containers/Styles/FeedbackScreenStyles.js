@@ -8,6 +8,9 @@ export default StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center'
   },
+  scrollview: {
+    flex: 1,
+  },
   blur: {
     position: 'absolute',
     top: 0,
@@ -22,7 +25,8 @@ export default StyleSheet.create({
     paddingLeft: Metrics.baseMargin,
     backgroundColor: Colors.textInput,
     height: Metrics.oneLineTextInput,
-    alignSelf: 'stretch',
+    width: Metrics.screenWidth - ( Metrics.baseMargin * 2 ),
+    textAlignVertical: 'top',
     borderRadius: Metrics.smallBorderRadius,
     borderColor: Colors.loadingIndicatorBackground,
     borderWidth: 1,
@@ -35,7 +39,7 @@ export default StyleSheet.create({
     paddingLeft: Metrics.baseMargin,
     backgroundColor: Colors.textInput,
     height: Metrics.messageInput,
-    alignSelf: 'stretch',
+    width: Metrics.screenWidth - ( Metrics.baseMargin * 2 ),
     textAlignVertical: 'top',
     borderRadius: Metrics.smallBorderRadius,
     borderColor: Colors.loadingIndicatorBackground,
@@ -50,7 +54,8 @@ export default StyleSheet.create({
     borderColor: Colors.loadingIndicatorBackground,
     borderWidth: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    alignSelf: 'center'
   },
   buttonText: {
     color: 'white',

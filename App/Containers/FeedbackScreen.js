@@ -27,18 +27,19 @@ class FeedbackScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView style={styles.scrollview}>
-        <View style={styles.main}>
-            <BlurView
-                style={styles.blur}
-                blurType="dark"
-                blurAmount={10}/>
+      <View style={styles.main}>
+        <BlurView
+            style={styles.blur}
+            blurType="dark"
+            blurAmount={10}/>
+        <ScrollView style={styles.scrollview}>
             <TextInput style={styles.topicInput}
                 onChangeText={(topic) => this.setState({topic})}
                 value={this.state.topic}
                 autoCapitalize={'sentences'}
                 autoCorrect={true}
                 placeholder={'Тема'}
+                placeholderTextColor={Colors.textInputPlaceholder}
                 underlineColorAndroid={Colors.transparent}
                 />
             <TextInput style={styles.messageInput}
@@ -47,14 +48,16 @@ class FeedbackScreen extends React.Component {
                 autoCapitalize={'sentences'}
                 autoCorrect={true}
                 placeholder={'Отзыв'}
+                placeholderTextColor={Colors.textInputPlaceholder}
                 multiline={true}
                 underlineColorAndroid={Colors.transparent}
                 />
             <TouchableOpacity style={styles.sendButton} onPress={()=> this.onSend()}>
               <Text style={styles.buttonText}>Отправить</Text>
             </TouchableOpacity>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
+
     );
   }
 

@@ -24,7 +24,8 @@ const colors = {
   google: '#599df0',
   skyBlue: '#6bcbda',
   loadingIndicatorBackground: 'lightgrey',
-  textInput: 'rgba(255,255,255, 0.10)'
+  textInput: 'rgba(255,255,255, 0.10)',
+  textInputPlaceholder: 'rgba(255, 255, 255, 0.5)'
 }
 
 export default colors
