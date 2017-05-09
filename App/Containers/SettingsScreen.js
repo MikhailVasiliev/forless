@@ -1,7 +1,13 @@
 // @flow
 
 import React from 'react'
-import { ScrollView, Text, View, Switch, TouchableOpacity } from 'react-native'
+import {
+  ScrollView,
+  Text,
+  View,
+  Switch,
+  TouchableOpacity
+} from 'react-native'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import ArticlesActions from '../Redux/ArticlesRedux'
 import NotificationActions from '../Redux/NotificationRedux'

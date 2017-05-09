@@ -1,7 +1,11 @@
 // @flow
 
 import React, { Component } from 'react'
-import { View, StatusBar, Platform } from 'react-native'
+import {
+  View,
+  StatusBar,
+  Platform
+} from 'react-native'
 import NavigationRouter from '../Navigation/NavigationRouter'
 import { connect } from 'react-redux'
 import StartupActions from '../Redux/StartupRedux'

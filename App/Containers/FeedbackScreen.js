@@ -1,5 +1,11 @@
 import React from 'react'
-import { View, TextInput, TouchableOpacity, Text, ScrollView } from 'react-native'
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  Text,
+  ScrollView
+} from 'react-native'
 // Configs
 
 // Redux
