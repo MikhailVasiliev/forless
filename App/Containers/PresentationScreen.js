@@ -7,6 +7,7 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 // Components
 import SwiperItem from '../Components/SwiperItem'
 import LoadingIndicator from '../Components/LoadingIndicator'
+import LeftMenu from '../Components/LeftMenu'
 
 // Redux
 import { connect } from 'react-redux'
@@ -23,7 +24,13 @@ import { Colors } from '../Themes'
 // External libs
 import Swiper from 'react-native-swiper';
 import FCM from 'react-native-fcm';
+import ScalingDrawer from 'react-native-scaling-drawer';
 
+let defaultScalingDrawerConfig = {
+  scalingFactor: 0.8,
+  minimizeFactor: 0.6,
+  swipeOffset: 20
+};
 
 class PresentationScreen extends React.Component {
 
@@ -38,9 +45,20 @@ class PresentationScreen extends React.Component {
 
   componentWillMount() {
     //TODO - hide splash screen after timeout to change screen if no-auth
+    NavigationActions.refresh({
+      onLeft: () => {
+        this._drawer.open()
+      }
+    })
     FirebaseDB.checkForUser(() => NavigationActions.login())
     FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.props.articles)
   }
+
+  setDynamicDrawerValue = (type, value) => {
+    defaultScalingDrawerConfig[type] = value;
+  /** forceUpdate show drawer dynamic scaling example **/
+    this.forceUpdate();
+  };
 
   setArticlesInState (articles, themes) {
     this.props.storeArticles(articles)
@@ -56,26 +74,38 @@ class PresentationScreen extends React.Component {
     })
   }
 
+  closeDrawer(){
+    this._drawer.close()
+  }
+
   render () {
     let articles = this.props.filteredArticles ? this.props.filteredArticles : this.props.articles
 
     if (articles.length > 0) {
       return (
-        <View style={styles.main}>
-          <Swiper horizontal={false}
-                   activeDotColor={Colors.skyBlue}
-                   dot={this.renderDot('rgba(0, 0, 0, 0.2)')}
-                   activeDot={this.renderDot(Colors.skyBlue)}
-                   showsButtons={true}
-                   buttonWrapperStyle={styles.footer}
-                   nextButton={this.renderFooterButton('След. >')}
-                   prevButton={this.renderFooterButton('< Назад')}
-                   >
-            { articles.map((article, index) => {
-              return (<SwiperItem article={article} key={index}/>)
-            }) }
-          </Swiper>
-        </View>
+        <ScalingDrawer
+          ref={ref => this._drawer = ref}
+          content={<LeftMenu close={this.closeDrawer.bind(this)}/>}
+          {...defaultScalingDrawerConfig}
+          onClose={() => console.tron.log('close')}
+          onOpen={() => console.tron.log('open')}
+        >
+          <View style={styles.main}>
+            <Swiper horizontal={false}
+                     activeDotColor={Colors.skyBlue}
+                     dot={this.renderDot('rgba(0, 0, 0, 0.2)')}
+                     activeDot={this.renderDot(Colors.skyBlue)}
+                     showsButtons={true}
+                     buttonWrapperStyle={styles.footer}
+                     nextButton={this.renderFooterButton('След. >')}
+                     prevButton={this.renderFooterButton('< Назад')}
+                     >
+              { articles.map((article, index) => {
+                return (<SwiperItem article={article} key={index}/>)
+              }) }
+            </Swiper>
+          </View>
+        </ScalingDrawer>
       )
     } else {
       return (
