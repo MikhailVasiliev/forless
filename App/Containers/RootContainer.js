@@ -10,6 +10,7 @@ import NavigationRouter from '../Navigation/NavigationRouter'
 import { connect } from 'react-redux'
 import StartupActions from '../Redux/StartupRedux'
 import ReduxPersist from '../Config/ReduxPersist'
+import LeftMenu from '../Components/LeftMenu'
 
 // Styles
 import styles from './Styles/RootContainerStyles'
@@ -19,11 +20,38 @@ import { Colors } from '../Themes'
 import DropdownAlert from 'react-native-dropdownalert'
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
 import { Actions as NavigationActions } from 'react-native-router-flux'
+import ScalingDrawer from 'react-native-scaling-drawer';
 
 // services
 import FirebaseDB from '../Services/FirebaseDB'
 
+let defaultScalingDrawerConfig = {
+  scalingFactor: 0.9,
+  minimizeFactor: 0.6,
+  swipeOffset: 20
+};
+
 class RootContainer extends Component {
+
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      isDrawerOpened: false
+    }
+  }
+
+  setDynamicDrawerValue = (type, value) => {
+    defaultScalingDrawerConfig[type] = value;
+  /** forceUpdate show drawer dynamic scaling example **/
+    this.forceUpdate();
+  };
+
+  toggleDrawer(){
+    this.state.isDrawerOpened
+      ? this._drawer.close()
+      : this._drawer.open()
+  }
 
   componentWillMount() {
     //TODO - hide splash screen after timeout to change screen if no-auth
@@ -65,14 +93,22 @@ class RootContainer extends Component {
       console.tron.log(token)
     // fcm token may not be available on first load, catch it here
     });
-
+    this._drawer.blockSwipeAbleDrawer(true)
   }
 
   render () {
     return (
-      <View style={styles.applicationView}>
-        <StatusBar barStyle="light-content" translucent={true} backgroundColor={Colors.transparent}/>
-        <NavigationRouter />
+      <ScalingDrawer
+        ref={ref => this._drawer = ref}
+        content={<LeftMenu onClick={this.toggleDrawer.bind(this)}/>}
+        {...defaultScalingDrawerConfig}
+        onClose={() => this.setState({isDrawerOpened: false})}
+        onOpen={() => this.setState({isDrawerOpened: true})}
+        >
+        <View style={styles.applicationView}>
+          <StatusBar barStyle="light-content" translucent={true} backgroundColor={Colors.transparent}/>
+          <NavigationRouter toggleDrawer={() => this.toggleDrawer()}/>
+        </View>
         <DropdownAlert
           closeInterval={4000}
           ref={(ref) => this.dropdown = ref}
@@ -82,7 +118,7 @@ class RootContainer extends Component {
           messageStyle={styles.alertMessage}
           imageStyle={styles.alertIcon}
           />
-      </View>
+      </ScalingDrawer>
     )
   }
 

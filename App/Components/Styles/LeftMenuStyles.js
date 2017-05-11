@@ -4,10 +4,11 @@ import { Metrics, Colors, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
-    paddingLeft: 30
+    paddingLeft: 0,
+    flex: 1
   },
   profile: {
-    marginLeft: Metrics.screenWidth * 0.16,
+    marginLeft: 25,
     marginTop: 50
   },
   group: {
@@ -15,8 +16,8 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   imgWrapper: {
-    width: 129,
-    height: 129,
+    width: 79,
+    height: 79,
     borderWidth: 2,
     borderRadius: 120,
     borderColor: 'rgba(255, 255, 255, 0.4)',
@@ -27,9 +28,9 @@ export default StyleSheet.create({
     marginLeft: 15
   },
   profilePic: {
-    width: 125,
-    height: 125,
-    borderRadius: 62.5,
+    width: 75,
+    height: 75,
+    borderRadius: 38,
   },
   imgBg: {
     position: 'absolute',
@@ -47,20 +48,21 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingTop: 10,
     paddingBottom: 10,
-    borderTopWidth: 1,
-    borderColor: '#fff'
+    borderTopWidth: 0.5,
+    borderColor: '#fff',
+    height: 50
   },
   menuTxt: {
     fontSize: 16,
     color: '#fff',
-    paddingLeft: 10
+    paddingLeft: 25
   },
   profileInfo: {
     paddingTop: 10,
     paddingBottom: 15,
   },
   name: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#fff'
   }
 })

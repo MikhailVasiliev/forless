@@ -27,7 +27,7 @@ import FCM from 'react-native-fcm';
 import ScalingDrawer from 'react-native-scaling-drawer';
 
 let defaultScalingDrawerConfig = {
-  scalingFactor: 0.8,
+  scalingFactor: 0.9,
   minimizeFactor: 0.6,
   swipeOffset: 20
 };
@@ -47,7 +47,7 @@ class PresentationScreen extends React.Component {
     //TODO - hide splash screen after timeout to change screen if no-auth
     NavigationActions.refresh({
       onLeft: () => {
-        this._drawer.open()
+        this.props.toggleDrawer()
       }
     })
     FirebaseDB.checkForUser(() => NavigationActions.login())
@@ -83,13 +83,6 @@ class PresentationScreen extends React.Component {
 
     if (articles.length > 0) {
       return (
-        <ScalingDrawer
-          ref={ref => this._drawer = ref}
-          content={<LeftMenu close={this.closeDrawer.bind(this)}/>}
-          {...defaultScalingDrawerConfig}
-          onClose={() => console.tron.log('close')}
-          onOpen={() => console.tron.log('open')}
-        >
           <View style={styles.main}>
             <Swiper horizontal={false}
                      activeDotColor={Colors.skyBlue}
@@ -105,7 +98,6 @@ class PresentationScreen extends React.Component {
               }) }
             </Swiper>
           </View>
-        </ScalingDrawer>
       )
     } else {
       return (

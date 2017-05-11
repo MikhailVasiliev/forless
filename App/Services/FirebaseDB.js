@@ -124,11 +124,15 @@ class Database {
   }
 
   static checkForUser(callback) {
-    firebase.auth().onAuthStateChanged((user) => {
+    firebaseApp.auth().onAuthStateChanged((user) => {
       if (!user){
         callback()
       }
     })
+  }
+
+  static logout() {
+    firebaseApp.auth().signOut()
   }
 }
 
