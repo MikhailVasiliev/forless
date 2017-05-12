@@ -55,7 +55,11 @@ class RootContainer extends Component {
 
   componentWillMount() {
     //TODO - hide splash screen after timeout to change screen if no-auth
-    FirebaseDB.checkForUser(() => NavigationActions.login())
+    FirebaseDB.checkForUser(() => NavigationActions.login(), user => this.storeUser(user))
+  }
+
+  storeUser(user){
+    this.user = user
   }
 
   componentDidMount () {
@@ -73,10 +77,6 @@ class RootContainer extends Component {
     FCM.getInitialNotification().then( notif => {console.tron.log('getInitialNotification'); console.tron.log(notif) } );
 
     this.notificationListener = FCM.on(FCMEvent.Notification,  notif => {
-      console.tron.log('notif')
-      console.tron.log(notif)
-
-      // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
       if (!notif.opened_from_tray){
         //this is a local notification
         Platform.OS === 'ios' ? this.dropdown.alertWithType('info', notif.notification.title, notif.articleTitle) :
@@ -93,21 +93,32 @@ class RootContainer extends Component {
       console.tron.log(token)
     // fcm token may not be available on first load, catch it here
     });
-    this._drawer.blockSwipeAbleDrawer(true)
+  }
+
+  blockDrawer(isBlocked) {
+    if (this._drawer){
+      this._drawer.blockSwipeAbleDrawer(isBlocked)
+    }
   }
 
   render () {
     return (
       <ScalingDrawer
         ref={ref => this._drawer = ref}
-        content={<LeftMenu onClick={this.toggleDrawer.bind(this)}/>}
+        content={<LeftMenu closeDrawer={this.toggleDrawer.bind(this)} user={this.user}/>}
         {...defaultScalingDrawerConfig}
         onClose={() => this.setState({isDrawerOpened: false})}
         onOpen={() => this.setState({isDrawerOpened: true})}
         >
         <View style={styles.applicationView}>
-          <StatusBar barStyle="light-content" translucent={true} backgroundColor={Colors.transparent}/>
-          <NavigationRouter toggleDrawer={() => this.toggleDrawer()}/>
+          <StatusBar
+            barStyle="light-content"
+            translucent={true}
+            backgroundColor={Colors.transparent}/>
+          <NavigationRouter
+            toggleDrawer={() => this.toggleDrawer()}
+            user={this.user}
+            blockDrawer={(isBlocked) => this.blockDrawer(isBlocked)}/>
         </View>
         <DropdownAlert
           closeInterval={4000}
@@ -123,10 +134,6 @@ class RootContainer extends Component {
   }
 
   onClose(data) {
-    // data = {type, title, message, action}
-    // action means how the alert was dismissed. returns: automatic, programmatic, tap, pan or cancel
-    console.tron.log('data');
-    console.tron.log(data);
     if (data.action === 'tap') {
       let newArticle = this.findArticleInState(data.message)
       NavigationActions.articleScreen({article: newArticle})

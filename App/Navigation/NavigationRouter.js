@@ -28,7 +28,7 @@ const getSceneStyle = () => {
 class NavigationRouter extends Component {
   render () {
     return (
-      <Router toggleDrawer={() => this.props.toggleDrawer()}>
+      <Router toggleDrawer={() => this.props.toggleDrawer()} blockDrawer={(isBlocked) => this.props.blockDrawer(isBlocked)}>
           <Scene key="drawerChildrenWrapper"
                  navigationBarStyle={Styles.navBar}
                  backButtonImage={Images.back}
@@ -56,9 +56,10 @@ class NavigationRouter extends Component {
                    leftButtonIconStyle={Styles.backButton}
                    rightButtonImage={Images.share}
                    rightButtonIconStyle={Styles.rightButton}
-                   onLeft={() => {}}
+                   onLeft={() => console.tron.log('onLeft')}
                    onRight={() => {}}
-                   />
+                   panHandlers={null}
+                   onBack={() => {Actions.pop(); this.props.blockDrawer(false)}} />
             <Scene key="settings"
                    animationStyle={animationStyle}
                    direction="vertical"
@@ -67,12 +68,12 @@ class NavigationRouter extends Component {
                    component={SettingsScreen}
                    leftButtonImage={Images.back}
                    leftButtonIconStyle={Styles.backButton}
-                   onLeft={() => {Actions.pop()}} />
+                   onBack={() => {Actions.pop()}} />
             <Scene key="newArticle"
                    component={NewArticleScreen}
                    leftButtonImage={Images.back}
                    leftButtonIconStyle={Styles.backButton}
-                   onLeft={() => {}} />
+                   onBack={() => {Actions.pop(); this.props.blockDrawer(false)}} />
             <Scene key="feedback"
                    animationStyle={animationStyle}
                    direction="vertical"
@@ -81,7 +82,7 @@ class NavigationRouter extends Component {
                    component={FeedbackScreen}
                    leftButtonImage={Images.back}
                    leftButtonIconStyle={Styles.backButton}
-                   onLeft={() => {Actions.pop()}} />
+                   onBack={() => {Actions.pop(); this.props.blockDrawer(false)}} />
           </Scene>
       </Router>
     )

@@ -7,7 +7,6 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 // Components
 import SwiperItem from '../Components/SwiperItem'
 import LoadingIndicator from '../Components/LoadingIndicator'
-import LeftMenu from '../Components/LeftMenu'
 
 // Redux
 import { connect } from 'react-redux'
@@ -24,7 +23,6 @@ import { Colors } from '../Themes'
 // External libs
 import Swiper from 'react-native-swiper';
 import FCM from 'react-native-fcm';
-import ScalingDrawer from 'react-native-scaling-drawer';
 
 let defaultScalingDrawerConfig = {
   scalingFactor: 0.9,
@@ -50,13 +48,16 @@ class PresentationScreen extends React.Component {
         this.props.toggleDrawer()
       }
     })
-    FirebaseDB.checkForUser(() => NavigationActions.login())
     FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.props.articles)
+  }
+
+  componentDidMount(){
+    this.props.blockDrawer(false)
   }
 
   setDynamicDrawerValue = (type, value) => {
     defaultScalingDrawerConfig[type] = value;
-  /** forceUpdate show drawer dynamic scaling example **/
+    /** forceUpdate show drawer dynamic scaling example **/
     this.forceUpdate();
   };
 
@@ -72,10 +73,6 @@ class PresentationScreen extends React.Component {
         FCM.subscribeToTopic('/topics/' + theme.topic);
       }
     })
-  }
-
-  closeDrawer(){
-    this._drawer.close()
   }
 
   render () {

@@ -51,6 +51,7 @@ export default StyleSheet.create({
   dot: {
     width: 6,
     height: 6,
-    borderRadius: 2,
+    // borderRadius: 2,
+    // margin: 2,
   }
 })

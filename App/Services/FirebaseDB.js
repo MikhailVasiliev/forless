@@ -123,10 +123,13 @@ class Database {
     ref.set(feedback)
   }
 
-  static checkForUser(callback) {
+  static checkForUser(callbackNoUser, callbackUser) {
     firebaseApp.auth().onAuthStateChanged((user) => {
       if (!user){
-        callback()
+        callbackNoUser()
+      } else {
+        callbackUser(user)
+        console.tron.log(user.providerData[0])
       }
     })
   }

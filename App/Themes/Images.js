@@ -12,7 +12,7 @@ const images = {
   back: require('../Images/back.png'),
   settings: require('../Images/settings.png'),
   share: require('../Images/share.png'),
-  face: require('../Images/face.jpg'),
+  face: require('../Images/noavatar.png'),
 }
 
 export default images

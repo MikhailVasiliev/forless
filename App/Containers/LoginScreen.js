@@ -48,6 +48,9 @@ class LoginScreen extends React.Component {
     }
   }
 
+  componentDidMount(){
+    this.props.blockDrawer(true)
+  }
 
   render () {
     return (

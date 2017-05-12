@@ -25,12 +25,17 @@ class ArticleScreen extends React.Component {
   componentWillMount() {
     NavigationActions.refresh({
       onBack: () => {
+        this.props.blockDrawer(false)
         NavigationActions.popTo('presentationScreen')
       },
       onRight: () => {
         this.onShare()
       }
     })
+  }
+
+  componentDidMount(){
+    this.props.blockDrawer(true)
   }
 
   onShare(){
