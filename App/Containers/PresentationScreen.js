@@ -24,6 +24,11 @@ import { Colors } from '../Themes'
 import Swiper from 'react-native-swiper';
 import FCM from 'react-native-fcm';
 
+let defaultScalingDrawerConfig = {
+  scalingFactor: 0.9,
+  minimizeFactor: 0.6,
+  swipeOffset: 20
+};
 
 class PresentationScreen extends React.Component {
 
@@ -38,9 +43,23 @@ class PresentationScreen extends React.Component {
 
   componentWillMount() {
     //TODO - hide splash screen after timeout to change screen if no-auth
-    FirebaseDB.checkForUser(() => NavigationActions.login())
+    NavigationActions.refresh({
+      onLeft: () => {
+        this.props.toggleDrawer()
+      }
+    })
     FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.props.articles)
   }
+
+  componentDidMount(){
+    this.props.blockDrawer(false)
+  }
+
+  setDynamicDrawerValue = (type, value) => {
+    defaultScalingDrawerConfig[type] = value;
+    /** forceUpdate show drawer dynamic scaling example **/
+    this.forceUpdate();
+  };
 
   setArticlesInState (articles, themes) {
     this.props.storeArticles(articles)
@@ -61,21 +80,21 @@ class PresentationScreen extends React.Component {
 
     if (articles.length > 0) {
       return (
-        <View style={styles.main}>
-          <Swiper horizontal={false}
-                   activeDotColor={Colors.skyBlue}
-                   dot={this.renderDot('rgba(0, 0, 0, 0.2)')}
-                   activeDot={this.renderDot(Colors.skyBlue)}
-                   showsButtons={true}
-                   buttonWrapperStyle={styles.footer}
-                   nextButton={this.renderFooterButton('След. >')}
-                   prevButton={this.renderFooterButton('< Назад')}
-                   >
-            { articles.map((article, index) => {
-              return (<SwiperItem article={article} key={index}/>)
-            }) }
-          </Swiper>
-        </View>
+          <View style={styles.main}>
+            <Swiper horizontal={false}
+                     activeDotColor={Colors.skyBlue}
+                     dot={this.renderDot('rgba(0, 0, 0, 0.2)')}
+                     activeDot={this.renderDot(Colors.skyBlue)}
+                     showsButtons={true}
+                     buttonWrapperStyle={styles.footer}
+                     nextButton={this.renderFooterButton('След. >')}
+                     prevButton={this.renderFooterButton('< Назад')}
+                     >
+              { articles.map((article, index) => {
+                return (<SwiperItem article={article} key={index}/>)
+              }) }
+            </Swiper>
+          </View>
       )
     } else {
       return (

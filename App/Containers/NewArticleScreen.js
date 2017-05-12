@@ -32,6 +32,14 @@ class NewArticleScreen extends React.Component {
     })
   }
 
+  componentDidMount(){
+    try {
+      this.props.blockDrawer(true)
+    } catch (error) {
+      console.tron.log('error - ' + error)
+    }
+  }
+
   onShare(){
     var article = this.props.article
 

@@ -10,6 +10,7 @@ import NavigationRouter from '../Navigation/NavigationRouter'
 import { connect } from 'react-redux'
 import StartupActions from '../Redux/StartupRedux'
 import ReduxPersist from '../Config/ReduxPersist'
+import LeftMenu from '../Components/LeftMenu'
 
 // Styles
 import styles from './Styles/RootContainerStyles'
@@ -19,15 +20,46 @@ import { Colors } from '../Themes'
 import DropdownAlert from 'react-native-dropdownalert'
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
 import { Actions as NavigationActions } from 'react-native-router-flux'
+import ScalingDrawer from 'react-native-scaling-drawer';
 
 // services
 import FirebaseDB from '../Services/FirebaseDB'
 
+let defaultScalingDrawerConfig = {
+  scalingFactor: 0.9,
+  minimizeFactor: 0.6,
+  swipeOffset: 20
+};
+
 class RootContainer extends Component {
+
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      isDrawerOpened: false
+    }
+  }
+
+  setDynamicDrawerValue = (type, value) => {
+    defaultScalingDrawerConfig[type] = value;
+  /** forceUpdate show drawer dynamic scaling example **/
+    this.forceUpdate();
+  };
+
+  toggleDrawer(){
+    this.state.isDrawerOpened
+      ? this._drawer.close()
+      : this._drawer.open()
+  }
 
   componentWillMount() {
     //TODO - hide splash screen after timeout to change screen if no-auth
-    FirebaseDB.checkForUser(() => NavigationActions.login())
+    FirebaseDB.checkForUser(() => NavigationActions.login(), user => this.storeUser(user))
+  }
+
+  storeUser(user){
+    this.user = user
   }
 
   componentDidMount () {
@@ -45,10 +77,6 @@ class RootContainer extends Component {
     FCM.getInitialNotification().then( notif => {console.tron.log('getInitialNotification'); console.tron.log(notif) } );
 
     this.notificationListener = FCM.on(FCMEvent.Notification,  notif => {
-      console.tron.log('notif')
-      console.tron.log(notif)
-
-      // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
       if (!notif.opened_from_tray){
         //this is a local notification
         Platform.OS === 'ios' ? this.dropdown.alertWithType('info', notif.notification.title, notif.articleTitle) :
@@ -65,14 +93,33 @@ class RootContainer extends Component {
       console.tron.log(token)
     // fcm token may not be available on first load, catch it here
     });
+  }
 
+  blockDrawer(isBlocked) {
+    if (this._drawer){
+      this._drawer.blockSwipeAbleDrawer(isBlocked)
+    }
   }
 
   render () {
     return (
-      <View style={styles.applicationView}>
-        <StatusBar barStyle="light-content" translucent={true} backgroundColor={Colors.transparent}/>
-        <NavigationRouter />
+      <ScalingDrawer
+        ref={ref => this._drawer = ref}
+        content={<LeftMenu closeDrawer={this.toggleDrawer.bind(this)} user={this.user}/>}
+        {...defaultScalingDrawerConfig}
+        onClose={() => this.setState({isDrawerOpened: false})}
+        onOpen={() => this.setState({isDrawerOpened: true})}
+        >
+        <View style={styles.applicationView}>
+          <StatusBar
+            barStyle="light-content"
+            translucent={true}
+            backgroundColor={Colors.transparent}/>
+          <NavigationRouter
+            toggleDrawer={() => this.toggleDrawer()}
+            user={this.user}
+            blockDrawer={(isBlocked) => this.blockDrawer(isBlocked)}/>
+        </View>
         <DropdownAlert
           closeInterval={4000}
           ref={(ref) => this.dropdown = ref}
@@ -82,15 +129,11 @@ class RootContainer extends Component {
           messageStyle={styles.alertMessage}
           imageStyle={styles.alertIcon}
           />
-      </View>
+      </ScalingDrawer>
     )
   }
 
   onClose(data) {
-    // data = {type, title, message, action}
-    // action means how the alert was dismissed. returns: automatic, programmatic, tap, pan or cancel
-    console.tron.log('data');
-    console.tron.log(data);
     if (data.action === 'tap') {
       let newArticle = this.findArticleInState(data.message)
       NavigationActions.articleScreen({article: newArticle})

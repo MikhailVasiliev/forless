@@ -39,15 +39,6 @@ class SettingsScreen extends React.Component {
     }
   }
 
-  componentWillMount() {
-
-    NavigationActions.refresh({
-      onLeft: () => {
-        NavigationActions.pop()
-      }
-    })
-  }
-
   render () {
     let allThemes = this.props.allThemes
     let isAdmin = this.props.user && (this.props.user.email === adminEmail)
