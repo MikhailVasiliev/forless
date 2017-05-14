@@ -43,7 +43,7 @@ class NavigationRouter extends Component {
             <Scene initial key="presentationScreen"
                    type={ActionConst.REPLACE}
                    component={PresentationScreen}
-                   title="Feed"
+                   title="Статьи"
                    leftButtonImage={Images.menu}
                    leftButtonIconStyle={Styles.leftButton}
                    rightButtonImage={Images.settings}
@@ -51,20 +51,20 @@ class NavigationRouter extends Component {
                    onLeft={() => {Actions.feedback()}}
                    onRight={() => {Actions.settings()}} />
             <Scene key="articleScreen"
+                   hideNavBar
                    component={ArticleScreen}
                    leftButtonImage={Images.back}
                    leftButtonIconStyle={Styles.backButton}
+                   rightButtonStyle={Styles.rightButtonContainer}
                    rightButtonImage={Images.share}
                    rightButtonIconStyle={Styles.rightButton}
-                   onLeft={() => console.tron.log('onLeft')}
                    onRight={() => {}}
-                   panHandlers={null}
                    onBack={() => {Actions.pop(); this.props.blockDrawer(false)}} />
             <Scene key="settings"
                    animationStyle={animationStyle}
                    direction="vertical"
                    getSceneStyle={getSceneStyle}
-                   title="Settings"
+                   title="Настройки"
                    component={SettingsScreen}
                    leftButtonImage={Images.back}
                    leftButtonIconStyle={Styles.backButton}
@@ -74,6 +74,10 @@ class NavigationRouter extends Component {
                    leftButtonImage={Images.back}
                    leftButtonIconStyle={Styles.backButton}
                    onBack={() => {Actions.pop(); this.props.blockDrawer(false)}} />
+            <Scene key="filteredArticles"
+                   component={PresentationScreen}
+                   title="Избранные"
+                   onBack={() => {Actions.pop()}} />
             <Scene key="feedback"
                    animationStyle={animationStyle}
                    direction="vertical"

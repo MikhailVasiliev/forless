@@ -13,6 +13,8 @@ const images = {
   settings: require('../Images/settings.png'),
   share: require('../Images/share.png'),
   face: require('../Images/noavatar.png'),
+  marked: require('../Images/marked.png'),
+  unmarked: require('../Images/unmarked.png'),
 }
 
 export default images

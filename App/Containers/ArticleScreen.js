@@ -19,19 +19,30 @@ import { connect } from 'react-redux'
 // Libs
 // Styles
 import styles from './Styles/ArticleScreenStyles'
+import { Images } from '../Themes'
 
 class ArticleScreen extends React.Component {
 
-  componentWillMount() {
-    NavigationActions.refresh({
-      onBack: () => {
-        this.props.blockDrawer(false)
-        NavigationActions.popTo('presentationScreen')
-      },
-      onRight: () => {
-        this.onShare()
-      }
+  constructor(props){
+    super(props)
+
+    let marked = props.markedArticles ? props.markedArticles.some((article) => {
+      return article.title === props.article.title
     })
+    : false
+
+    console.tron.log('props')
+    console.tron.log(props)
+    console.tron.log('marked')
+    console.tron.log(marked)
+
+    this.state = {
+      marked: marked
+    }
+  }
+
+  componentWillMount() {
+
   }
 
   componentDidMount(){
@@ -58,8 +69,31 @@ class ArticleScreen extends React.Component {
 
   render () {
     var article = this.props.article
+
+    let marked = this.props.markedArticles ? this.props.markedArticles.some((articleElement) => {
+      return articleElement.title === this.props.article.title
+    })
+    : false
+
+    let favIcon = marked ? Images.marked : Images.unmarked
+
+    let onAction = marked ? this.props.removeArticleFromFavorite.bind(this) : this.props.addArticleToFavorite.bind(this)
     return (
       <View style={styles.mainContainer}>
+      <TouchableOpacity style={styles.favoriteIconContainer}
+        onPress={() => onAction(article)}>
+        <Image style={styles.icon} source={favIcon}/>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.backIconContainer}
+        onPress={() => {
+          NavigationActions.pop();
+          this.props.blockDrawer(false)}}>
+        <Image style={styles.backIcon} source={Images.back}/>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.shareIconContainer}
+        onPress={() => this.onShare()}>
+        <Image style={styles.icon} source={Images.share}/>
+      </TouchableOpacity>
       <LinearGradient
         colors={[
           'rgba(0, 0, 0, 0.7)',
@@ -97,7 +131,8 @@ class ArticleScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    filteredArticles: state.articles.filteredArticles
+    filteredArticles: state.articles.filteredArticles,
+    markedArticles: state.articles.markedArticles,
   }
 }
 
@@ -105,6 +140,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     articleFetchAttempt: (path) => dispatch(ArticlesActions.articleFetchAttempt(path)),
     filterArticles: (filter) => dispatch(ArticlesActions.filterArticles(filter)),
+    addArticleToFavorite: (article) => dispatch(ArticlesActions.addArticleToFavorite(article)),
+    removeArticleFromFavorite: (article) => dispatch(ArticlesActions.removeArticleFromFavorite(article)),
   }
 }
 

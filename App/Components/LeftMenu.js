@@ -36,7 +36,10 @@ class LeftMenu extends Component {
         <View style={styles.menu}>
           <TouchableOpacity
             style={styles.col}
-            onPress={() => this.props.closeDrawer()}
+            onPress={() => {
+              this.props.closeDrawer()
+              NavigationActions.filteredArticles({filteredArticles: this.props.markedArticles})
+            }}
             activeOpacity={0.6}
             >
             <Text style={styles.menuTxt}>Избранные</Text>
@@ -69,7 +72,8 @@ class LeftMenu extends Component {
 
 LeftMenu.propTypes = {
   closeDrawer: React.PropTypes.func.isRequired,
-  user: React.PropTypes.object
+  user: React.PropTypes.object,
+  markedArticles: React.PropTypes.array.isRequired,
 };
 
 

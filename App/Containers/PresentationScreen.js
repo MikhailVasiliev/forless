@@ -48,7 +48,9 @@ class PresentationScreen extends React.Component {
         this.props.toggleDrawer()
       }
     })
-    FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.props.articles)
+    if (!this.props.filteredArticles){
+      FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.props.articles)
+    }
   }
 
   componentDidMount(){

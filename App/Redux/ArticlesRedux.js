@@ -15,6 +15,8 @@ const { Types, Creators } = createActions({
   sendFcmNotification: ['article', 'topic'],
   storeArticles: ['articles'],
   filterArticles: ['filter'],
+  addArticleToFavorite: ['article'],
+  removeArticleFromFavorite: ['article'],
 })
 
 export const ArticlesTypes = Types
@@ -28,6 +30,7 @@ export const INITIAL_STATE = Immutable({
   fetching: false,
   filter: 'all',
   filteredArticles: [],
+  markedArticles: [],
 })
 
 /* ------------- Reducers ------------- */
@@ -69,6 +72,32 @@ export const filterArticles = (state, { filter }) => {
   return state.merge({ filter: Immutable(filter), filteredArticles: Immutable(filteredArticles) })
 }
 
+export const addArticleToFavorite = (state, { article }) => {
+  console.tron.log('article')
+  console.tron.log(article)
+  let articles = state.markedArticles
+  articles = articles.concat(article)
+  console.tron.log('articles')
+  console.tron.log(articles)
+  return state.merge({ markedArticles: articles })
+}
+
+export const removeArticleFromFavorite = (state, { article }) => {
+  var articleIndex
+  console.tron.log('article')
+  console.tron.log(article)
+  let articles = state.markedArticles.asMutable()
+  articles.map((arrayElement, index)=>{
+    if (arrayElement.title === article.title) {
+      articleIndex = index
+    }
+  })
+  articles.splice(articleIndex, 1)
+  console.tron.log('articles')
+  console.tron.log(articles)
+  return state.merge({ markedArticles: Immutable(articles) })
+}
+
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -82,4 +111,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.STORE_ARTICLES]: storeArticles,
   [Types.FILTER_ARTICLES]: filterArticles,
   [Types.SEND_FCM_NOTIFICATION]: sendFcmNotification,
+  [Types.ADD_ARTICLE_TO_FAVORITE]: addArticleToFavorite,
+  [Types.REMOVE_ARTICLE_FROM_FAVORITE]: removeArticleFromFavorite,
 })

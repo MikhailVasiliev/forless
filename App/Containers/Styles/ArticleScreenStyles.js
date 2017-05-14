@@ -108,4 +108,38 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row'
   },
+  favoriteIconContainer: {
+    position: 'absolute',
+    top: 36,
+    right: 70,
+    width: 30,
+    height: 30,
+    zIndex: 11
+  },
+  backIconContainer: {
+    position: 'absolute',
+    top: 40,
+    left: 20,
+    width: 22,
+    height: 22,
+    zIndex: 11
+  },
+  shareIconContainer: {
+    position: 'absolute',
+    top: 36,
+    right: 20,
+    width: 30,
+    height: 30,
+    zIndex: 11
+  },
+  icon:{
+    width: 30,
+    height: 30,
+    resizeMode: 'contain',
+  },
+  backIcon:{
+    width: 22,
+    height: 22,
+    resizeMode: 'contain',
+  },
 })

@@ -42,5 +42,8 @@ export default {
     width: 30,
     height: 30,
     resizeMode: 'contain'
-  }
+  },
+  rightButtonContainer: {
+    width: 50,
+  },
 }

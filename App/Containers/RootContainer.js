@@ -105,7 +105,7 @@ class RootContainer extends Component {
     return (
       <ScalingDrawer
         ref={ref => this._drawer = ref}
-        content={<LeftMenu closeDrawer={this.toggleDrawer.bind(this)} user={this.user}/>}
+        content={<LeftMenu closeDrawer={this.toggleDrawer.bind(this)} user={this.user} markedArticles={this.props.markedArticles}/>}
         {...defaultScalingDrawerConfig}
         onClose={() => this.setState({isDrawerOpened: false})}
         onOpen={() => this.setState({isDrawerOpened: true})}
@@ -157,6 +157,7 @@ class RootContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     articles: state.articles.data,
+    markedArticles: state.articles.markedArticles,
   }
 }
 
