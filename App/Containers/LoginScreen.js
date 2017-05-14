@@ -37,7 +37,8 @@ class LoginScreen extends React.Component {
     this.state = {
       login: '',
       password: '',
-      user: {},
+      passwordRepeat: '',
+      form: 'login',
       loading: false,
     }
 
@@ -53,14 +54,18 @@ class LoginScreen extends React.Component {
   }
 
   render () {
+    let loginText = this.state.form === 'login' ? 'Вход' : 'Создать'
+    let createAccountText = this.state.form === 'login' ? 'Еще нет аккаунта? Создайте новый' : 'Вернуться к предыдущей форме'
     return (
       <View style={styles.mainOuter} >
         <Image style={styles.backgroundImage} source={Images.background3}>
           <View style={styles.main} >
-            <Text style={styles.welcomeText}>Please log in</Text>
+            {this.state.form === 'login' && <Text style={styles.welcomeText}>Войти в аккаунт</Text>}
+            {this.state.form === 'signup' && <Text style={styles.welcomeText}>Создайте аккаунт</Text>}
             <TextInput
               style={styles.loginInput}
               placeholder={'адрес эл.почты'}
+              placeholderTextColor={'rgba(255, 255, 255, 0.4)'}
               keyboardType={'email-address'}
               autoCorrect={false}
               autoCapitalize={'none'}
@@ -70,36 +75,50 @@ class LoginScreen extends React.Component {
             <TextInput
               style={styles.passInput}
               placeholder={'пароль'}
+              placeholderTextColor={'rgba(255, 255, 255, 0.4)'}
               autoCapitalize={'none'}
               secureTextEntry={true}
               autoCorrect={false}
               underlineColorAndroid={Colors.transparent}
               onChangeText={(password) => this.setState({password})}
               value={this.state.password}/>
+            {this.state.form === 'signup' && <TextInput
+              style={styles.passInput}
+              placeholder={'повторите пароль'}
+              placeholderTextColor={'rgba(255, 255, 255, 0.4)'}
+              autoCapitalize={'none'}
+              secureTextEntry={true}
+              autoCorrect={false}
+              underlineColorAndroid={Colors.transparent}
+              onChangeText={(passwordRepeat) => this.setState({passwordRepeat})}
+              value={this.state.passwordRepeat}/>}
             <View style={styles.buttonsContainer}>
               <TouchableOpacity
                 style={styles.loginBtn}
                 onPress={() => {
-                  this.login(this.state.login, this.state.password)
+                  this.handleActionButton()
                 }}>
-                <Text style={styles.loginBtnText}>Log in</Text>
+                <Text style={styles.loginBtnText}>{loginText}</Text>
               </TouchableOpacity>
-              <TouchableOpacity
+              {this.state.form === 'login' && <TouchableOpacity
                 style={styles.loginGoogleBtn}
                 onPress={() => {this.loginGoogle()}}>
                 <Image style={styles.loginGoogleBtnText} source={Images.g}/>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </TouchableOpacity>}
+              {this.state.form === 'login' && <TouchableOpacity
                 style={styles.loginFbBtn}
                 onPress={() => {this.loginFacebook()}}>
                 <Image style={styles.loginGoogleBtnText} source={Images.f}/>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </TouchableOpacity>}
+              {/*<TouchableOpacity
                 style={styles.loginSmsBtn}
                 onPress={() => {this.loginSms()}}>
                 <Text style={styles.loginSmsBtnText}>SMS</Text>
-              </TouchableOpacity>
+              </TouchableOpacity>*/}
             </View>
+            <TouchableOpacity style={styles.createAccountButton} onPress={()=> this.openSighUpForm()}>
+              <Text style={styles.createAccountText}>{createAccountText}</Text>
+            </TouchableOpacity>
           </View>
         </Image>
         <LoadingIndicator
@@ -109,15 +128,38 @@ class LoginScreen extends React.Component {
     )
   }
 
-  async signup(email, pass) {
+  handleActionButton(){
+    this.state.form === 'login'
+      ? this.login(this.state.login, this.state.password)
+      : this.signup()
+  }
+
+  openSighUpForm(){
+    if (this.state.form === 'login'){
+      this.setState({form: 'signup'})
+    } else {
+      this.setState({form: 'login'})
+    }
+  }
+
+  async signup() {
+    let email = this.state.login
+    let password = this.state.password
+    let passwordRepeat = this.state.passwordRepeat
     email = email.trim()
-    try {
-      await firebase.auth().createUserWithEmailAndPassword(email, pass);
-      console.tron.log('Account created');
-        // Navigate to the Home page, the user is auto logged in
-    } catch (error) {
-      Toast.show(error.toString())
-      console.tron.log(error.toString())
+    if (password === passwordRepeat){
+      try {
+        await firebase.auth().createUserWithEmailAndPassword(email, password);
+        this.setState({form: 'login'})
+      } catch (error) {
+        if (email === '' || password === '' || password === '') {
+          Toast.show('Заполните все поля')
+        } else {
+          Toast.show(error.toString(), {duration: Toast.durations.LONG})
+        }
+      }
+    } else {
+      Toast.show('Пароли должны совпадать')
     }
   }
 
@@ -130,14 +172,31 @@ class LoginScreen extends React.Component {
       if (email === '' || pass === '') {
         Toast.show('Заполните оба поля')
       } else {
-        Toast.show(error.toString())
+        Toast.show(error.toString(), {duration: Toast.durations.LONG})
       }
     }
   }
 
   onLoggedIn(userProfile){
-    this.props.storeUser(userProfile)
-    NavigationActions.presentationScreen()
+    FirebaseDB.checkForUser(
+      () => console.tron.log('no user'),
+      (user) => {
+        this.props.storeUser(user.providerData[0])
+        NavigationActions.presentationScreen()
+      }
+    )
+  }
+
+  checkUserVerified(user){
+    if (user.emailVerified) {
+      Toast.show('Email is verified')
+      this.props.storeUser(user.providerData[0])
+      NavigationActions.presentationScreen()
+    }
+    else {
+      user.sendEmailVerification();
+      Toast.show('Подтвердите почтовый адрес. Для этого перейдите по ссылке в письме, отправленном на указанный адрес.', {duration: Toast.durations.LONG})
+    }
   }
 
   loginSms() {
@@ -219,7 +278,7 @@ const mapDispatchToProps = (dispatch) => {
     articlesListFetchAttempt: () => dispatch(ArticlesActions.articlesListFetchAttempt()),
     storeArticles: (articles) => dispatch(ArticlesActions.storeArticles(articles)),
     storeThemes: (themes) => dispatch(NotificationActions.storeThemes(themes)),
-    storeUser: (user) => dispatch(LoginActions.storeUser(user)),
+    // storeUser: (user) => dispatch(LoginActions.storeUser(user)),
   }
 }
 
