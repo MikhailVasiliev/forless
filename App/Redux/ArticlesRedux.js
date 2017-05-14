@@ -73,19 +73,13 @@ export const filterArticles = (state, { filter }) => {
 }
 
 export const addArticleToFavorite = (state, { article }) => {
-  console.tron.log('article')
-  console.tron.log(article)
   let articles = state.markedArticles
   articles = articles.concat(article)
-  console.tron.log('articles')
-  console.tron.log(articles)
   return state.merge({ markedArticles: articles })
 }
 
 export const removeArticleFromFavorite = (state, { article }) => {
   var articleIndex
-  console.tron.log('article')
-  console.tron.log(article)
   let articles = state.markedArticles.asMutable()
   articles.map((arrayElement, index)=>{
     if (arrayElement.title === article.title) {
@@ -93,8 +87,6 @@ export const removeArticleFromFavorite = (state, { article }) => {
     }
   })
   articles.splice(articleIndex, 1)
-  console.tron.log('articles')
-  console.tron.log(articles)
   return state.merge({ markedArticles: Immutable(articles) })
 }
 

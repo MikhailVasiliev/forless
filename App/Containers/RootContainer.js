@@ -118,6 +118,7 @@ class RootContainer extends Component {
           <NavigationRouter
             toggleDrawer={() => this.toggleDrawer()}
             user={this.user}
+            storeUser={(user) => this.storeUser(user)}
             blockDrawer={(isBlocked) => this.blockDrawer(isBlocked)}/>
         </View>
         <DropdownAlert

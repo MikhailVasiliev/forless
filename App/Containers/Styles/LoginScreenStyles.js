@@ -35,24 +35,30 @@ export default StyleSheet.create({
   loginInput: {
     alignSelf: 'stretch',
     height: 40,
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    color: 'white',
     margin: 15,
     paddingLeft: 10,
     paddingRight: 10,
     marginBottom: 5,
     borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'white',
     fontFamily: 'Avenir Next'
   },
   passInput: {
     alignSelf: 'stretch',
     height: 40,
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    color: 'white',
     margin: 15,
     marginTop: 0,
     marginBottom: 0,
     paddingLeft: 10,
     paddingRight: 10,
     borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'white',
     fontFamily: 'Avenir Next'
   },
   loginBtn: {
@@ -122,5 +128,13 @@ export default StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
     marginTop: 5,
+  },
+  createAccountButton: {
+    margin: 30,
+  },
+  createAccountText: {
+    ...Fonts.style.normal,
+    color: 'white',
+    textDecorationLine: 'underline'
   },
 })

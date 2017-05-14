@@ -6,6 +6,7 @@ import styles from './Styles/LeftMenuStyles'
 import { Images } from '../Themes'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import FirebaseDB from '../Services/FirebaseDB'
+import Toast from 'react-native-root-toast'
 
 class LeftMenu extends Component {
   constructor(props) {
@@ -36,10 +37,7 @@ class LeftMenu extends Component {
         <View style={styles.menu}>
           <TouchableOpacity
             style={styles.col}
-            onPress={() => {
-              this.props.closeDrawer()
-              NavigationActions.filteredArticles({filteredArticles: this.props.markedArticles})
-            }}
+            onPress={() => this.onFavoritePressed()}
             activeOpacity={0.6}
             >
             <Text style={styles.menuTxt}>Избранные</Text>
@@ -67,6 +65,16 @@ class LeftMenu extends Component {
         </View>
       </View>
     );
+  }
+
+  onFavoritePressed(){
+    let markedArticles = this.props.markedArticles
+    if (markedArticles.length > 0) {
+      this.props.closeDrawer()
+      NavigationActions.filteredArticles({filteredArticles: this.props.markedArticles})
+    } else {
+      Toast.show('У Вас нет статей в группе избранных')
+    }
   }
 }
 

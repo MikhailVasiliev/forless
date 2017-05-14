@@ -31,11 +31,6 @@ class ArticleScreen extends React.Component {
     })
     : false
 
-    console.tron.log('props')
-    console.tron.log(props)
-    console.tron.log('marked')
-    console.tron.log(marked)
-
     this.state = {
       marked: marked
     }

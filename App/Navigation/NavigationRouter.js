@@ -28,7 +28,10 @@ const getSceneStyle = () => {
 class NavigationRouter extends Component {
   render () {
     return (
-      <Router toggleDrawer={() => this.props.toggleDrawer()} blockDrawer={(isBlocked) => this.props.blockDrawer(isBlocked)}>
+      <Router
+            toggleDrawer={() => this.props.toggleDrawer()}
+            blockDrawer={(isBlocked) => this.props.blockDrawer(isBlocked)}
+            storeUser={(user) => this.props.storeUser(user)}>
           <Scene key="drawerChildrenWrapper"
                  navigationBarStyle={Styles.navBar}
                  backButtonImage={Images.back}

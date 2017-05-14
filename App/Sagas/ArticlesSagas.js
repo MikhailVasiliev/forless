@@ -46,7 +46,6 @@ export function * articlesListFetchFailure (api, action) {
 }
 
 export function * sendFcmNotification (api, action) {
-  console.tron.log(action.article)
   const sendMessageResponse = yield call(api.sendRemote, action.article, action.topic)
   if (sendMessageResponse.status === 200) {
     console.tron.log('success')

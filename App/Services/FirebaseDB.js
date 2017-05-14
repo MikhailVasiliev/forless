@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+import Toast from 'react-native-root-toast'
 
 
 const firebaseConfig = {
@@ -125,11 +126,18 @@ class Database {
 
   static checkForUser(callbackNoUser, callbackUser) {
     firebaseApp.auth().onAuthStateChanged((user) => {
+      console.tron.log(user)
       if (!user){
         callbackNoUser()
       } else {
-        callbackUser(user)
-        console.tron.log(user.providerData[0])
+        if (user.emailVerified) {
+          callbackUser(user)
+        }
+        else {
+          user.sendEmailVerification();
+          Toast.show('Подтвердите почтовый адрес. Для этого перейдите по ссылке в письме, отправленном на указанный адрес.', {duration: Toast.durations.LONG})
+          callbackNoUser()
+        }
       }
     })
   }
