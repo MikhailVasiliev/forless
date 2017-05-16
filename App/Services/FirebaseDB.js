@@ -126,17 +126,19 @@ class Database {
 
   static checkForUser(callbackNoUser, callbackUser) {
     firebaseApp.auth().onAuthStateChanged((user) => {
-      console.tron.log(user)
       if (!user){
         callbackNoUser()
       } else {
-        if (user.emailVerified) {
+        if (user.providerData[0].providerId === 'password'){
+          if (user.emailVerified) {
+            callbackUser(user)
+          } else {
+            user.sendEmailVerification();
+            Toast.show('Подтвердите почтовый адрес. Для этого перейдите по ссылке в письме, отправленном на указанный адрес.', {duration: Toast.durations.LONG})
+            callbackNoUser()
+          }
+        } else {
           callbackUser(user)
-        }
-        else {
-          user.sendEmailVerification();
-          Toast.show('Подтвердите почтовый адрес. Для этого перейдите по ссылке в письме, отправленном на указанный адрес.', {duration: Toast.durations.LONG})
-          callbackNoUser()
         }
       }
     })

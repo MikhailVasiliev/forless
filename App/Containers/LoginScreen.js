@@ -187,18 +187,6 @@ class LoginScreen extends React.Component {
     )
   }
 
-  checkUserVerified(user){
-    if (user.emailVerified) {
-      Toast.show('Email is verified')
-      this.props.storeUser(user.providerData[0])
-      NavigationActions.presentationScreen()
-    }
-    else {
-      user.sendEmailVerification();
-      Toast.show('Подтвердите почтовый адрес. Для этого перейдите по ссылке в письме, отправленном на указанный адрес.', {duration: Toast.durations.LONG})
-    }
-  }
-
   loginSms() {
     lock.show({
       connections: ['sms']
