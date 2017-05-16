@@ -58,7 +58,7 @@ class ArticleScreen extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.filteredArticles !== nextProps.filteredArticles) {
-      NavigationActions.presentationScreen({filteredArticles: nextProps.filteredArticles})
+      NavigationActions.presentationScreen({mode: 'filtered', title: nextProps.filteredArticles[0].theme})
     }
   }
 

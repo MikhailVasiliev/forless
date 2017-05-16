@@ -20,7 +20,6 @@ class LeftMenu extends Component {
       profileImage = {uri: this.props.user.photoURL}
       profileName = this.props.user.displayName
     }
-    // let profileImage = this.props.user.photoURL ? {uri: this.props.user.photoURL} : Images.face
     return (
       <View style={styles.container}>
         <Image source={Images.background3} style={styles.imgBg}/>
@@ -71,7 +70,7 @@ class LeftMenu extends Component {
     let markedArticles = this.props.markedArticles
     if (markedArticles.length > 0) {
       this.props.closeDrawer()
-      NavigationActions.filteredArticles({filteredArticles: this.props.markedArticles})
+      NavigationActions.filteredArticles({mode: 'marked'})
     } else {
       Toast.show('У Вас нет статей в группе избранных')
     }

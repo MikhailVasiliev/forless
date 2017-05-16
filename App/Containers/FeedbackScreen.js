@@ -75,7 +75,7 @@ class FeedbackScreen extends React.Component {
         sender: this.props.user.email
       }
       FirebaseDB.sendFeedback(feedback)
-      NavigationActions.presentationScreen()
+      NavigationActions.presentationScreen({mode: 'feed'})
       Toast.show('Отзыв отправлен')
     } else {
       Toast.show('Заполните оба поля')

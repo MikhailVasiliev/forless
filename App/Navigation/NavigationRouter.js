@@ -47,6 +47,7 @@ class NavigationRouter extends Component {
                    type={ActionConst.REPLACE}
                    component={PresentationScreen}
                    title="Статьи"
+                   mode="feed"
                    leftButtonImage={Images.menu}
                    leftButtonIconStyle={Styles.leftButton}
                    rightButtonImage={Images.settings}
