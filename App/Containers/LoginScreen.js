@@ -182,7 +182,7 @@ class LoginScreen extends React.Component {
       () => console.tron.log('no user'),
       (user) => {
         this.props.storeUser(user.providerData[0])
-        NavigationActions.presentationScreen()
+        NavigationActions.presentationScreen({mode: 'feed'})
       }
     )
   }
@@ -263,7 +263,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    articlesListFetchAttempt: () => dispatch(ArticlesActions.articlesListFetchAttempt()),
     storeArticles: (articles) => dispatch(ArticlesActions.storeArticles(articles)),
     storeThemes: (themes) => dispatch(NotificationActions.storeThemes(themes)),
     // storeUser: (user) => dispatch(LoginActions.storeUser(user)),

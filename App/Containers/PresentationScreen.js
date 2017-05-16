@@ -32,25 +32,33 @@ let defaultScalingDrawerConfig = {
 
 class PresentationScreen extends React.Component {
 
-  // this.login('mr.m.vasiliev@gmail.com', '111111')
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      articles: props.articles ? props.articles : []
+  componentWillReceiveProps(nextProps){
+    switch (nextProps.mode){
+    case 'feed':
+      this.articles = nextProps.articles ? nextProps.articles : []
+      break;
+    case 'filtered':
+      this.articles = nextProps.filteredArticles
+      break;
+    case 'marked':
+      this.articles = nextProps.markedArticles
+      break;
+    default:
+      break;
     }
   }
 
   componentWillMount() {
     //TODO - hide splash screen after timeout to change screen if no-auth
+
+    if (this.props.mode === 'feed'){
+      FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.articles)
+    }
     NavigationActions.refresh({
       onLeft: () => {
         this.props.toggleDrawer()
-      }
+      },
     })
-    if (!this.props.filteredArticles){
-      FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.props.articles)
-    }
   }
 
   componentDidMount(){
@@ -78,9 +86,8 @@ class PresentationScreen extends React.Component {
   }
 
   render () {
-    let articles = this.props.filteredArticles ? this.props.filteredArticles : this.props.articles
 
-    if (articles.length > 0) {
+    if (this.articles && this.articles.length > 0) {
       return (
           <View style={styles.main}>
             <Swiper horizontal={false}
@@ -92,7 +99,7 @@ class PresentationScreen extends React.Component {
                      nextButton={this.renderFooterButton('След. >')}
                      prevButton={this.renderFooterButton('< Назад')}
                      >
-              { articles.map((article, index) => {
+              { this.articles.map((article, index) => {
                 return (<SwiperItem article={article} key={index}/>)
               }) }
             </Swiper>
@@ -125,6 +132,8 @@ class PresentationScreen extends React.Component {
 const mapStateToProps = (state) => {
   return {
     articles: state.articles.data,
+    markedArticles: state.articles.markedArticles,
+    filteredArticles: state.articles.filteredArticles,
     allThemes: state.notification.allThemes,
     notificationsEnabled: state.notification.notificationsEnabled
   }
@@ -133,7 +142,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     articleFetchAttempt: (path) => dispatch(ArticlesActions.articleFetchAttempt(path)),
-    articlesListFetchAttempt: () => dispatch(ArticlesActions.articlesListFetchAttempt()),
     storeArticles: (articles) => dispatch(ArticlesActions.storeArticles(articles)),
     storeThemes: (themes) => dispatch(NotificationActions.storeThemes(themes)),
   }
