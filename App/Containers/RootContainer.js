@@ -43,7 +43,7 @@ class RootContainer extends Component {
 
   setDynamicDrawerValue = (type, value) => {
     defaultScalingDrawerConfig[type] = value;
-  /** forceUpdate show drawer dynamic scaling example **/
+    /** forceUpdate show drawer dynamic scaling example **/
     this.forceUpdate();
   };
 
@@ -77,12 +77,13 @@ class RootContainer extends Component {
     FCM.getInitialNotification().then( notif => {console.tron.log('getInitialNotification'); console.tron.log(notif) } );
 
     this.notificationListener = FCM.on(FCMEvent.Notification,  notif => {
-      if (!notif.opened_from_tray){
+      if (this.user && !notif.opened_from_tray){
         //this is a local notification
-        Platform.OS === 'ios' ? this.dropdown.alertWithType('info', notif.notification.title, notif.articleTitle) :
-        this.dropdown.alertWithType('info', notif.fcm.title, notif.articleTitle)
+        Platform.OS === 'ios'
+            ? this.dropdown.alertWithType('info', notif.notification.title, notif.articleTitle)
+            : this.dropdown.alertWithType('info', notif.fcm.title, notif.articleTitle)
       }
-      if (notif.opened_from_tray){
+      if (this.user && notif.opened_from_tray){
         //app is open/resumed because user clicked banner
         let newArticle = this.findArticleInState(notif.articleTitle)
         NavigationActions.articleScreen({article: newArticle})
@@ -90,8 +91,8 @@ class RootContainer extends Component {
     });
 
     this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, (token) => {
+      // fcm token may not be available on first load, catch it here
       console.tron.log(token)
-    // fcm token may not be available on first load, catch it here
     });
   }
 
@@ -135,7 +136,7 @@ class RootContainer extends Component {
   }
 
   onClose(data) {
-    if (data.action === 'tap') {
+    if (data.action === 'tap' && this.user) {
       let newArticle = this.findArticleInState(data.message)
       NavigationActions.articleScreen({article: newArticle})
     }
