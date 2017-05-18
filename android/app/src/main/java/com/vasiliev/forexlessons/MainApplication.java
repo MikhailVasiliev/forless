@@ -17,6 +17,7 @@ import com.facebook.soloader.SoLoader;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.kwaak.react.BlurryOverlayPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,7 +46,8 @@ public class MainApplication extends Application implements ReactApplication {
           new RNGoogleSigninPackage(),
           new FBSDKPackage(mCallbackManager),
           new RNSharePackage(),
-          new LinearGradientPackage()
+          new LinearGradientPackage(),
+          new BlurryOverlayPackage()
       );
     }
   };

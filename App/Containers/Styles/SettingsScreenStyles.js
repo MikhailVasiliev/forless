@@ -14,7 +14,17 @@ export default StyleSheet.create({
     left: 0,
     bottom: 0,
     right: 0,
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: Colors.transparent
+  },
+  bluredOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.8)'
   },
   switchContainer: {
     // marginTop: Metrics.navBarHeight + Metrics.statusBarHeight * 2,

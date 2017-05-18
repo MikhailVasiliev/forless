@@ -148,6 +148,7 @@ dependencies {
     compile 'com.google.firebase:firebase-core:10.2.4' //this decides your firebase SDK version
     compile project(':react-native-linear-gradient')
     compile "com.facebook.react:react-native:+"  // From node_modules
+    compile project(':react-native-android-blurryoverlay')
 }
 
 // Run this once to be able to run the application with BUCK
