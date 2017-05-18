@@ -6,7 +6,9 @@ import {
   Text,
   View,
   Switch,
-  TouchableOpacity
+  TouchableOpacity,
+  InteractionManager,
+  findNodeHandle
 } from 'react-native'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import ArticlesActions from '../Redux/ArticlesRedux'
@@ -22,7 +24,7 @@ import { CheckboxField, Checkbox } from 'react-native-checkbox-field';
 import FCM from 'react-native-fcm'
 import LinearGradient from 'react-native-linear-gradient';
 import { BlurView, VibrancyView } from 'react-native-blur';
-
+import BlurryOverlay from 'react-native-android-blurryoverlay';
 // Styles
 import styles from './Styles/SettingsScreenStyles'
 
@@ -36,18 +38,33 @@ class SettingsScreen extends React.Component {
       selectedOverall: false,
       selectedIntro: false,
       selectedTech: false,
+      renderBlurry: false
     }
+  }
+
+  componentDidMount(){
+    setTimeout(() => {
+      this.setState({ renderBlurry: true })
+    }, 50);
   }
 
   render () {
     let allThemes = this.props.allThemes
     let isAdmin = this.props.user && (this.props.user.email === adminEmail)
+    var overlay = (this.state.renderBlurry) ? <BlurryOverlay
+    radius={7} sampling={6} color="#00FFFF00"
+    style={[{
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      bottom: 0,
+      right: 0,
+    }]}  /> : <View />;
     return (
       <View style={styles.main}>
-        <BlurView
-          style={styles.blur}
-          blurType="dark"
-          blurAmount={10}/>
+      {overlay}
+        <View
+          style={styles.bluredOverlay}/>
         <ScrollView style={styles.main}  >
           <LinearGradient
             colors={[
@@ -98,6 +115,7 @@ class SettingsScreen extends React.Component {
                   labelSide="left">
                   <Text style={styles.checkboxText}>{yn}</Text>
               </CheckboxField>
+
             </View>
           })
           }

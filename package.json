@@ -31,6 +31,7 @@
     "ramda": "0.22.1",
     "react": "15.5.0",
     "react-native": "0.42.3",
+    "react-native-android-blurryoverlay": "git@github.com:Maydar/react-native-android-blurryoverlay.git",
     "react-native-animatable": "0.6.1",
     "react-native-blur": "^3.0.0-alpha",
     "react-native-checkbox-field": "1.1.2",

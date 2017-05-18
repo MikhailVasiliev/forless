@@ -19,6 +19,15 @@ export default StyleSheet.create({
     right: 0,
     alignItems: 'center'
   },
+  bluredOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.8)'
+  },
   topicInput: {
     marginTop: Metrics.navBarHeight + Metrics.statusBarHeight + Metrics.baseMargin,
     margin: Metrics.baseMargin,
