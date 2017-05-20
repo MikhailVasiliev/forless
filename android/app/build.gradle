@@ -64,7 +64,17 @@ import com.android.build.OutputFile
  *   extraPackagerArgs: []
  * ]
  */
-
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.6.+'
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+apply plugin: 'io.fabric'
 apply from: "../../node_modules/react-native/react.gradle"
 
 /**
@@ -85,6 +95,7 @@ def enableProguardInReleaseBuilds = false
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
+
 
     defaultConfig {
         applicationId "com.vasiliev.forexlessons"
@@ -112,10 +123,31 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
+    signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
+
+            def versionPropsFile = file('version.properties')
+            def Properties versionProps = new Properties()
+            versionProps.load(new FileInputStream(versionPropsFile))
+            def code = versionProps['VERSION_CODE'].toInteger() + 1
+            versionProps['VERSION_CODE']=code.toString()
+            versionProps.store(versionPropsFile.newWriter(), null)
+            defaultConfig {
+                versionCode code
+            }
         }
     }
     // applicationVariants are e.g. debug, release
@@ -133,7 +165,19 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+crashlytics {
+    enableNdk true
+    androidNdkOut 'src/main/obj'
+    androidNdkLibsOut 'src/main/libs'
+}
+
 dependencies {
+    compile project(':react-native-fabric')
     compile project(':react-native-blur')
     compile project(':react-native-fcm')
     compile project(':react-native-lock')
@@ -145,6 +189,13 @@ dependencies {
     compile project(':react-native-share')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
+        transitive = true;
+    }
+    // NDK Kit
+    compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.6@aar') {
+        transitive = true
+    }
     compile 'com.google.firebase:firebase-core:10.2.4' //this decides your firebase SDK version
     compile project(':react-native-linear-gradient')
     compile "com.facebook.react:react-native:+"  // From node_modules

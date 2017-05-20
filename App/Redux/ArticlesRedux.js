@@ -2,6 +2,7 @@
 
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
+import Fabric from 'react-native-fabric';
 
 /* ------------- Types and Action Creators ------------- */
 
@@ -73,12 +74,14 @@ export const filterArticles = (state, { filter }) => {
 }
 
 export const addArticleToFavorite = (state, { article }) => {
+  Fabric.Answers.logCustom('Add article to favorites', {article: article.title});
   let articles = state.markedArticles
   articles = articles.concat(article)
   return state.merge({ markedArticles: articles })
 }
 
 export const removeArticleFromFavorite = (state, { article }) => {
+  Fabric.Answers.logCustom('remove article from favorites', {article: article.title});
   var articleIndex
   let articles = state.markedArticles.asMutable()
   articles.map((arrayElement, index)=>{

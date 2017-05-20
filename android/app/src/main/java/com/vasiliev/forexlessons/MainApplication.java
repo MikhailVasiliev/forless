@@ -3,7 +3,9 @@ package com.vasiliev.forexlessons;
 import android.app.Application;
 
 import com.BV.LinearGradient.LinearGradientPackage;
+import com.crashlytics.android.Crashlytics;
 import com.facebook.react.ReactApplication;
+import com.smixx.fabric.FabricPackage;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
 import com.auth0.lock.react.LockReactPackage;
@@ -19,8 +21,11 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.kwaak.react.BlurryOverlayPackage;
 
+import io.fabric.sdk.android.Fabric;
 import java.util.Arrays;
 import java.util.List;
+
+import com.crashlytics.android.ndk.CrashlyticsNdk;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -39,27 +44,31 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
+
           new MainReactPackage(),
-            new BlurViewPackage(),
+          new BlurViewPackage(),
           new FIRMessagingPackage(),
           new LockReactPackage(),
           new RNGoogleSigninPackage(),
           new FBSDKPackage(mCallbackManager),
           new RNSharePackage(),
           new LinearGradientPackage(),
-          new BlurryOverlayPackage()
+          new BlurryOverlayPackage(),
+          new FabricPackage()
       );
     }
   };
 
   @Override
   public ReactNativeHost getReactNativeHost() {
+    Fabric.with(this, new Crashlytics());
     return mReactNativeHost;
   }
 
   @Override
   public void onCreate() {
     super.onCreate();
+    Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
     SoLoader.init(this, /* native exopackage */ false);
     FacebookSdk.sdkInitialize(getApplicationContext());
     // If you want to use AppEventsLogger to log events.

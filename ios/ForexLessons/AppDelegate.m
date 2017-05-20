@@ -14,6 +14,9 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 #import "RNFIRMessaging.h"
 
 @implementation AppDelegate
@@ -41,7 +44,7 @@
 
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
-
+  [Fabric with:@[[Crashlytics class]]];
   return YES;
 }
 
