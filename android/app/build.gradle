@@ -108,6 +108,7 @@ android {
         }
         renderscriptTargetApi 23
         renderscriptSupportModeEnabled true
+        multiDexEnabled true
     }
 
     packagingOptions {
@@ -200,6 +201,7 @@ dependencies {
     compile project(':react-native-linear-gradient')
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile project(':react-native-android-blurryoverlay')
+    compile 'com.android.support:multidex:1.0.1'
 }
 
 // Run this once to be able to run the application with BUCK
