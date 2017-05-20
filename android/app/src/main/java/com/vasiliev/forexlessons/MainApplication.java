@@ -8,7 +8,6 @@ import com.facebook.react.ReactApplication;
 import com.smixx.fabric.FabricPackage;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
-import com.auth0.lock.react.LockReactPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import cl.json.RNSharePackage;
@@ -48,7 +47,6 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
           new BlurViewPackage(),
           new FIRMessagingPackage(),
-          new LockReactPackage(),
           new RNGoogleSigninPackage(),
           new FBSDKPackage(mCallbackManager),
           new RNSharePackage(),
