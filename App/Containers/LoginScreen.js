@@ -19,8 +19,6 @@ import NotificationActions from '../Redux/NotificationRedux'
 // External libs
 import FBSDK, { LoginManager, AccessToken } from 'react-native-fbsdk';
 import {GoogleSignin} from 'react-native-google-signin';
-import Auth0Lock from 'react-native-lock'
-var lock = new Auth0Lock({clientId: '350196186671-v2vsgllehd23v4blh97c823c6lkj4ma1.apps.googleusercontent.com', domain: 'numeric-oarlock-144410.firebaseio.com'});
 import * as firebase from 'firebase';
 
 // Services
@@ -189,11 +187,7 @@ class LoginScreen extends React.Component {
   }
 
   loginSms() {
-    lock.show({
-      connections: ['sms']
-    }, (err, profile, token) => {
-      console.tron.log('Logged in with sms!');
-    });
+    console.tron.log('Logged in with sms!');
   }
 
   loginFacebook() {

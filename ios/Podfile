@@ -8,10 +8,4 @@ target 'ForexLessons' do
   pod 'Firebase/Messaging'
   pod 'Google/SignIn'
 
-  pod 'Lock', '~> 1.29'
-  pod 'Lock/TouchID'
-  pod 'Lock/SMS'
-  pod 'Lock/Email'
-  pod 'Lock/Safari'
-
 end
