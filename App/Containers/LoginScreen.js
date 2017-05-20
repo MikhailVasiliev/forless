@@ -181,6 +181,7 @@ class LoginScreen extends React.Component {
     FirebaseDB.checkForUser(
       () => console.tron.log('no user'),
       (user) => {
+        console.tron.log(user)
         this.props.storeUser(user.providerData[0])
         NavigationActions.presentationScreen({mode: 'feed'})
       }
