@@ -1,9 +1,13 @@
 package com.vasiliev.forexlessons;
 
 import android.content.Intent;
+import android.os.Bundle;
 
+import com.crashlytics.android.Crashlytics;
 import com.facebook.react.ReactActivity;
 import com.vasiliev.forexlessons.MainApplication;
+
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends ReactActivity {
 

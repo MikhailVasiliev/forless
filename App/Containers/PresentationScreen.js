@@ -23,6 +23,7 @@ import { Colors } from '../Themes'
 // External libs
 import Swiper from 'react-native-swiper';
 import FCM from 'react-native-fcm';
+import Fabric from 'react-native-fabric';
 
 let defaultScalingDrawerConfig = {
   scalingFactor: 0.9,
@@ -63,6 +64,7 @@ class PresentationScreen extends React.Component {
 
   componentDidMount(){
     this.props.blockDrawer(false)
+    Fabric.Answers.logCustom('Presentation Screen', {user: this.props.user ? this.props.user : 'unauth launch'});
   }
 
   setDynamicDrawerValue = (type, value) => {

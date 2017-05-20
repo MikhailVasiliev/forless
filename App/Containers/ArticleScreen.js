@@ -14,6 +14,8 @@ import ArticlesActions from '../Redux/ArticlesRedux'
 import Image from 'react-native-image-progress';
 import LinearGradient from 'react-native-linear-gradient';
 import Share, {ShareSheet, Button} from 'react-native-share';
+import Fabric from 'react-native-fabric';
+
 // Redux
 import { connect } from 'react-redux'
 // Libs
@@ -42,9 +44,11 @@ class ArticleScreen extends React.Component {
 
   componentDidMount(){
     this.props.blockDrawer(true)
+    Fabric.Answers.logCustom('Article Screen', {article: this.props.article.title});
   }
 
   onShare(){
+    Fabric.Answers.logCustom('Share', {article: this.props.article.title});
     var article = this.props.article
 
     let shareOptions = {
