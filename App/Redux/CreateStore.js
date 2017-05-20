@@ -5,7 +5,7 @@ import Config from '../Config/DebugSettings'
 // Redux
 import { createStore, applyMiddleware, compose } from 'redux'
 import { autoRehydrate } from 'redux-persist'
-import createLogger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 import ReduxPersist from '../Config/ReduxPersist'
 import createSagaMiddleware from 'redux-saga'
 import { StartupTypes } from './StartupRedux'

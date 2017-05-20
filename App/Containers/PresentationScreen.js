@@ -64,6 +64,9 @@ class PresentationScreen extends React.Component {
 
   componentDidMount(){
     this.props.blockDrawer(false)
+  }
+
+  componentWillUnmount(){
     Fabric.Answers.logCustom('Presentation Screen', {user: this.props.user ? this.props.user : 'unauth launch'});
   }
 
