@@ -56,7 +56,7 @@ const style = {
   },
   h5: {
     fontFamily: type.light,
-    fontSize: size.h5
+    fontSize: size.input
   },
   h6: {
     fontFamily: type.light,

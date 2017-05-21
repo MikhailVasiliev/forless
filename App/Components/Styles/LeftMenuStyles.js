@@ -22,11 +22,6 @@ export default StyleSheet.create({
     borderRadius: 120,
     borderColor: 'rgba(255, 255, 255, 0.4)',
   },
-  settings: {
-    fontSize: 30,
-    color: '#fff',
-    marginLeft: 15
-  },
   profilePic: {
     width: 75,
     height: 75,
@@ -39,30 +34,31 @@ export default StyleSheet.create({
     width: Metrics.screenWidth,
     height: Metrics.screenHeight
   },
-  icon: {
-    fontSize: 45,
-    color: '#fff'
-  },
   col: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingTop: 10,
     paddingBottom: 10,
     borderTopWidth: 0.5,
-    borderColor: '#fff',
+    borderColor: Colors.drawerLine,
     height: 50
   },
   menuTxt: {
-    fontSize: 16,
+    ...Fonts.style.normal,
     color: '#fff',
-    paddingLeft: 25
+    paddingLeft: 15
   },
   profileInfo: {
     paddingTop: 10,
     paddingBottom: 15,
   },
   name: {
-    fontSize: 16,
+    ...Fonts.style.normal,
     color: '#fff'
+  },
+  icon: {
+    width: 25,
+    height: 25,
+    marginLeft: 25
   }
 })

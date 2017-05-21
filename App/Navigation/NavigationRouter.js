@@ -40,6 +40,7 @@ class NavigationRouter extends Component {
                  rightButtonTextStyle={Styles.rightButton}>
             <Scene key="login"
                    hideNavBar
+                   titleStyle={Styles.title}
                    type={ActionConst.REPLACE}
                    component={LoginScreen}
                    title="Login" />
@@ -47,6 +48,7 @@ class NavigationRouter extends Component {
                    type={ActionConst.REPLACE}
                    component={PresentationScreen}
                    title="Статьи"
+                   titleStyle={Styles.title}
                    mode="feed"
                    leftButtonImage={Images.menu}
                    leftButtonIconStyle={Styles.leftButton}

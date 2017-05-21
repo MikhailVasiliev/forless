@@ -23,7 +23,6 @@ import { adminEmail } from '../Lib/Constants'
 import { CheckboxField, Checkbox } from 'react-native-checkbox-field';
 import FCM from 'react-native-fcm'
 import LinearGradient from 'react-native-linear-gradient';
-import { BlurView, VibrancyView } from 'react-native-blur';
 import BlurryOverlay from 'react-native-android-blurryoverlay';
 // Styles
 import styles from './Styles/SettingsScreenStyles'
@@ -51,15 +50,11 @@ class SettingsScreen extends React.Component {
   render () {
     let allThemes = this.props.allThemes
     let isAdmin = this.props.user && (this.props.user.email === adminEmail)
-    var overlay = (this.state.renderBlurry) ? <BlurryOverlay
-    radius={7} sampling={6} color="#00FFFF00"
-    style={[{
-      position: 'absolute',
-      left: 0,
-      top: 0,
-      bottom: 0,
-      right: 0,
-    }]}  /> : <View />;
+    var overlay = (this.state.renderBlurry)
+                  ? <BlurryOverlay
+                      radius={7} sampling={6} color="#00FFFF00"
+                      style={styles.blur}  />
+                  : <View />;
     return (
       <View style={styles.main}>
       {overlay}
@@ -76,10 +71,10 @@ class SettingsScreen extends React.Component {
               'rgba(50, 50, 50, 0)']}
             locations={[0, 0.2, 0.45, 0.55, 0.8, 1]}
             style={styles.gradientFirst}>
-            <Text style={styles.topicsSticker}>New article notifications</Text>
+            <Text style={styles.topicsSticker}>Уведомить о новой статье</Text>
           </LinearGradient>
           <View style={styles.switchContainer} >
-            <Text style={styles.switchComponentText}>Enable notifications</Text>
+            <Text style={styles.switchComponentText}>Уведомления</Text>
             <Switch
                 onValueChange={(notificationsEnabled) => this.handleSwitchToggle(notificationsEnabled)}
                 style={styles.switchComponent}
@@ -96,10 +91,10 @@ class SettingsScreen extends React.Component {
               'rgba(50, 50, 50, 0)']}
             locations={[0, 0.2, 0.45, 0.55, 0.8, 1]}
             style={styles.gradient}>
-            <Text style={styles.topicsSticker}>Subscribe to topics:</Text>
+            <Text style={styles.topicsSticker}>Уведомлять по темам:</Text>
           </LinearGradient>
           { allThemes.map((theme, index) => {
-            if (theme.enabled){ var yn = 'Y' } else { yn = 'N' }
+            if (theme.enabled){ var yn = '+' } else { yn = '-' }
             return <View style={styles.checkboxContainer} key={index}>
               <CheckboxField
                   label={theme.name}
@@ -121,7 +116,7 @@ class SettingsScreen extends React.Component {
           }
         </ScrollView>
         {isAdmin && <TouchableOpacity onPress={this.fetchNewArticle.bind(this)} style={styles.applyButton}>
-          <Text style={styles.btnText}>OPEN TEST VIEW SCREEN</Text>
+          <Text style={styles.btnText}>ОТКРЫТЬ КОНСОЛЬ АДМИНА</Text>
         </TouchableOpacity>}
       </View>
     )
