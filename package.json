@@ -36,6 +36,7 @@
     "react-native-animatable": "1.2.0",
     "react-native-blur": "^3.0.0-alpha",
     "react-native-checkbox-field": "1.1.2",
+    "react-native-code-push": "^2.0.3-beta",
     "react-native-config": "0.4.2",
     "react-native-device-info": "0.10.2",
     "react-native-drawer": "2.3.0",

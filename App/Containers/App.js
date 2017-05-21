@@ -6,12 +6,15 @@ import '../I18n/I18n' // keep before root container
 import RootContainer from './RootContainer'
 import createStore from '../Redux'
 import applyConfigSettings from '../Config'
-
+import codePush from 'react-native-code-push';
 // Apply config overrides
 applyConfigSettings()
 // create our store
 const store = createStore()
-
+// production
+// const codePushOptions = { updateDialog: true, deploymentKey: 'AOxdtq88esMn2G7guwIL1cCldti341a6FqYxQ', checkFrequency: codePush.CheckFrequency.ON_APP_RESUME , installMode: codePush.InstallMode.ON_NEXT_RESUME};
+// staging
+const codePushOptions = { updateDialog: true, deploymentKey: 'Oy-exOXIKLmgNEDZZaKjP52pmiyg41a6FqYxQ', checkFrequency: codePush.CheckFrequency.ON_APP_RESUME , installMode: codePush.InstallMode.ON_NEXT_RESUME};
 /**
  * Provides an entry point into our application.  Both index.ios.js and index.android.js
  * call this component first.
@@ -23,6 +26,7 @@ const store = createStore()
  */
 class App extends Component {
   render () {
+    // codePush.sync({ deploymentKey: 'Oy-exOXIKLmgNEDZZaKjP52pmiyg41a6FqYxQ', updateDialog: true, installMode: codePush.InstallMode.IMMEDIATE });
     return (
       <Provider store={store}>
         <RootContainer />
@@ -31,4 +35,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default codePush(codePushOptions)(App);
