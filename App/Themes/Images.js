@@ -15,6 +15,9 @@ const images = {
   face: require('../Images/noavatar.png'),
   marked: require('../Images/marked.png'),
   unmarked: require('../Images/unmarked.png'),
+  star: require('../Images/star.png'),
+  letter: require('../Images/letter.png'),
+  logout: require('../Images/logout.png'),
 }
 
 export default images

@@ -23,9 +23,9 @@ export default StyleSheet.create({
     marginBottom: Metrics.articleTitleMarginBottom
   },
   articleDate: {
+    ...Fonts.style.normal,
     color: 'white',
     marginLeft: 20,
-    fontFamily: 'Avenir Next'
   },
   themeContainer: {
     backgroundColor: Colors.skyBlue,
@@ -40,6 +40,6 @@ export default StyleSheet.create({
     ...Fonts.style.normal,
     color: 'white',
     textAlign: 'center',
-    fontSize: 12
+    fontSize: 14
   },
 })

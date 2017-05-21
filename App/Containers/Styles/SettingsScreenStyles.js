@@ -79,9 +79,9 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   labelStyle: {
+    ...Fonts.style.h5,
     flex: 1,
     color: 'white',
-    fontFamily: 'Avenir Next',
     textAlign: 'right',
     marginRight: 30,
   },

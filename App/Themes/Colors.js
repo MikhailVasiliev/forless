@@ -25,6 +25,7 @@ const colors = {
   skyBlue: '#6bcbda',
   loadingIndicatorBackground: 'lightgrey',
   textInput: 'rgba(255,255,255, 0.10)',
+  drawerLine: 'rgba(255,255,255, 0.20)',
   textInputPlaceholder: 'rgba(255, 255, 255, 0.5)'
 }
 

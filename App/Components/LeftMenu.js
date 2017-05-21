@@ -39,6 +39,7 @@ class LeftMenu extends Component {
             onPress={() => this.onFavoritePressed()}
             activeOpacity={0.6}
             >
+            <Image source={Images.star} style={styles.icon}/>
             <Text style={styles.menuTxt}>Избранные</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -49,7 +50,8 @@ class LeftMenu extends Component {
             }}
             activeOpacity={0.6}
             >
-            <Text style={styles.menuTxt}>Отчет об ошибке/отзыв</Text>
+            <Image source={Images.letter} style={styles.icon}/>
+            <Text style={styles.menuTxt}>Ошибка/отзыв</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.col, {borderBottomWidth: 0.5}]}
@@ -59,6 +61,7 @@ class LeftMenu extends Component {
             }}
             activeOpacity={0.6}
             >
+            <Image source={Images.logout} style={styles.icon}/>
             <Text style={styles.menuTxt}>Выйти</Text>
           </TouchableOpacity>
         </View>
