@@ -51,7 +51,6 @@ class PresentationScreen extends React.Component {
 
   componentWillMount() {
     //TODO - hide splash screen after timeout to change screen if no-auth
-
     if (this.props.mode === 'feed'){
       FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.articles)
     }

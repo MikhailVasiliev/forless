@@ -19,6 +19,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.kwaak.react.BlurryOverlayPackage;
+import com.microsoft.codepush.react.CodePush;
 
 import io.fabric.sdk.android.Fabric;
 import java.util.Arrays;
@@ -35,6 +36,12 @@ public class MainApplication extends Application implements ReactApplication {
   }
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+
+    @Override
+    protected String getJSBundleFile() {
+      return CodePush.getJSBundleFile();
+    }
+
     @Override
     public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
@@ -43,8 +50,8 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-
           new MainReactPackage(),
+          new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
           new BlurViewPackage(),
           new FIRMessagingPackage(),
           new RNGoogleSigninPackage(),
