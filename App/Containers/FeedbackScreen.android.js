@@ -43,13 +43,7 @@ class FeedbackScreen extends React.Component {
   render() {
     var overlay = (this.state.renderBlurry) ? <BlurryOverlay
     radius={7} sampling={6} color="#00FFFF00"
-    style={[{
-      position: 'absolute',
-      left: 0,
-      top: 0,
-      bottom: 0,
-      right: 0,
-    }]}  /> : <View />;
+    style={styles.blur}  /> : <View />;
 
     return (
       <View style={styles.main}>
@@ -90,7 +84,7 @@ class FeedbackScreen extends React.Component {
       let feedback = {
         topic: this.state.topic,
         message: this.state.message,
-        sender: this.props.user.email
+        sender: this.props.user().email
       }
       FirebaseDB.sendFeedback(feedback)
       NavigationActions.presentationScreen({mode: 'feed'})
@@ -101,10 +95,5 @@ class FeedbackScreen extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.login.user
-  }
-}
 
-export default connect(mapStateToProps, null)(FeedbackScreen)
+export default connect(null, null)(FeedbackScreen)

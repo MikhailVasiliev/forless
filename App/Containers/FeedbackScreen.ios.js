@@ -72,7 +72,7 @@ class FeedbackScreen extends React.Component {
       let feedback = {
         topic: this.state.topic,
         message: this.state.message,
-        sender: this.props.user.email
+        sender: this.props.user().email
       }
       FirebaseDB.sendFeedback(feedback)
       NavigationActions.presentationScreen({mode: 'feed'})
@@ -83,10 +83,5 @@ class FeedbackScreen extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.login.user
-  }
-}
 
-export default connect(mapStateToProps, null)(FeedbackScreen)
+export default connect(null, null)(FeedbackScreen)

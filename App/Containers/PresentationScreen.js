@@ -66,7 +66,7 @@ class PresentationScreen extends React.Component {
   }
 
   componentWillUnmount(){
-    Fabric.Answers.logCustom('Presentation Screen', {user: this.props.user ? this.props.user : 'unauth launch'});
+    Fabric.Answers.logCustom('Presentation Screen', {user: this.props.user() ? this.props.user().email : 'unauth launch'});
   }
 
   setDynamicDrawerValue = (type, value) => {

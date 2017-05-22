@@ -49,7 +49,7 @@ class SettingsScreen extends React.Component {
 
   render () {
     let allThemes = this.props.allThemes
-    let isAdmin = this.props.user && (this.props.user.email === adminEmail)
+    let isAdmin = this.props.user() && (this.props.user().email === adminEmail)
     var overlay = (this.state.renderBlurry)
                   ? <BlurryOverlay
                       radius={7} sampling={6} color="#00FFFF00"
@@ -155,7 +155,6 @@ const mapStateToProps = (state) => {
   return {
     filter: state.articles.filter,
     allThemes: state.notification.allThemes,
-    user: state.login.user,
   }
 }
 

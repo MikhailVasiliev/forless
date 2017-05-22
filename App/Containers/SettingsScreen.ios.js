@@ -43,7 +43,7 @@ class SettingsScreen extends React.Component {
 
   render () {
     let allThemes = this.props.allThemes
-    let isAdmin = this.props.user && (this.props.user.email === adminEmail)
+    let isAdmin = this.props.user().email && (this.props.user().email === adminEmail)
     return (
       <View style={styles.main}>
         <BlurView
@@ -144,7 +144,6 @@ const mapStateToProps = (state) => {
   return {
     filter: state.articles.filter,
     allThemes: state.notification.allThemes,
-    user: state.login.user,
   }
 }
 

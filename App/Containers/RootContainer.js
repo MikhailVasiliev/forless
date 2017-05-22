@@ -118,7 +118,7 @@ class RootContainer extends Component {
             backgroundColor={Colors.transparent}/>
           <NavigationRouter
             toggleDrawer={() => this.toggleDrawer()}
-            user={this.user}
+            user={() => {return this.user}}
             storeUser={(user) => this.storeUser(user)}
             blockDrawer={(isBlocked) => this.blockDrawer(isBlocked)}/>
         </View>

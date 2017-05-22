@@ -31,7 +31,8 @@ class NavigationRouter extends Component {
       <Router
             toggleDrawer={() => this.props.toggleDrawer()}
             blockDrawer={(isBlocked) => this.props.blockDrawer(isBlocked)}
-            storeUser={(user) => this.props.storeUser(user)}>
+            storeUser={(user) => this.props.storeUser(user)}
+            user={()=>this.props.user()}>
           <Scene key="drawerChildrenWrapper"
                  navigationBarStyle={Styles.navBar}
                  backButtonImage={Images.back}
