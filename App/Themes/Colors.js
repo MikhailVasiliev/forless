@@ -22,11 +22,13 @@ const colors = {
   drawer: 'rgba(30, 30, 29, 0.95)',
   overlay: 'rgba(0, 0, 0, 0.5)',
   google: '#599df0',
-  skyBlue: '#6bcbda',
+  skyBlue: 'rgba(89, 201, 24, 1)',
+  // skyBlue: '#6bcbda',
   loadingIndicatorBackground: 'lightgrey',
   textInput: 'rgba(255,255,255, 0.10)',
   drawerLine: 'rgba(255,255,255, 0.20)',
-  textInputPlaceholder: 'rgba(255, 255, 255, 0.5)'
+  textInputPlaceholder: 'rgba(255, 255, 255, 0.5)',
+  green: 'rgba(135, 234, 77, 1)'
 }
 
 export default colors
