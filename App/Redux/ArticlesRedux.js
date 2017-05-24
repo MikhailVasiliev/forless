@@ -18,6 +18,8 @@ const { Types, Creators } = createActions({
   filterArticles: ['filter'],
   addArticleToFavorite: ['article'],
   removeArticleFromFavorite: ['article'],
+  publishArticle: ['article'],
+  publishArticleSuccess: ['sharedArticle'],
 })
 
 export const ArticlesTypes = Types
@@ -32,6 +34,7 @@ export const INITIAL_STATE = Immutable({
   filter: 'all',
   filteredArticles: [],
   markedArticles: [],
+  sharedArticles: [],
 })
 
 /* ------------- Reducers ------------- */
@@ -52,6 +55,15 @@ export const articlesListFetchSuccess = (state) =>
 
 export const sendFcmNotification = (state, {article, topic}) =>
   state
+
+export const publishArticle = (state, {article}) =>
+  state
+
+export const publishArticleSuccess = (state, {sharedArticle}) => {
+  let articles = state.sharedArticles
+  articles = articles.concat(sharedArticle)
+  return state.merge({ sharedArticles: articles })
+}
 
 export const articlesListFetchFailure = (state, {error}) =>
   state
@@ -108,4 +120,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.SEND_FCM_NOTIFICATION]: sendFcmNotification,
   [Types.ADD_ARTICLE_TO_FAVORITE]: addArticleToFavorite,
   [Types.REMOVE_ARTICLE_FROM_FAVORITE]: removeArticleFromFavorite,
+  [Types.PUBLISH_ARTICLE]: publishArticle,
+  [Types.PUBLISH_ARTICLE_SUCCESS]: publishArticleSuccess,
 })

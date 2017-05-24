@@ -28,7 +28,7 @@ export default StyleSheet.create({
     marginLeft: 20,
   },
   themeContainer: {
-    backgroundColor: Colors.skyBlue,
+    backgroundColor: Colors.mainGreen,
     justifyContent: 'center',
     height: 23,
     margin: 20,

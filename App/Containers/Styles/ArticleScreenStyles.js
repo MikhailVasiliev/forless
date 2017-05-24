@@ -80,7 +80,7 @@ export default StyleSheet.create({
     zIndex: 1
   },
   themeContainer: {
-    backgroundColor: Colors.skyBlue,
+    backgroundColor: Colors.mainGreen,
     justifyContent: 'center',
     height: 23,
     alignItems: 'center',
@@ -94,7 +94,7 @@ export default StyleSheet.create({
     fontSize: 14
   },
   applyButton: {
-    backgroundColor: Colors.skyBlue,
+    backgroundColor: Colors.mainGreen,
     alignSelf: 'stretch',
     justifyContent: 'center',
     height: 50,

@@ -1,6 +1,8 @@
 import { put, call } from 'redux-saga/effects'
 import ArticlesActions from '../Redux/ArticlesRedux'
 import FirebaseDB from '../Services/FirebaseDB'
+import {dataToContent} from '../Transforms/FromArticleToTelegraph'
+import Share, {ShareSheet, Button} from 'react-native-share';
 
 // External libs
 import { Actions as NavigationActions } from 'react-native-router-flux';
@@ -56,9 +58,40 @@ export function * sendFcmNotification (api, action) {
   }
 }
 
+export function * publishArticle (api, action) {
+  // let data = encodeURIComponent(action.article.data)
+  let content = yield call(dataToContent, action.article.cover, action.article.data)
+  console.tron.log('content')
+  console.tron.log(content)
+  const publishArticleResponse = yield call(api.createPage, action.article.title, content)
+  if (publishArticleResponse.status === 200) {
 
+    console.tron.log('success')
+    console.tron.log(publishArticleResponse)
 
+    let sharedArticle = publishArticleResponse.data.result
+    yield put(ArticlesActions.publishArticleSuccess(sharedArticle))
+  } else {
+    console.tron.log('failure')
+  }
+}
 
+export function * publishArticleSuccess (api, action) {
+  let article = action.sharedArticle
+  let shareOptions = {
+    title: article.title,
+    message: `Советую прочесть - ${article.title}`,
+    url: article.url,
+    subject: 'Subject' //  for email
+  };
+  // let shareResult = yield call(Share.open, shareOptions)
+  yield Share.open(shareOptions).catch((error) => console.tron.log(error));
+
+  // if (shareResult.error) {
+  //   console.tron.log('share error')
+  //   console.tron.log('shareResult.error')
+  // }
+}
 
 
 

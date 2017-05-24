@@ -18,6 +18,7 @@ import Fabric from 'react-native-fabric';
 
 // Redux
 import { connect } from 'react-redux'
+import { alreadySharedThisArticle } from '../Lib/Utilities'
 // Libs
 // Styles
 import styles from './Styles/ArticleScreenStyles'
@@ -38,10 +39,6 @@ class ArticleScreen extends React.Component {
     }
   }
 
-  componentWillMount() {
-
-  }
-
   componentDidMount(){
     this.props.blockDrawer(true)
     Fabric.Answers.logCustom('Article Screen', {article: this.props.article.title});
@@ -50,14 +47,18 @@ class ArticleScreen extends React.Component {
   onShare(){
     Fabric.Answers.logCustom('Share', {article: this.props.article.title});
     var article = this.props.article
-
-    let shareOptions = {
-      title: article.title,
-      message: 'Советую прочесть - "' + article.title + '"',
-      url: article.cover,
-      subject: 'Subject' //  for email
-    };
-    Share.open(shareOptions).catch((error) => console.tron.log(error));
+    let sharedArticle = alreadySharedThisArticle(article.title, this.props.sharedArticles)
+    if (sharedArticle){
+      let shareOptions = {
+        title: sharedArticle.title,
+        message: `Советую прочесть - ${sharedArticle.title}`,
+        url: sharedArticle.url,
+        subject: 'Subject' //  for email
+      };
+      Share.open(shareOptions).catch((error) => console.tron.log(error));
+    } else {
+      this.props.publishArticle(article)
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -132,6 +133,7 @@ const mapStateToProps = (state) => {
   return {
     filteredArticles: state.articles.filteredArticles,
     markedArticles: state.articles.markedArticles,
+    sharedArticles: state.articles.sharedArticles,
   }
 }
 
@@ -141,6 +143,7 @@ const mapDispatchToProps = (dispatch) => {
     filterArticles: (filter) => dispatch(ArticlesActions.filterArticles(filter)),
     addArticleToFavorite: (article) => dispatch(ArticlesActions.addArticleToFavorite(article)),
     removeArticleFromFavorite: (article) => dispatch(ArticlesActions.removeArticleFromFavorite(article)),
+    publishArticle: (article) => dispatch(ArticlesActions.publishArticle(article)),
   }
 }
 

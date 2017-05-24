@@ -19,6 +19,7 @@ export const locationURL = (address: string) => {
 
   return url
 }
+
 export const directionsURL = (address: string) => {
   let cleanAddress = nullifyNewlines(address)
   // https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/MapLinks/MapLinks.html
@@ -27,4 +28,21 @@ export const directionsURL = (address: string) => {
   if (Platform.OS === 'android') {url = `http://maps.google.com/?daddr=${cleanAddress}`}
 
   return url
+}
+
+export const alreadySharedThisArticle = (title, sharedArticles) => {
+  console.tron.log('sharedArticles')
+  console.tron.log(sharedArticles)
+  var alreadySharedArticle
+  if (sharedArticles.length === 0){
+    return null
+  }
+  sharedArticles.map((article, index)=>{
+    if (article.title === title){
+      console.tron.log(article.title + (article.title === title))
+      alreadySharedArticle = article
+    }
+  })
+
+  return alreadySharedArticle.url ? alreadySharedArticle : null
 }

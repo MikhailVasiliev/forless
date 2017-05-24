@@ -95,9 +95,9 @@ class PresentationScreen extends React.Component {
       return (
           <View style={styles.main}>
             <Swiper horizontal={false}
-                     activeDotColor={Colors.skyBlue}
+                     activeDotColor={Colors.mainGreen}
                      dot={this.renderDot('rgba(0, 0, 0, 0.2)')}
-                     activeDot={this.renderDot(Colors.skyBlue)}
+                     activeDot={this.renderDot(Colors.mainGreen)}
                      showsButtons={true}
                      buttonWrapperStyle={styles.footer}
                      nextButton={this.renderFooterButton('След. >')}
