@@ -31,18 +31,15 @@ export const directionsURL = (address: string) => {
 }
 
 export const alreadySharedThisArticle = (title, sharedArticles) => {
-  console.tron.log('sharedArticles')
-  console.tron.log(sharedArticles)
   var alreadySharedArticle
-  if (sharedArticles.length === 0){
+  if (sharedArticles.length > 0){
+    sharedArticles.map((article, index)=>{
+      if (article.title === title){
+        alreadySharedArticle = article
+      }
+    })
+    return alreadySharedArticle ? alreadySharedArticle : null
+  } else {
     return null
   }
-  sharedArticles.map((article, index)=>{
-    if (article.title === title){
-      console.tron.log(article.title + (article.title === title))
-      alreadySharedArticle = article
-    }
-  })
-
-  return alreadySharedArticle.url ? alreadySharedArticle : null
 }

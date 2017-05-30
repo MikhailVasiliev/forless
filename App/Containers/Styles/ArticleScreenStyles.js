@@ -63,6 +63,11 @@ export default StyleSheet.create({
     lineHeight: Metrics.lineHeight,
     textAlign: 'justify',
   },
+  btnText: {
+    ...Fonts.style.description,
+    color: 'white',
+    textAlign: 'center',
+  },
   dateContainer: {
     flexDirection: 'row',
     alignSelf: 'stretch',
@@ -70,6 +75,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingRight: 20,
     paddingLeft: 20,
+  },
+  dateContainerInner: {
+    paddingLeft: 0,
   },
   linearGradient: {
     position: 'absolute',
@@ -87,6 +95,14 @@ export default StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
+  telegraphContainer: {
+    backgroundColor: Colors.mainGreen,
+    justifyContent: 'center',
+    height: 23,
+    alignItems: 'center',
+    paddingLeft: 15,
+    paddingRight: 15,
+  },
   articleTheme: {
     ...Fonts.style.normal,
     color: 'white',
@@ -99,8 +115,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
     height: 50,
     alignItems: 'center',
-    marginHorizontal: 1,
-    width: Metrics.screenWidth / 2
+    marginHorizontal: 0.5,
+    paddingHorizontal: 10,
+    flex: 1
   },
   buttonsContainer: {
     alignSelf: 'stretch',

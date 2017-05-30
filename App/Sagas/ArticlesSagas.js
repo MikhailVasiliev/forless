@@ -1,5 +1,6 @@
 import { put, call } from 'redux-saga/effects'
 import ArticlesActions from '../Redux/ArticlesRedux'
+import LoginActions from '../Redux/LoginRedux'
 import FirebaseDB from '../Services/FirebaseDB'
 import {dataToContent} from '../Transforms/FromArticleToTelegraph'
 import Share, {ShareSheet, Button} from 'react-native-share';
@@ -33,9 +34,6 @@ export function * articlesListFetchAttempt (api, action) {
   if (fetchArticlesListResponse.length > 0) {
     console.tron.log(fetchArticlesListResponse)
     yield call(NavigationActions.presentationScreen, {articles: fetchArticlesListResponse})
-  //   yield put(ArticlesActions.articlesListFetchSuccess(fetchArticlesListResponse.result))
-  // } else {
-  //   yield put(ArticlesActions.articlesListFetchFailure())
   }
 }
 
@@ -51,10 +49,8 @@ export function * sendFcmNotification (api, action) {
   const sendMessageResponse = yield call(api.sendRemote, action.article, action.topic)
   if (sendMessageResponse.status === 200) {
     console.tron.log('success')
-    // yield put(AccountsActions.registerSuccess(account))
   } else {
     console.tron.log('failure')
-    // yield put(AccountsActions.registerFailure(sendMessageResponse.status))
   }
 }
 
@@ -63,52 +59,38 @@ export function * publishArticle (api, action) {
   let content = yield call(dataToContent, action.article.cover, action.article.data)
   console.tron.log('content')
   console.tron.log(content)
-  const publishArticleResponse = yield call(api.createPage, action.article.title, content)
+  const publishArticleResponse = yield call(api.createPage, action.article.title, content, action.telegraphToken)
   if (publishArticleResponse.status === 200) {
+    if (publishArticleResponse.data.ok){
+      console.tron.log('success')
+      console.tron.log(publishArticleResponse)
 
-    console.tron.log('success')
-    console.tron.log(publishArticleResponse)
-
-    let sharedArticle = publishArticleResponse.data.result
-    yield put(ArticlesActions.publishArticleSuccess(sharedArticle))
+      let sharedArticle = publishArticleResponse.data.result
+      yield put(ArticlesActions.publishArticleSuccess(sharedArticle, action.article.date))
+    } else {
+      yield put(ArticlesActions.publishArticleFailure(publishArticleResponse, action.article, content))
+    }
   } else {
     console.tron.log('failure')
   }
 }
 
 export function * publishArticleSuccess (api, action) {
-  let article = action.sharedArticle
-  let shareOptions = {
-    title: article.title,
-    message: `Советую прочесть - ${article.title}`,
-    url: article.url,
-    subject: 'Subject' //  for email
-  };
-  // let shareResult = yield call(Share.open, shareOptions)
-  yield Share.open(shareOptions).catch((error) => console.tron.log(error));
-
-  // if (shareResult.error) {
-  //   console.tron.log('share error')
-  //   console.tron.log('shareResult.error')
-  // }
+  FirebaseDB.setShareLink(action.sharedArticle.url, action.date)
+  // let article = action.sharedArticle
+  // let shareOptions = {
+  //   title: article.title,
+  //   message: `Советую прочесть - ${article.title}`,
+  //   url: article.url,
+  //   subject: 'Subject' //  for email
+  // };
+  // yield Share.open(shareOptions).catch((error) => console.tron.log(error));
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//asdasd
+export function * publishArticleFailure (api, action) {
+  if (action.publishArticleResponse.data.error === 'ACCESS_TOKEN_INVALID'){
+    yield put(LoginActions.createTelegraphAccount(action.publishArticleResponse, action.article, action.content))
+  } else {
+    yield call(Toast.show, action.publishArticleResponse.data.error, { duration: 6000 })
+  }
+}

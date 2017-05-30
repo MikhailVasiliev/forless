@@ -42,14 +42,22 @@ const create = (baseURL = 'https://api.telegra.ph/') => {
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //
-  const createPage = (title, content) => api.post('createPage', {
-    access_token: '416cc7937ac76c982353dbd84f1c65823123af9218c389fbb6e463248b6f',
+  const createAccount = () => api.get('createAccount', {
+    short_name: 'ForexLessons',
+    author_name: 'Forex Lessons',
+    author_url: 'https://www.facebook.com/profile.php?id=100004348080482',
+  })
+
+  const createPage = (title, content, token) => api.post('createPage', {
+    access_token: token,
     title: title,
     author_name: 'Forex Lessons',
     author_url: 'https://www.facebook.com/profile.php?id=100004348080482',
     content: content,
     return_content: true
   })
+
+  const authLink = (path) => api.get('getPage/' + path, {return_content: true})
   const getPage = (path) => api.get('getPage/' + path, {return_content: true})
   const getPageList = (token) => api.get('getPageList?', {access_token: token})
 
@@ -93,6 +101,7 @@ const create = (baseURL = 'https://api.telegra.ph/') => {
     // a list of the API functions from step 2
     getPage,
     createPage,
+    createAccount,
     getPageList,
     sendRemote
   }

@@ -18,8 +18,9 @@ const { Types, Creators } = createActions({
   filterArticles: ['filter'],
   addArticleToFavorite: ['article'],
   removeArticleFromFavorite: ['article'],
-  publishArticle: ['article'],
-  publishArticleSuccess: ['sharedArticle'],
+  publishArticle: ['article', 'telegraphToken'],
+  publishArticleSuccess: ['sharedArticle', 'date'],
+  publishArticleFailure: ['publishArticleResponse', 'article', 'content'],
 })
 
 export const ArticlesTypes = Types
@@ -56,13 +57,13 @@ export const articlesListFetchSuccess = (state) =>
 export const sendFcmNotification = (state, {article, topic}) =>
   state
 
-export const publishArticle = (state, {article}) =>
+export const publishArticle = (state, {article, telegraphToken}) =>
   state
 
-export const publishArticleSuccess = (state, {sharedArticle}) => {
-  let articles = state.sharedArticles
-  articles = articles.concat(sharedArticle)
-  return state.merge({ sharedArticles: articles })
+export const publishArticleSuccess = (state, {sharedArticle, date}) => {
+  // let articles = state.sharedArticles
+  // articles = articles.concat(sharedArticle)
+  return state//.merge({ sharedArticles: articles })
 }
 
 export const articlesListFetchFailure = (state, {error}) =>

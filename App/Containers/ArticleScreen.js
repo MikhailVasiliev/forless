@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import ArticlesActions from '../Redux/ArticlesRedux'
+import LoginActions from '../Redux/LoginRedux'
 
 // External libs
 import Image from 'react-native-image-progress';
@@ -47,18 +48,13 @@ class ArticleScreen extends React.Component {
   onShare(){
     Fabric.Answers.logCustom('Share', {article: this.props.article.title});
     var article = this.props.article
-    let sharedArticle = alreadySharedThisArticle(article.title, this.props.sharedArticles)
-    if (sharedArticle){
-      let shareOptions = {
-        title: sharedArticle.title,
-        message: `Советую прочесть - ${sharedArticle.title}`,
-        url: sharedArticle.url,
-        subject: 'Subject' //  for email
-      };
-      Share.open(shareOptions).catch((error) => console.tron.log(error));
-    } else {
-      this.props.publishArticle(article)
-    }
+    let shareOptions = {
+      title: article.title,
+      message: `Советую прочесть - ${article.title}`,
+      url: article.shareLink,
+      subject: 'Subject' //  for email
+    };
+    Share.open(shareOptions).catch((error) => console.tron.log(error));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -134,6 +130,7 @@ const mapStateToProps = (state) => {
     filteredArticles: state.articles.filteredArticles,
     markedArticles: state.articles.markedArticles,
     sharedArticles: state.articles.sharedArticles,
+    telegraphToken: state.login.telegraphToken,
   }
 }
 
@@ -143,7 +140,7 @@ const mapDispatchToProps = (dispatch) => {
     filterArticles: (filter) => dispatch(ArticlesActions.filterArticles(filter)),
     addArticleToFavorite: (article) => dispatch(ArticlesActions.addArticleToFavorite(article)),
     removeArticleFromFavorite: (article) => dispatch(ArticlesActions.removeArticleFromFavorite(article)),
-    publishArticle: (article) => dispatch(ArticlesActions.publishArticle(article)),
+    publishArticle: (article, telegraphToken) => dispatch(ArticlesActions.publishArticle(article, telegraphToken)),
   }
 }
 
