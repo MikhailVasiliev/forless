@@ -7,8 +7,6 @@ import {
   View,
   Switch,
   TouchableOpacity,
-  InteractionManager,
-  findNodeHandle
 } from 'react-native'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import ArticlesActions from '../Redux/ArticlesRedux'

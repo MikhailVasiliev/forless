@@ -9,7 +9,6 @@ import {
 } from 'react-native'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import ArticlesActions from '../Redux/ArticlesRedux'
-import LoginActions from '../Redux/LoginRedux'
 
 // External libs
 import Image from 'react-native-image-progress';
@@ -19,7 +18,6 @@ import Fabric from 'react-native-fabric';
 
 // Redux
 import { connect } from 'react-redux'
-import { alreadySharedThisArticle } from '../Lib/Utilities'
 // Libs
 // Styles
 import styles from './Styles/ArticleScreenStyles'

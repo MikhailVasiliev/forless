@@ -44,7 +44,7 @@ class SettingsScreen extends React.Component {
   componentDidMount(){
     setTimeout(() => {
       this.setState({ renderBlurry: true })
-    }, 300);
+    }, 340);
   }
 
   render () {

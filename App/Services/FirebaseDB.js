@@ -118,6 +118,7 @@ class Database {
   static async approveNewArticle(article) {
     const ref = firebaseApp.database().ref().child('/articles/' + article.date)
     ref.set(article)
+    Toast.show('Статья опубликована', { duration: 2000 })
   }
 
   static async sendFeedback(feedback) {

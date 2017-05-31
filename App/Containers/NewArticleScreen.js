@@ -13,7 +13,6 @@ import ArticlesActions from '../Redux/ArticlesRedux'
 // External libs
 import Image from 'react-native-image-progress';
 import LinearGradient from 'react-native-linear-gradient';
-import Share, {ShareSheet, Button} from 'react-native-share';
 import Toast from 'react-native-root-toast'
 
 // Redux
@@ -26,21 +25,7 @@ import styles from './Styles/ArticleScreenStyles'
 
 class NewArticleScreen extends React.Component {
 
-  componentWillMount() {
-    // let callback = (article) => {
-    //   this.setArticle(article)
-    //   NavigationActions.refresh({
-    //     onBack: () => {
-    //       NavigationActions.popTo('presentationScreen')
-    //     }
-    //   })
-    // }
-    // FirebaseDB.getNewArticle(callback)
-  }
-
   setArticle(article){
-    console.tron.log('***********')
-    console.tron.log(article)
     let that = this
     this.article = article
     that.forceUpdate()
