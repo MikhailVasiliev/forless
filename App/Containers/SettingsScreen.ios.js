@@ -7,8 +7,6 @@ import {
   View,
   Switch,
   TouchableOpacity,
-  InteractionManager,
-  findNodeHandle
 } from 'react-native'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import ArticlesActions from '../Redux/ArticlesRedux'
@@ -112,8 +110,9 @@ class SettingsScreen extends React.Component {
   }
 
   fetchNewArticle(){
-    let callback = (article) => NavigationActions.newArticle({article})
-    FirebaseDB.getNewArticle(callback)
+    NavigationActions.newArticle()
+    // let callback = (article) => NavigationActions.newArticle({article})
+    // FirebaseDB.getNewArticle(callback)
   }
 
   handleSwitchToggle(enabled){

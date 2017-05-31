@@ -38,10 +38,6 @@ class ArticleScreen extends React.Component {
     }
   }
 
-  componentWillMount() {
-
-  }
-
   componentDidMount(){
     this.props.blockDrawer(true)
     Fabric.Answers.logCustom('Article Screen', {article: this.props.article.title});
@@ -50,11 +46,10 @@ class ArticleScreen extends React.Component {
   onShare(){
     Fabric.Answers.logCustom('Share', {article: this.props.article.title});
     var article = this.props.article
-
     let shareOptions = {
       title: article.title,
-      message: 'Советую прочесть - "' + article.title + '"',
-      url: article.cover,
+      message: `Советую прочесть - ${article.title}`,
+      url: article.shareLink,
       subject: 'Subject' //  for email
     };
     Share.open(shareOptions).catch((error) => console.tron.log(error));
@@ -132,6 +127,8 @@ const mapStateToProps = (state) => {
   return {
     filteredArticles: state.articles.filteredArticles,
     markedArticles: state.articles.markedArticles,
+    sharedArticles: state.articles.sharedArticles,
+    telegraphToken: state.login.telegraphToken,
   }
 }
 
@@ -141,6 +138,7 @@ const mapDispatchToProps = (dispatch) => {
     filterArticles: (filter) => dispatch(ArticlesActions.filterArticles(filter)),
     addArticleToFavorite: (article) => dispatch(ArticlesActions.addArticleToFavorite(article)),
     removeArticleFromFavorite: (article) => dispatch(ArticlesActions.removeArticleFromFavorite(article)),
+    publishArticle: (article, telegraphToken) => dispatch(ArticlesActions.publishArticle(article, telegraphToken)),
   }
 }
 

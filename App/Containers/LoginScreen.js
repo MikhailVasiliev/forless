@@ -14,7 +14,6 @@ import LoadingIndicator from '../Components/LoadingIndicator'
 // Redux
 import { connect } from 'react-redux'
 import ArticlesActions from '../Redux/ArticlesRedux'
-import LoginActions from '../Redux/LoginRedux'
 import NotificationActions from '../Redux/NotificationRedux'
 // External libs
 import FBSDK, { LoginManager, AccessToken } from 'react-native-fbsdk';
@@ -260,7 +259,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     storeArticles: (articles) => dispatch(ArticlesActions.storeArticles(articles)),
     storeThemes: (themes) => dispatch(NotificationActions.storeThemes(themes)),
-    // storeUser: (user) => dispatch(LoginActions.storeUser(user)),
   }
 }
 

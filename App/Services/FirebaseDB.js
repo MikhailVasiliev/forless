@@ -95,7 +95,7 @@ class Database {
     const rootRef = firebaseApp.database().ref().child('/newArticle')
     var articles = []
 
-    rootRef.once('value', (snap) => {
+    rootRef.on('value', (snap) => {
       snap.forEach((child) => {
         articles.push({
           title: child.val().title,
@@ -103,17 +103,22 @@ class Database {
           cover: child.val().cover,
           theme: child.val().theme,
           topic: child.val().topic,
+          shareLink: child.val().shareLink,
           date: child.key
         });
       });
 
+      console.tron.log('articles[0]')
+      console.tron.log(articles[0])
       callback(articles[0]);
     });
+    articles = []
   }
 
   static async approveNewArticle(article) {
     const ref = firebaseApp.database().ref().child('/articles/' + article.date)
     ref.set(article)
+    Toast.show('Статья опубликована', { duration: 2000 })
   }
 
   static async sendFeedback(feedback) {
@@ -122,6 +127,11 @@ class Database {
 
     let ref = firebaseApp.database().ref('feedback/' + dateID);
     ref.set(feedback)
+  }
+
+  static async setShareLink(shareLink, date) {
+    let ref = firebaseApp.database().ref(`newArticle/${date}/shareLink`);
+    ref.set(shareLink)
   }
 
   static checkForUser(callbackNoUser, callbackUser) {

@@ -15,7 +15,7 @@
     "coverage": "nyc ava && nyc report --reporter=html && open coverage/index.html || xdg-open coverage/index.html",
     "tron": "node_modules/.bin/reactotron",
     "android:build": "cd android && ./gradlew crashlyticsUploadSymbolsRelease && ./gradlew assembleRelease ",
-    "android:install": "cd android && ./gradlew crashlyticsUploadSymbolsRelease && ./gradlew assembleRelease && ./gradlew installRelease",
+    "android:install": "cd android && ./gradlew assembleRelease && ./gradlew installRelease",
     "android:hockeyapp": "cd android && ./gradlew assembleRelease && puck -submit=auto app/build/outputs/apk/app-release.apk",
     "android:devices": "$ANDROID_HOME/platform-tools/adb devices",
     "android:logcat": "$ANDROID_HOME/platform-tools/adb logcat *:S ReactNative:V ReactNativeJS:V",
