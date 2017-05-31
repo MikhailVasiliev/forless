@@ -37,7 +37,7 @@ class FeedbackScreen extends React.Component {
   componentDidMount(){
     setTimeout(() => {
       this.setState({ renderBlurry: true })
-    }, 340);
+    }, 380);
   }
 
   render() {
