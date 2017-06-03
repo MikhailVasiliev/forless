@@ -62,7 +62,8 @@ const create = (baseURL = 'https://fcm.googleapis.com/fcm/') => {
       'notification': {
         'message': 'This is a Firebase Cloud Messaging Topic Message!',
         'title': 'Новая статья для Вас!',
-        'body': article.title
+        'body': article.title,
+        'icon':'notif_icon',
       },
       'priority': 'high'
     }

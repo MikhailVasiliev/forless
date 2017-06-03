@@ -18,6 +18,7 @@ const images = {
   star: require('../Images/star.png'),
   letter: require('../Images/letter.png'),
   logout: require('../Images/logout.png'),
+  notifIcon: require('../Images/notifIcon.png'),
 }
 
 export default images
