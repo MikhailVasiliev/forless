@@ -44,6 +44,7 @@ class Database {
           cover: child.val().cover,
           theme: child.val().theme,
           topic: child.val().topic,
+          shareLink: child.val().shareLink,
           date: child.key
         });
 
@@ -90,6 +91,7 @@ class Database {
     });
   }
 
+  // clean up
   static async getNewArticle(callback) {
 
     const rootRef = firebaseApp.database().ref().child('/newArticle')
