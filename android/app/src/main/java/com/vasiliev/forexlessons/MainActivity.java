@@ -2,11 +2,12 @@ package com.vasiliev.forexlessons;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 
 import com.crashlytics.android.Crashlytics;
 import com.facebook.react.ReactActivity;
 import com.vasiliev.forexlessons.MainApplication;
-
+import com.cboy.rn.splashscreen.SplashScreen;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends ReactActivity {
@@ -18,6 +19,12 @@ public class MainActivity extends ReactActivity {
     @Override
     protected String getMainComponentName() {
         return "ForexLessons";
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen.show(this);
+        super.onCreate(savedInstanceState);
     }
 
     @Override

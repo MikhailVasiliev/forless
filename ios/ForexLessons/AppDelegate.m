@@ -18,6 +18,8 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
+#import "SplashScreen.h"
+
 #import "RNFIRMessaging.h"
 
 @implementation AppDelegate
@@ -51,6 +53,7 @@
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
   [Fabric with:@[[Crashlytics class]]];
+  [SplashScreen show];
   return YES;
 }
 
