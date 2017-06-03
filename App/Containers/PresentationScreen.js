@@ -24,6 +24,7 @@ import { Colors } from '../Themes'
 import Swiper from 'react-native-swiper';
 import FCM from 'react-native-fcm';
 import Fabric from 'react-native-fabric';
+import SplashScreen from 'react-native-splash-screen'
 
 let defaultScalingDrawerConfig = {
   scalingFactor: 0.9,
@@ -50,6 +51,9 @@ class PresentationScreen extends React.Component {
   }
 
   componentWillMount() {
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 500);
     //TODO - hide splash screen after timeout to change screen if no-auth
     if (this.props.mode === 'feed'){
       FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.articles)

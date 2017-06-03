@@ -1,5 +1,11 @@
 // @flow
-import { downloadApp, appStorePic, appStoreLink, playMarketPic, playMarketLink } from '../Lib/Constants'
+import {
+  downloadApp,
+  appStorePic,
+  appStoreLink,
+  playMarketPic,
+  playMarketLink
+} from '../Lib/Constants'
 
 export const dataToContent = (cover, data) => {
   var content = []

@@ -5,6 +5,7 @@ import android.app.Application;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.crashlytics.android.Crashlytics;
 import com.facebook.react.ReactApplication;
+import com.cboy.rn.splashscreen.SplashScreenReactPackage;
 import com.smixx.fabric.FabricPackage;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
@@ -51,6 +52,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SplashScreenReactPackage(),
           new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
           new BlurViewPackage(),
           new FIRMessagingPackage(),

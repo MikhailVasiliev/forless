@@ -3,7 +3,6 @@ import ArticlesActions from '../Redux/ArticlesRedux'
 import LoginActions from '../Redux/LoginRedux'
 import FirebaseDB from '../Services/FirebaseDB'
 import {dataToContent} from '../Transforms/FromArticleToTelegraph'
-import Share, {ShareSheet, Button} from 'react-native-share';
 
 // External libs
 import { Actions as NavigationActions } from 'react-native-router-flux';
@@ -12,7 +11,6 @@ import Toast from 'react-native-root-toast';
 export function * articleFetchAttempt (api, action) {
   const fetchArticleResponse = yield call(api.getPage, action.path)
   if (fetchArticleResponse.ok) {
-    console.tron.log(fetchArticleResponse.data.result)
     yield put(ArticlesActions.articleFetchSuccess(fetchArticleResponse.data.result))
   } else {
     yield put(ArticlesActions.articleFetchFailure())
@@ -20,7 +18,6 @@ export function * articleFetchAttempt (api, action) {
 }
 
 export function * articleFetchSuccess (api, action) {
-  console.tron.log(action)
   yield call(NavigationActions.refresh, {article: action.article})
 }
 
@@ -29,10 +26,8 @@ export function * articleFetchFailure (api, action) {
 }
 
 export function * articlesListFetchAttempt (api, action) {
-  // FirebaseDB.getAllArticles(this.setArticlesInState.bind(this))
   const fetchArticlesListResponse = yield call(FirebaseDB.fetchArticles)
   if (fetchArticlesListResponse.length > 0) {
-    console.tron.log(fetchArticlesListResponse)
     yield call(NavigationActions.presentationScreen, {articles: fetchArticlesListResponse})
   }
 }
@@ -48,7 +43,6 @@ export function * articlesListFetchFailure (api, action) {
 export function * sendFcmNotification (api, action) {
   const sendMessageResponse = yield call(api.sendRemote, action.article, action.topic)
   if (sendMessageResponse.status === 200) {
-    console.tron.log('success')
     yield call(Toast.show, 'Push notification оправлен', { duration: 2000 })
   } else {
     console.tron.log('failure')
@@ -56,16 +50,10 @@ export function * sendFcmNotification (api, action) {
 }
 
 export function * publishArticle (api, action) {
-  // let data = encodeURIComponent(action.article.data)
   let content = yield call(dataToContent, action.article.cover, action.article.data)
-  console.tron.log('content')
-  console.tron.log(content)
   const publishArticleResponse = yield call(api.createPage, action.article.title, content, action.telegraphToken)
   if (publishArticleResponse.status === 200) {
     if (publishArticleResponse.data.ok){
-      console.tron.log('success')
-      console.tron.log(publishArticleResponse)
-
       let sharedArticle = publishArticleResponse.data.result
       yield put(ArticlesActions.publishArticleSuccess(sharedArticle, action.article.date))
     } else {
