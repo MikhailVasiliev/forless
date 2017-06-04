@@ -30,7 +30,6 @@
     "lodash": "4.17.4",
     "querystringify": "1.0.0",
     "ramda": "0.23.0",
-    
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.0",
     "react-native-android-blurryoverlay": "git@github.com:Maydar/react-native-android-blurryoverlay.git",
