@@ -7,6 +7,11 @@ export default StyleSheet.create({
     paddingLeft: 0,
     flex: 1
   },
+  overlay: {
+    backgroundColor: Colors.overlay,
+    paddingLeft: 0,
+    flex: 1
+  },
   profile: {
     marginLeft: 25,
     marginTop: 50
