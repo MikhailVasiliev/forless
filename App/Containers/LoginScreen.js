@@ -41,7 +41,8 @@ class LoginScreen extends React.Component {
 
     this.KEYS = {
       iosClientId: '350196186671-c7hi3nigtp9101q5b1cb6o2uuqh785lr.apps.googleusercontent.com', // only for iOS
-      webClientId: '350196186671-ckn9u519anj4pr0f1inb4r45763cb60v.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+      // webClientId: '350196186671-ckn9u519anj4pr0f1inb4r45763cb60v.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+      webClientId: '982814521811-njdvtmlbu9r3nkv1vbhtdrdn76ma9iej.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
       offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
     }
   }

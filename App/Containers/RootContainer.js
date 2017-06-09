@@ -53,6 +53,10 @@ class RootContainer extends Component {
       : this._drawer.open()
   }
 
+  isDrawerOpened(){
+    return this.state.isDrawerOpened
+  }
+
   componentWillMount() {
     //TODO - hide splash screen after timeout to change screen if no-auth
     FirebaseDB.checkForUser(() => NavigationActions.login(), user => this.storeUser(user))
@@ -118,9 +122,11 @@ class RootContainer extends Component {
             backgroundColor={Colors.transparent}/>
           <NavigationRouter
             toggleDrawer={() => this.toggleDrawer()}
+            isDrawerOpened={() => this.isDrawerOpened()}
             user={() => {return this.user}}
             storeUser={(user) => this.storeUser(user)}
-            blockDrawer={(isBlocked) => this.blockDrawer(isBlocked)}/>
+            blockDrawer={(isBlocked) => this.blockDrawer(isBlocked)}
+            />
         </View>
         <DropdownAlert
           closeInterval={4000}

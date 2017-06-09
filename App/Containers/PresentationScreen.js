@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, BackHandler } from 'react-native'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
 // Components
@@ -33,6 +33,19 @@ let defaultScalingDrawerConfig = {
 };
 
 class PresentationScreen extends React.Component {
+
+  constructor(props){
+    super(props)
+
+    BackHandler.addEventListener('hardwareBackPress', () => {
+
+      if (this.props.isDrawerOpened()) {
+        this.props.toggleDrawer()
+        return true;
+      }
+      return false;
+    });
+  }
 
   componentWillReceiveProps(nextProps){
     switch (nextProps.mode){
@@ -71,6 +84,7 @@ class PresentationScreen extends React.Component {
 
   componentWillUnmount(){
     Fabric.Answers.logCustom('Presentation Screen', {user: this.props.user() ? this.props.user().email : 'unauth launch'});
+    BackHandler.removeEventListener('hardwareBackPress', () => {});
   }
 
   setDynamicDrawerValue = (type, value) => {
@@ -104,7 +118,7 @@ class PresentationScreen extends React.Component {
                      activeDot={this.renderDot(Colors.mainGreen)}
                      showsButtons={true}
                      buttonWrapperStyle={styles.footer}
-                     nextButton={this.renderFooterButton('След. >')}
+                     nextButton={this.renderFooterButton('Вперед >')}
                      prevButton={this.renderFooterButton('< Назад')}
                      >
               { this.articles.map((article, index) => {
