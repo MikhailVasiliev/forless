@@ -178,7 +178,7 @@ class RootContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     articles: state.articles.data,
-    markedArticles: state.articles.markedArticles,
+    markedArticles: state.articles.markedArticles
   }
 }
 
