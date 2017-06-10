@@ -55,10 +55,21 @@ class LeftMenu extends Component {
               <Text style={styles.menuTxt}>Ошибка/отзыв</Text>
             </TouchableOpacity>
             <TouchableOpacity
+              style={styles.col}
+              onPress={() => {
+                this.props.closeDrawer()
+                NavigationActions.settings()
+              }}
+              activeOpacity={0.6}
+              >
+              <Image source={Images.settings} style={styles.icon}/>
+              <Text style={styles.menuTxt}>Настройки</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
               style={[styles.col, {borderBottomWidth: 0.5}]}
               onPress={() => {
                 this.props.closeDrawer()
-                FirebaseDB.logout()
+                this.onLogoutPressed()
               }}
               activeOpacity={0.6}
               >
@@ -79,6 +90,10 @@ class LeftMenu extends Component {
     } else {
       Toast.show('У Вас нет статей в группе избранных')
     }
+  }
+
+  onLogoutPressed(){
+    this.props.openModal(true)
   }
 }
 

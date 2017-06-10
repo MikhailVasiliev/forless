@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import StartupActions from '../Redux/StartupRedux'
 import ReduxPersist from '../Config/ReduxPersist'
 import LeftMenu from '../Components/LeftMenu'
+import Dialog from '../Components/Dialog'
 
 // Styles
 import styles from './Styles/RootContainerStyles'
@@ -37,7 +38,8 @@ class RootContainer extends Component {
     super(props)
 
     this.state = {
-      isDrawerOpened: false
+      isDrawerOpened: false,
+      modalVisible: false
     }
   }
 
@@ -51,6 +53,10 @@ class RootContainer extends Component {
     this.state.isDrawerOpened
       ? this._drawer.close()
       : this._drawer.open()
+  }
+
+  isDrawerOpened(){
+    return this.state.isDrawerOpened
   }
 
   componentWillMount() {
@@ -106,7 +112,7 @@ class RootContainer extends Component {
     return (
       <ScalingDrawer
         ref={ref => this._drawer = ref}
-        content={<LeftMenu closeDrawer={this.toggleDrawer.bind(this)} user={this.user} markedArticles={this.props.markedArticles}/>}
+        content={<LeftMenu openModal={(isOpen) => this.openModal(isOpen)} closeDrawer={this.toggleDrawer.bind(this)} user={this.user} markedArticles={this.props.markedArticles}/>}
         {...defaultScalingDrawerConfig}
         onClose={() => this.setState({isDrawerOpened: false})}
         onOpen={() => this.setState({isDrawerOpened: true})}
@@ -118,9 +124,11 @@ class RootContainer extends Component {
             backgroundColor={Colors.transparent}/>
           <NavigationRouter
             toggleDrawer={() => this.toggleDrawer()}
+            isDrawerOpened={() => this.isDrawerOpened()}
             user={() => {return this.user}}
             storeUser={(user) => this.storeUser(user)}
-            blockDrawer={(isBlocked) => this.blockDrawer(isBlocked)}/>
+            blockDrawer={(isBlocked) => this.blockDrawer(isBlocked)}
+            />
         </View>
         <DropdownAlert
           closeInterval={4000}
@@ -131,6 +139,13 @@ class RootContainer extends Component {
           messageStyle={styles.alertMessage}
           imageStyle={styles.alertIcon}
           />
+        <Dialog
+          visible={this.state.modalVisible}
+          onPress={() => {
+            FirebaseDB.logout()
+          }}
+          dismissDialog={() => this.openModal(false)}
+          />
       </ScalingDrawer>
     )
   }
@@ -140,6 +155,10 @@ class RootContainer extends Component {
       let newArticle = this.findArticleInState(data.message)
       NavigationActions.articleScreen({article: newArticle})
     }
+  }
+
+  openModal(isOpen) {
+    this.setState({modalVisible: isOpen})
   }
 
   findArticleInState(title) {
@@ -159,7 +178,7 @@ class RootContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     articles: state.articles.data,
-    markedArticles: state.articles.markedArticles,
+    markedArticles: state.articles.markedArticles
   }
 }
 

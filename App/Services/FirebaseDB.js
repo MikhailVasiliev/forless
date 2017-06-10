@@ -1,5 +1,6 @@
 import * as firebase from 'firebase';
 import Toast from 'react-native-root-toast'
+import { adminEmail } from '../Lib/Constants'
 
 
 const firebaseConfig = {
@@ -145,10 +146,21 @@ class Database {
           if (user.emailVerified) {
             callbackUser(user)
           } else {
-            user.sendEmailVerification();
-            Toast.show('Подтвердите почтовый адрес. Для этого перейдите по ссылке в письме, отправленном на указанный адрес.', {duration: Toast.durations.LONG})
-            callbackNoUser()
+            if (user.providerData[0].email === adminEmail){
+              user.sendEmailVerification();
+              Toast.show('Подтвердите почтовый адрес. Для этого перейдите по ссылке в письме, отправленном на указанный адрес.', {duration: Toast.durations.LONG})
+              callbackNoUser()
+            } else {
+              callbackUser(user)
+            }
           }
+          // if (user.emailVerified) {
+          //   callbackUser(user)
+          // } else {
+          //   user.sendEmailVerification();
+          //   Toast.show('Подтвердите почтовый адрес. Для этого перейдите по ссылке в письме, отправленном на указанный адрес.', {duration: Toast.durations.LONG})
+          //   callbackNoUser()
+          // }
         } else {
           callbackUser(user)
         }

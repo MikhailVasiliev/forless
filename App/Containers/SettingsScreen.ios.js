@@ -25,6 +25,7 @@ import { BlurView, VibrancyView } from 'react-native-blur';
 
 // Styles
 import styles from './Styles/SettingsScreenStyles'
+import {Colors} from '../Themes'
 
 class SettingsScreen extends React.Component {
 
@@ -67,6 +68,7 @@ class SettingsScreen extends React.Component {
                 onValueChange={(notificationsEnabled) => this.handleSwitchToggle(notificationsEnabled)}
                 style={styles.switchComponent}
                 value={this.state.notificationsEnabled}
+                onTintColor={Colors.mainGreen}
                 />
           </View>
           <LinearGradient
@@ -91,7 +93,7 @@ class SettingsScreen extends React.Component {
                   disabledColor="grey"
                   selected={theme.enabled}
                   defaultColor={'white'}
-                  selectedColor="green"
+                  selectedColor={Colors.mainGreen}
                   containerStyle={styles.containerStyle}
                   labelStyle={styles.labelStyle}
                   checkboxStyle={styles.checkboxStyle}

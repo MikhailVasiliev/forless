@@ -30,9 +30,11 @@ class NavigationRouter extends Component {
     return (
       <Router
             toggleDrawer={() => this.props.toggleDrawer()}
+            isDrawerOpened={() => this.props.isDrawerOpened()}
             blockDrawer={(isBlocked) => this.props.blockDrawer(isBlocked)}
             storeUser={(user) => this.props.storeUser(user)}
-            user={()=>this.props.user()}>
+            user={()=>this.props.user()}
+            onExitApp={() => {}}>
           <Scene key="drawerChildrenWrapper"
                  navigationBarStyle={Styles.navBar}
                  backButtonImage={Images.back}
@@ -53,10 +55,8 @@ class NavigationRouter extends Component {
                    mode="feed"
                    leftButtonImage={Images.menu}
                    leftButtonIconStyle={Styles.leftButton}
-                   rightButtonImage={Images.settings}
-                   rightButtonIconStyle={Styles.rightButton}
-                   onLeft={() => {Actions.feedback()}}
-                   onRight={() => {Actions.settings()}} />
+                   onLeft={() => {}}
+                   /*onRight={() => {Actions.settings()}}*/ />
             <Scene key="articleScreen"
                    hideNavBar
                    component={ArticleScreen}
