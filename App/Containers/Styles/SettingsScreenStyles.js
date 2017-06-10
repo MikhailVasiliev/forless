@@ -88,8 +88,8 @@ export default StyleSheet.create({
   checkboxStyle: {
     width: 26,
     height: 26,
-    borderWidth: 2,
-    borderColor: 'green',
+    borderWidth: 1,
+    borderColor: Colors.mainGreen,
     borderRadius: 5
   },
   applyButton: {
