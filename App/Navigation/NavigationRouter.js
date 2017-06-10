@@ -55,8 +55,6 @@ class NavigationRouter extends Component {
                    mode="feed"
                    leftButtonImage={Images.menu}
                    leftButtonIconStyle={Styles.leftButton}
-                  //  rightButtonImage={Images.settings}
-                  //  rightButtonIconStyle={Styles.rightButton}
                    onLeft={() => {}}
                    /*onRight={() => {Actions.settings()}}*/ />
             <Scene key="articleScreen"

@@ -46,7 +46,9 @@ const metrics = {
   oneLineTextInput: 40,
   smallBorderRadius: 5,
   messageInput: height * 0.5,
-  buttonHeight: 50
+  buttonHeight: 50,
+  alertWidth: width * 0.73,
+  alertHeight: height * 0.22,
 }
 
 export default metrics
