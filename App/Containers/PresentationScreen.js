@@ -1,12 +1,13 @@
 // @flow
 
 import React from 'react'
-import { Text, View, BackHandler } from 'react-native'
+import { Text, View, BackHandler, ScrollView, Animated } from 'react-native'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
 // Components
 import SwiperItem from '../Components/SwiperItem'
 import LoadingIndicator from '../Components/LoadingIndicator'
+import Footer from '../Components/Footer'
 
 // Redux
 import { connect } from 'react-redux'
@@ -18,7 +19,7 @@ import FirebaseDB from '../Services/FirebaseDB'
 
 // Styles
 import styles from './Styles/PresentationScreenStyles'
-import { Colors } from '../Themes'
+import { Colors, Metrics } from '../Themes'
 
 // External libs
 import Swiper from 'react-native-swiper';
@@ -32,10 +33,37 @@ let defaultScalingDrawerConfig = {
   swipeOffset: 20
 };
 
+let width = Metrics.screenWidth
+
+const getInterpolate = (animatedScroll, i, imageLength) => {
+  const inputRange = [
+    (i - 1) * width,
+    i * width,
+    (i + 1) * width
+  ]
+  const outputRange = i === 0 ? [0, 0, 150] : [ 0, 0, 150];
+  return animatedScroll.interpolate({
+    inputRange,
+    outputRange,
+    extrapolate: 'clamp'
+  })
+}
+const getSeparator = (i) => {
+  return (
+    <View key={i} style={[styles.separate, { left: (i - 1) * width - 2.5 }]} />
+  )
+}
+
 class PresentationScreen extends React.Component {
 
   constructor(props){
     super(props)
+
+    this.state = {
+      animatedScroll: new Animated.Value(0),
+      scrollPosition: 0,
+      scrollviewContentWidth: 0
+    }
 
     BackHandler.addEventListener('hardwareBackPress', () => {
 
@@ -82,6 +110,16 @@ class PresentationScreen extends React.Component {
     this.props.blockDrawer(false)
   }
 
+  shouldComponentUpdate(nextProps, nextState){
+    if (nextState.scrollPosition !== this.state.scrollPosition){
+      return false
+    }
+    if (nextState.scrollviewContentWidth !== this.state.scrollviewContentWidth){
+      return false
+    }
+    return true;
+  }
+
   componentWillUnmount(){
     Fabric.Answers.logCustom('Presentation Screen', {user: this.props.user() ? this.props.user().email : 'unauth launch'});
     BackHandler.removeEventListener('hardwareBackPress', () => {});
@@ -107,24 +145,73 @@ class PresentationScreen extends React.Component {
     })
   }
 
+  scrollToPrevArticle(){
+    if (this.scrollview){
+      this.currentPage = this.state.scrollPosition / Metrics.screenWidth
+      this.currentPage = Math.round(this.currentPage)
+      let prevPagePosition = this.currentPage === 0 ? this.state.scrollviewContentWidth - Metrics.screenWidth : (this.currentPage - 1) * Metrics.screenWidth
+      this.scrollview.scrollTo({x: prevPagePosition, animated: true})
+    }
+  }
+
+  scrollToNextArticle(){
+    if (this.scrollview){
+      this.currentPage = this.state.scrollPosition / Metrics.screenWidth
+      this.currentPage = Math.round(this.currentPage)
+      let nextPagePosition = this.currentPage === (this.props.articles.length - 1) ? 0 : (this.currentPage + 1) * Metrics.screenWidth
+      this.scrollview.scrollTo({x: nextPagePosition, animated: true})
+    }
+  }
+
   render () {
+    console.tron.log('render')
 
     if (this.articles && this.articles.length > 0) {
       return (
           <View style={styles.main}>
-            <Swiper horizontal={false}
-                     activeDotColor={Colors.mainGreen}
-                     dot={this.renderDot('rgba(0, 0, 0, 0.2)')}
-                     activeDot={this.renderDot(Colors.mainGreen)}
-                     showsButtons={true}
-                     buttonWrapperStyle={styles.footer}
-                     nextButton={this.renderFooterButton('Вперед >')}
-                     prevButton={this.renderFooterButton('< Назад')}
-                     >
+            <ScrollView
+              style={styles.scrollview}
+              ref={(scroll) => this.scrollview = scroll}
+              onContentSizeChange={(contentWidth, contentHeight) => {
+                this.setState({scrollviewContentWidth: contentWidth})
+              }}
+              pagingEnabled
+              horizontal
+              scrollEventThrottle={16}
+              onScroll={(event) => {
+                this.setState({scrollPosition: event.nativeEvent.contentOffset.x})
+                // Animated.event(
+                //   [{
+                //     nativeEvent: {
+                //       contentOffset: {
+                //         x: this.state.animatedScroll
+                //       }
+                //     }
+                //   }]
+                // )
+              }
+              }
+              >
               { this.articles.map((article, index) => {
-                return (<SwiperItem article={article} key={index}/>)
+                return (
+                  <SwiperItem
+                    article={article}
+                    key={index}
+                    translateX={getInterpolate(this.state.animatedScroll, index, this.articles.length )}
+                    />
+                )
               }) }
-            </Swiper>
+              {Array.apply(null, {length: this.articles.length + 1}).map((_, i) => getSeparator(i))}
+              </ScrollView>
+              <Footer
+                leftButtonText={'< Назад'}
+                rightButtonText={'Вперед >'}
+                onPressLeftButton={() => this.scrollToPrevArticle()}
+                onPressRightButton={() => this.scrollToNextArticle()}
+                currentPage={Math.round(this.state.scrollPosition / Metrics.screenWidth) + 1}
+                pagesAmount={this.props.articles.length}
+                />
+
           </View>
       )
     } else {
@@ -136,12 +223,6 @@ class PresentationScreen extends React.Component {
         </View>
       )
     }
-  }
-
-  renderFooterButton(text){
-    return (
-        <Text style={styles.footerButtonText}>{text}</Text>
-    )
   }
 
   renderDot(color) {
