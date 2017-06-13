@@ -112,7 +112,7 @@ class PresentationScreen extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState){
     if (nextState.scrollPosition !== this.state.scrollPosition){
-      return false
+      return Math.round(nextState.scrollPosition / Metrics.screenWidth) !== Math.round(this.state.scrollPosition / Metrics.screenWidth)
     }
     if (nextState.scrollviewContentWidth !== this.state.scrollviewContentWidth){
       return false
@@ -164,8 +164,6 @@ class PresentationScreen extends React.Component {
   }
 
   render () {
-    console.tron.log('render')
-
     if (this.articles && this.articles.length > 0) {
       return (
           <View style={styles.main}>
