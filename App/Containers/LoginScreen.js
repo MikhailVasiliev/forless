@@ -6,7 +6,8 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  Image
+  Image,
+  KeyboardAvoidingView
 } from 'react-native'
 
 import { Actions as NavigationActions } from 'react-native-router-flux'
@@ -55,7 +56,7 @@ class LoginScreen extends React.Component {
     let loginText = this.state.form === 'login' ? 'Вход' : 'Создать'
     let createAccountText = this.state.form === 'login' ? 'Еще нет аккаунта? Создайте новый' : 'Вернуться к предыдущей форме'
     return (
-      <View style={styles.mainOuter} >
+      <KeyboardAvoidingView style={styles.mainOuter} behavior="padding" >
         <Image style={styles.backgroundImage} source={Images.background3}>
           <View style={styles.main} >
             {this.state.form === 'login' && <Text style={styles.welcomeText}>Войти в аккаунт</Text>}
@@ -122,7 +123,7 @@ class LoginScreen extends React.Component {
         <LoadingIndicator
           active={this.state.loading}
           text={'Входим в систему...'}/>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 
