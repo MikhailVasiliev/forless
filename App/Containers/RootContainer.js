@@ -41,7 +41,7 @@ class RootContainer extends Component {
       isDrawerOpened: false,
       modalVisible: false,
       openedFromTray: false,
-      notif: {}
+      notif: null
     }
   }
 
@@ -68,6 +68,9 @@ class RootContainer extends Component {
 
   storeUser(user){
     this.user = user
+    if (this.state.notif){
+      this.findArticleAndOpen(this.state.notif.articleTitle, this.props.articles.asMutable())
+    }
   }
 
   componentDidMount () {
@@ -97,19 +100,16 @@ class RootContainer extends Component {
   }
 
   handleNotification(notif){
+    console.tron.log('handleNotification')
+    console.tron.log(notif)
     if (this.user && !notif.opened_from_tray){
       //this is a local notification
       Platform.OS === 'ios'
           ? this.dropdown.alertWithType('info', notif.notification.title, notif.articleTitle)
           : this.dropdown.alertWithType('info', notif.fcm.title, notif.articleTitle)
     }
-    if (notif.opened_from_tray){
-      this.setState({openedFromTray: true, notif})
-      setTimeout(() => {
-        if (this.state.openedFromTray){
-          this.setState({openedFromTray: false, notif: null})
-        }
-      }, 5000);
+    if (notif.opened_from_tray && notif.articleTitle){
+      this.setState({openedFromTray: true, notif: notif})
     }
   }
 
@@ -121,15 +121,6 @@ class RootContainer extends Component {
       return false
     }
     return true
-  }
-
-  componentWillReceiveProps(nextProps){
-    if (nextProps.articles.length !== this.props.articles.length){
-      if (this.state.openedFromTray){
-        //todo - save notification and check for user
-        this.findArticleAndOpen(this.state.notif.articleTitle, nextProps.articles)
-      }
-    }
   }
 
   blockDrawer(isBlocked) {
@@ -189,7 +180,12 @@ class RootContainer extends Component {
   findArticleAndOpen(title, articles){
     let newArticle = this.findArticleInState(title, articles)
     if (newArticle){
-      NavigationActions.articleScreen({article: newArticle})
+      setTimeout(() => {
+        NavigationActions.articleScreen({article: newArticle})
+      }, 600);
+      if (this.state.notif) {
+        this.setState({openedFromTray: false, notif: null})
+      }
     }
   }
 

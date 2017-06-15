@@ -154,13 +154,6 @@ class Database {
               callbackUser(user)
             }
           }
-          // if (user.emailVerified) {
-          //   callbackUser(user)
-          // } else {
-          //   user.sendEmailVerification();
-          //   Toast.show('Подтвердите почтовый адрес. Для этого перейдите по ссылке в письме, отправленном на указанный адрес.', {duration: Toast.durations.LONG})
-          //   callbackNoUser()
-          // }
         } else {
           callbackUser(user)
         }
