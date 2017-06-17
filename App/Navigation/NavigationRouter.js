@@ -84,6 +84,13 @@ class NavigationRouter extends Component {
             <Scene key="filteredArticles"
                    component={PresentationScreen}
                    title="Избранные"
+                   titleStyle={Styles.titleFavorites}
+                   onBack={() => {Actions.pop()}} />
+            <Scene key="themeArticles"
+                   type={ActionConst.REPLACE}
+                   component={PresentationScreen}
+                   title="Статьи по теме:"
+                   titleStyle={Styles.titleThemes}
                    onBack={() => {Actions.pop()}} />
             <Scene key="feedback"
                    animationStyle={animationStyle}

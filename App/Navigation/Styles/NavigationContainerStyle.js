@@ -25,6 +25,32 @@ export default {
       }
     })
   },
+  titleFavorites: {
+    color: Colors.snow,
+    backgroundColor: Colors.orange,
+    fontFamily: 'Avenir Next',
+    ...Platform.select({
+      ios: {
+        elevation: 15
+      },
+      android: {
+        marginTop: 4
+      }
+    })
+  },
+  titleThemes: {
+    color: Colors.snow,
+    backgroundColor: Colors.mainGreen,
+    fontFamily: 'Avenir Next',
+    ...Platform.select({
+      ios: {
+        elevation: 15
+      },
+      android: {
+        marginTop: 4
+      }
+    })
+  },
   leftButton: {
     tintColor: Colors.snow,
     width: 30,

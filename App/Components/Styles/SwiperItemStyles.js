@@ -35,6 +35,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 10,
     paddingRight: 10,
+    elevation: 15
   },
   articleTheme: {
     ...Fonts.style.normal,

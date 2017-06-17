@@ -95,10 +95,11 @@ class PresentationScreen extends React.Component {
     setTimeout(() => {
       SplashScreen.hide();
     }, 500);
-    //TODO - hide splash screen after timeout to change screen if no-auth
+
     if (this.props.mode === 'feed'){
       FirebaseDB.getAllArticles(this.setArticlesInState.bind(this), this.props.allThemes, this.articles)
     }
+
     NavigationActions.refresh({
       onLeft: () => {
         this.props.toggleDrawer()
@@ -158,7 +159,7 @@ class PresentationScreen extends React.Component {
     if (this.scrollview){
       this.currentPage = this.state.scrollPosition / Metrics.screenWidth
       this.currentPage = Math.round(this.currentPage)
-      let nextPagePosition = this.currentPage === (this.props.articles.length - 1) ? 0 : (this.currentPage + 1) * Metrics.screenWidth
+      let nextPagePosition = this.currentPage === (this.articles.length - 1) ? 0 : (this.currentPage + 1) * Metrics.screenWidth
       this.scrollview.scrollTo({x: nextPagePosition, animated: true})
     }
   }
@@ -207,9 +208,8 @@ class PresentationScreen extends React.Component {
                 onPressLeftButton={() => this.scrollToPrevArticle()}
                 onPressRightButton={() => this.scrollToNextArticle()}
                 currentPage={Math.round(this.state.scrollPosition / Metrics.screenWidth) + 1}
-                pagesAmount={this.props.articles.length}
+                pagesAmount={this.articles.length}
                 />
-
           </View>
       )
     } else {
