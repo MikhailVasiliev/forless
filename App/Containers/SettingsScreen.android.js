@@ -44,11 +44,12 @@ class SettingsScreen extends React.Component {
 
   componentDidMount(){
     setTimeout(() => {
-      this.setState({ renderBlurry: true })
+      // this.setState({ renderBlurry: true })
     }, 380);
   }
 
   render () {
+    let buttonColor = this.state.notificationsEnabled ? Colors.mainGreen : 'grey'
     let allThemes = this.props.allThemes
     let isAdmin = this.props.user() && (this.props.user().email === adminEmail)
     var overlay = (this.state.renderBlurry)
@@ -56,6 +57,7 @@ class SettingsScreen extends React.Component {
                       radius={7} sampling={6} color="#00FFFF00"
                       style={styles.blur}  />
                   : <View />;
+
     return (
       <View style={styles.main}>
       {overlay}
@@ -76,13 +78,18 @@ class SettingsScreen extends React.Component {
           </LinearGradient>
           <View style={styles.switchContainer} >
             <Text style={styles.switchComponentText}>Уведомления</Text>
-            <Switch
+            <View style={styles.switchComponent}>
+              <TouchableOpacity
+                style={[styles.switchButton, {backgroundColor: buttonColor}]}
+                onPress={() => this.handleSwitchToggle()}/>
+            </View>
+            {/*<Switch
                 onValueChange={(notificationsEnabled) => this.handleSwitchToggle(notificationsEnabled)}
                 style={styles.switchComponent}
                 value={this.state.notificationsEnabled}
                 thumbTintColor={this.state.notificationsEnabled ? Colors.mainGreen : 'white'}
                 onTintColor={Colors.mainGreenTransparent}
-                />
+                />*/}
           </View>
           <LinearGradient
             colors={[
@@ -130,7 +137,8 @@ class SettingsScreen extends React.Component {
     FirebaseDB.getNewArticle(callback)
   }
 
-  handleSwitchToggle(enabled){
+  handleSwitchToggle(){
+    let enabled = !this.state.notificationsEnabled
     this.setState({notificationsEnabled: enabled})
     this.props.toggleNotifications(enabled)
     this.props.allThemes.map((theme)=> {

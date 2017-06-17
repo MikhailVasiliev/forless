@@ -41,6 +41,7 @@ class SettingsScreen extends React.Component {
   }
 
   render () {
+    let buttonColor = this.state.notificationsEnabled ? Colors.mainGreen : 'grey'
     let allThemes = this.props.allThemes
     let isAdmin = this.props.user().email && (this.props.user().email === adminEmail)
     return (
@@ -64,12 +65,17 @@ class SettingsScreen extends React.Component {
           </LinearGradient>
           <View style={styles.switchContainer} >
             <Text style={styles.switchComponentText}>Уведомления</Text>
-            <Switch
+            <View style={styles.switchComponent}>
+              <TouchableOpacity
+                style={[styles.switchButton, {backgroundColor: buttonColor}]}
+                onPress={() => this.handleSwitchToggle()}/>
+            </View>
+            {/*<Switch
                 onValueChange={(notificationsEnabled) => this.handleSwitchToggle(notificationsEnabled)}
                 style={styles.switchComponent}
                 value={this.state.notificationsEnabled}
                 onTintColor={Colors.mainGreen}
-                />
+                />*/}
           </View>
           <LinearGradient
             colors={[
@@ -117,7 +123,8 @@ class SettingsScreen extends React.Component {
     // FirebaseDB.getNewArticle(callback)
   }
 
-  handleSwitchToggle(enabled){
+  handleSwitchToggle(){
+    let enabled = !this.state.notificationsEnabled
     this.setState({notificationsEnabled: enabled})
     this.props.toggleNotifications(enabled)
     this.props.allThemes.map((theme)=> {

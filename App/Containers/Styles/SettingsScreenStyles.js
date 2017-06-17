@@ -63,8 +63,28 @@ export default StyleSheet.create({
     backgroundColor: Colors.transparent,
     color: 'white'
   },
+  // switchComponent: {
+  //   margin: 10,
+  // },
   switchComponent: {
     margin: 10,
+    height: 30,
+    width: 30,
+    borderRadius: 15,
+    borderWidth: 0.5,
+    borderColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  switchButton: {
+    margin: 10,
+    height: 26,
+    width: 26,
+    borderRadius: 13,
+    borderWidth: 0.5,
+    borderColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   switchComponentText: {
     ...Fonts.style.h5,
@@ -74,7 +94,7 @@ export default StyleSheet.create({
   containerStyle: {
     flex: 1,
     flexDirection: 'row',
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
     paddingVertical: 10,
     alignItems: 'center',
   },
