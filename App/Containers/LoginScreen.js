@@ -188,7 +188,23 @@ class LoginScreen extends React.Component {
     )
   }
 
-  loginSms() {
+  async loginSms() {
+    // 'recaptcha-container' is the ID of an element in the DOM.
+    console.tron.log('before applicationVerifier')
+    var applicationVerifier = new firebase.auth().RecaptchaVerifier('recaptcha-container');
+    console.tron.log('applicationVerifier')
+    console.tron.log(applicationVerifier)
+    firebase.auth().signInWithPhoneNumber('+380930600342', applicationVerifier)
+    .then(function(confirmationResult) {
+      console.tron.log(confirmationResult);
+      var verificationCode = window.prompt('Please enter the verification ' +
+          'code that was sent to your mobile device.');
+      return confirmationResult.confirm(verificationCode);
+    })
+    .catch(function(error) {
+      console.tron.log(error);
+      // Handle Errors here.
+    });
     console.tron.log('Logged in with sms!');
   }
 
