@@ -122,10 +122,12 @@ class LoginScreen extends React.Component {
         </Image>
         <LoadingIndicator
           active={this.state.loading}
-          text={'Входим в систему...'}/>
+          />
       </KeyboardAvoidingView>
     )
   }
+
+  // Входим в систему...
 
   handleActionButton(){
     this.state.form === 'login'
@@ -178,7 +180,7 @@ class LoginScreen extends React.Component {
 
   onLoggedIn(userProfile){
     FirebaseDB.checkForUser(
-      () => {console.tron.log('no user'), this.props.storeUser(null)},
+      () => {console.tron.log('checkForUser - no user'), this.props.storeUser(null)},
       (user) => {
         this.props.storeUser(user.providerData[0])
         NavigationActions.presentationScreen({mode: 'feed'})
@@ -194,7 +196,7 @@ class LoginScreen extends React.Component {
     LoginManager.logInWithReadPermissions(['public_profile', 'email']).then(
       (result) => {
         if (result.isCancelled) {
-          alert('Отмена авторизации');
+          Toast.show('Отмена авторизации', {duration: Toast.durations.LONG})
         } else {
           AccessToken.getCurrentAccessToken().then((accessTokenData) => {
             const credential = firebase.auth.FacebookAuthProvider.credential(accessTokenData.accessToken)
@@ -202,21 +204,24 @@ class LoginScreen extends React.Component {
               let userProfile = loginResult.providerData[0]
               this.onLoggedIn(userProfile)
             }, (error) => {
+              Toast.show(error.message, {duration: Toast.durations.LONG})
               console.tron.log(error)
             })
           }, (error) => {
+            Toast.show(error.message, {duration: Toast.durations.LONG})
             console.tron.log(error)
           })
         }
       },
       function(error) {
-        alert('Login fail with error: ' + error);
+        Toast.show('Login fail with error: ' + error, {duration: Toast.durations.LONG})
         console.tron.log(error)
       }
     );
   }
 
   loginGoogle() {
+    this.setState({loading: true})
     try {
       GoogleSignin.hasPlayServices({ autoResolve: true })
         .then(() => {
@@ -227,18 +232,24 @@ class LoginScreen extends React.Component {
                    const credential = firebase.auth.GoogleAuthProvider.credential(null, user.accessToken)
                    firebase.auth().signInWithCredential(credential).then((loginResult) => {
                      let userProfile = loginResult.providerData[0]
+                     this.setState({loading: false})
                      this.onLoggedIn(userProfile)
                    }, (error) => {
+                     this.setState({loading: false})
                      console.tron.log(error)
+                     Toast.show(error.message, {duration: Toast.durations.LONG})
                    })
                  })
                  .catch(error=>{
+                   this.setState({loading: false})
                    console.tron.log(error);
+                   Toast.show(error.message, {duration: Toast.durations.LONG})
                  })
                  .done();
              });
         })
         .catch((err) => {
+          Toast.show(err.message, {duration: Toast.durations.LONG})
           console.tron.log('Play services error - ');
           console.tron.log(err);
         })
