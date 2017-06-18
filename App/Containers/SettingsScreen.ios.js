@@ -67,8 +67,12 @@ class SettingsScreen extends React.Component {
             <Text style={styles.switchComponentText}>Уведомления</Text>
             <View style={styles.switchComponent}>
               <TouchableOpacity
-                style={[styles.switchButton, {backgroundColor: buttonColor}]}
-                onPress={() => this.handleSwitchToggle()}/>
+                style={styles.switchButton}
+                onPress={() => this.handleSwitchToggle()}>
+              <View
+                style={[styles.switchButtonView, {backgroundColor: buttonColor}]}
+                />
+              </TouchableOpacity>
             </View>
             {/*<Switch
                 onValueChange={(notificationsEnabled) => this.handleSwitchToggle(notificationsEnabled)}

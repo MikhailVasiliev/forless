@@ -68,6 +68,7 @@ export default StyleSheet.create({
   // },
   switchComponent: {
     margin: 10,
+    padding: -10,
     height: 30,
     width: 30,
     borderRadius: 15,
@@ -77,6 +78,12 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   switchButton: {
+    height: 50,
+    width: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  switchButtonView: {
     margin: 10,
     height: 26,
     width: 26,
