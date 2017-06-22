@@ -60,15 +60,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
+              "client_id": "350196186671-ckn9u519anj4pr0f1inb4r45763cb60v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
               "client_id": "350196186671-c7hi3nigtp9101q5b1cb6o2uuqh785lr.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.vasiliev.forexlessons"
               }
-            },
-            {
-              "client_id": "350196186671-ckn9u519anj4pr0f1inb4r45763cb60v.apps.googleusercontent.com",
-              "client_type": 3
             }
           ]
         },

@@ -16,7 +16,7 @@ export default StyleSheet.create({
     right: 0,
   },
   indicatorView: {
-    width: Metrics.screenWidth * 0.6,
+    // width: Metrics.screenWidth * 0.6,
     padding: Metrics.baseMargin,
     backgroundColor: Colors.loadingIndicatorBackground,
     borderRadius: 3,

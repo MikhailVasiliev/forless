@@ -186,7 +186,7 @@ dependencies {
     compile(project(":react-native-google-signin")){
         exclude group: "com.google.android.gms" // very important
     }
-    compile 'com.google.android.gms:play-services-auth:10.2.4' // should be at least 9.0.0
+    compile 'com.google.android.gms:play-services-auth:11.0.0' // should be at least 9.0.0
     compile project(':react-native-fbsdk')
     compile project(':react-native-share')
     compile fileTree(dir: "libs", include: ["*.jar"])
@@ -198,7 +198,7 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.6@aar') {
         transitive = true
     }
-    compile 'com.google.firebase:firebase-core:10.2.4' //this decides your firebase SDK version
+    compile 'com.google.firebase:firebase-core:11.0.0' //this decides your firebase SDK version
     compile project(':react-native-linear-gradient')
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile project(':react-native-android-blurryoverlay')

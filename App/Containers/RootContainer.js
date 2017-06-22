@@ -39,7 +39,9 @@ class RootContainer extends Component {
 
     this.state = {
       isDrawerOpened: false,
-      modalVisible: false
+      modalVisible: false,
+      openedFromTray: false,
+      notif: null
     }
   }
 
@@ -66,6 +68,9 @@ class RootContainer extends Component {
 
   storeUser(user){
     this.user = user
+    if (this.state.notif){
+      this.findArticleAndOpen(this.state.notif.articleTitle, this.props.articles.asMutable())
+    }
   }
 
   componentDidMount () {
@@ -80,26 +85,42 @@ class RootContainer extends Component {
       console.log(token)
     });
 
-    FCM.getInitialNotification().then( notif => {console.tron.log('getInitialNotification'); console.tron.log(notif) } );
+    FCM.getInitialNotification().then( notif => {
+      this.handleNotification(notif)
+    });
 
     this.notificationListener = FCM.on(FCMEvent.Notification,  notif => {
-      if (this.user && !notif.opened_from_tray){
-        //this is a local notification
-        Platform.OS === 'ios'
-            ? this.dropdown.alertWithType('info', notif.notification.title, notif.articleTitle)
-            : this.dropdown.alertWithType('info', notif.fcm.title, notif.articleTitle)
-      }
-      if (this.user && notif.opened_from_tray){
-        //app is open/resumed because user clicked banner
-        let newArticle = this.findArticleInState(notif.articleTitle)
-        NavigationActions.articleScreen({article: newArticle})
-      }
+      this.handleNotification(notif)
     });
 
     this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, (token) => {
       // fcm token may not be available on first load, catch it here
       console.tron.log(token)
     });
+  }
+
+  handleNotification(notif){
+    console.tron.log('handleNotification')
+    console.tron.log(notif)
+    if (this.user && !notif.opened_from_tray){
+      //this is a local notification
+      Platform.OS === 'ios'
+          ? this.dropdown.alertWithType('info', notif.notification.title, notif.articleTitle)
+          : this.dropdown.alertWithType('info', notif.fcm.title, notif.articleTitle)
+    }
+    if (notif.opened_from_tray && notif.articleTitle){
+      this.setState({openedFromTray: true, notif: notif})
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    if (nextState.notif !== this.state.notif){
+      return false
+    }
+    if (nextState.openedFromTray !== this.state.openedFromTray){
+      return false
+    }
+    return true
   }
 
   blockDrawer(isBlocked) {
@@ -152,8 +173,19 @@ class RootContainer extends Component {
 
   onClose(data) {
     if (data.action === 'tap' && this.user) {
-      let newArticle = this.findArticleInState(data.message)
-      NavigationActions.articleScreen({article: newArticle})
+      this.findArticleAndOpen(data.message)
+    }
+  }
+
+  findArticleAndOpen(title, articles){
+    let newArticle = this.findArticleInState(title, articles)
+    if (newArticle){
+      setTimeout(() => {
+        NavigationActions.articleScreen({article: newArticle})
+      }, 600);
+      if (this.state.notif) {
+        this.setState({openedFromTray: false, notif: null})
+      }
     }
   }
 
@@ -161,11 +193,9 @@ class RootContainer extends Component {
     this.setState({modalVisible: isOpen})
   }
 
-  findArticleInState(title) {
-    let articles = this.props.articles.asMutable()
-    return articles.filter((article)=> {
-      return article.title === title
-    })[0]
+  findArticleInState(title, allArticles) {
+    let articles = allArticles ? allArticles : this.props.articles.asMutable()
+    return articles.filter((article) => { return article.title === title })[0]
   }
 
   componentWillUnmount() {
