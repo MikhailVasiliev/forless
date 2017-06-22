@@ -5,7 +5,8 @@ import { adminEmail } from '../Lib/Constants'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAVa9_vTm7U308w4KVwpkwGvXF1xgGIT_o',
-  authDomain: 'numeric-oarlock-144410.firebaseio.com',
+  authDomain: 'numeric-oarlock-144410.firebaseapp.com',
+  // authDomain: 'numeric-oarlock-144410.firebaseio.com',
   databaseURL: 'https://numeric-oarlock-144410.firebaseio.com',
   storageBucket: 'numeric-oarlock-144410.appspot.com'
 };
