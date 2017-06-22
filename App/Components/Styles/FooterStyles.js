@@ -37,5 +37,5 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     margin: 20,
-  },
+  }
 })
