@@ -31,4 +31,11 @@ export default StyleSheet.create({
     color: 'white',
     margin: 20,
   },
+  footerNumberText: {
+    ...Fonts.style.alertMessage,
+    fontSize: 14,
+    textAlign: 'center',
+    color: 'white',
+    margin: 20,
+  }
 })

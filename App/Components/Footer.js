@@ -9,11 +9,11 @@ class Footer extends Component {
   render(){
     return (
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.buttonContainer} onPress={() => this.props.onPressLeftButton()}>
+        <TouchableOpacity onPress={() => this.props.onPressLeftButton()}>
           <Text style={styles.footerButtonText}>{this.props.leftButtonText}</Text>
         </TouchableOpacity>
-        <Text style={styles.footerButtonText}>{`${this.props.currentPage}/${this.props.pagesAmount}`}</Text>
-        <TouchableOpacity style={styles.buttonContainer} onPress={() => this.props.onPressRightButton()}>
+        <Text style={styles.footerNumberText}>{`${this.props.currentPage}/${this.props.pagesAmount}`}</Text>
+        <TouchableOpacity onPress={() => this.props.onPressRightButton()}>
           <Text style={styles.footerButtonText}>{this.props.rightButtonText}</Text>
         </TouchableOpacity>
       </View>

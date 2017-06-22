@@ -23,6 +23,7 @@ const colors = {
   overlay: 'rgba(0, 0, 0, 0.5)',
   google: '#599df0',
   mainGreen: '#9CC358',
+  orange: '#dfaf20',
   mainGreenTransparent: 'rgba(156, 195, 88, 0.3)',
   // mainGreen: 'rgba(89, 201, 24, 1)',
   // skyBlue: '#6bcbda',
