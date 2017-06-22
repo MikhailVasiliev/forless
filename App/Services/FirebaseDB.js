@@ -111,8 +111,6 @@ class Database {
         });
       });
 
-      console.tron.log('articles[0]')
-      console.tron.log(articles[0])
       callback(articles[0]);
     });
     articles = []
