@@ -21,6 +21,7 @@ const { Types, Creators } = createActions({
   publishArticle: ['article', 'telegraphToken'],
   publishArticleSuccess: ['sharedArticle', 'date'],
   publishArticleFailure: ['publishArticleResponse', 'article', 'content'],
+  setInitialLaunch: ['isInitial'],
 })
 
 export const ArticlesTypes = Types
@@ -36,6 +37,7 @@ export const INITIAL_STATE = Immutable({
   filteredArticles: [],
   markedArticles: [],
   sharedArticles: [],
+  isInitialLaunch: true
 })
 
 /* ------------- Reducers ------------- */
@@ -106,6 +108,9 @@ export const removeArticleFromFavorite = (state, { article }) => {
   return state.merge({ markedArticles: Immutable(articles) })
 }
 
+export const setInitialLaunch = (state, { isInitial }) => {
+  return state.merge({ isInitialLaunch: isInitial })
+}
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -123,4 +128,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.REMOVE_ARTICLE_FROM_FAVORITE]: removeArticleFromFavorite,
   [Types.PUBLISH_ARTICLE]: publishArticle,
   [Types.PUBLISH_ARTICLE_SUCCESS]: publishArticleSuccess,
+  [Types.SET_INITIAL_LAUNCH]: setInitialLaunch,
 })

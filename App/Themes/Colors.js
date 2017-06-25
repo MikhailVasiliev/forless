@@ -31,7 +31,8 @@ const colors = {
   textInput: 'rgba(255,255,255, 0.10)',
   drawerLine: 'rgba(255,255,255, 0.20)',
   textInputPlaceholder: 'rgba(255, 255, 255, 0.5)',
-  lightGreen: 'rgba(135, 234, 77, 1)'
+  lightGreen: 'rgba(135, 234, 77, 1)',
+  onboardingBackground: 'rgba(64, 64, 64, 1)',
 }
 
 export default colors

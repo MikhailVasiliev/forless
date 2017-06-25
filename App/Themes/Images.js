@@ -1,5 +1,5 @@
 // @flow
-
+import {Platform} from 'react-native'
 // leave off @2x/@3x
 const images = {
   clearLogo: require('../Images/top_logo.png'),
@@ -19,6 +19,18 @@ const images = {
   letter: require('../Images/letter.png'),
   logout: require('../Images/logout.png'),
   notifIcon: require('../Images/notifIcon.png'),
+  ...Platform.select({
+    ios: {
+      onboarding1: require('../Images/onboarding1android.png'),
+      onboarding2: require('../Images/onboarding2android.png'),
+      onboarding3: require('../Images/onboarding3android.png'),
+    },
+    android: {
+      onboarding1: require('../Images/onboarding1android.png'),
+      onboarding2: require('../Images/onboarding2android.png'),
+      onboarding3: require('../Images/onboarding3android.png'),
+    }
+  })
 }
 
 export default images
