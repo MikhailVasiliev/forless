@@ -11,7 +11,6 @@ export default StyleSheet.create({
   footerButtonText: {
     ...Fonts.style.normal,
     color: 'white',
-    // margin: 20,
   },
   footerButtonContainer: {
     backgroundColor: Colors.mainGreenTransparent,

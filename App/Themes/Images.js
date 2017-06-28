@@ -21,9 +21,9 @@ const images = {
   notifIcon: require('../Images/notifIcon.png'),
   ...Platform.select({
     ios: {
-      onboarding1: require('../Images/onboarding1android.png'),
-      onboarding2: require('../Images/onboarding2android.png'),
-      onboarding3: require('../Images/onboarding3android.png'),
+      onboarding1: require('../Images/onboarding1ios.png'),
+      onboarding2: require('../Images/onboarding2ios.png'),
+      onboarding3: require('../Images/onboarding3ios.png'),
     },
     android: {
       onboarding1: require('../Images/onboarding1android.png'),
