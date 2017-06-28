@@ -7,6 +7,7 @@ import { Images, Colors } from '../Themes'
 
 // screens identified by the router
 import PresentationScreen from '../Containers/PresentationScreen'
+import OnBoardingScreen from '../Containers/OnBoardingScreen'
 import ArticleScreen from '../Containers/ArticleScreen'
 import NewArticleScreen from '../Containers/NewArticleScreen'
 import LoginScreen from '../Containers/LoginScreen'
@@ -47,6 +48,11 @@ class NavigationRouter extends Component {
                    type={ActionConst.REPLACE}
                    component={LoginScreen}
                    title="Login" />
+            <Scene key="onboarding"
+                   hideNavBar
+                   type={ActionConst.REPLACE}
+                   component={OnBoardingScreen}
+                   />
             <Scene initial key="presentationScreen"
                    type={ActionConst.REPLACE}
                    component={PresentationScreen}

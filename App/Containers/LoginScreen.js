@@ -184,7 +184,12 @@ class LoginScreen extends React.Component {
       () => {console.tron.log('checkForUser - no user'), this.props.storeUser(null)},
       (user) => {
         this.props.storeUser(user.providerData[0])
-        NavigationActions.presentationScreen({mode: 'feed'})
+        console.tron.log('isInitialLaunch - ' + this.props.isInitialLaunch)
+        if (this.props.isInitialLaunch){
+          NavigationActions.onboarding()
+        } else {
+          NavigationActions.presentationScreen({mode: 'feed'})
+        }
       }
     )
   }
@@ -279,6 +284,7 @@ class LoginScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    isInitialLaunch: state.articles.isInitialLaunch,
     allThemes: state.notification.allThemes,
     notificationsEnabled: state.notification.notificationsEnabled
   }
