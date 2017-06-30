@@ -52,7 +52,7 @@ export default StyleSheet.create({
     marginTop: 15,
     marginBottom: 0,
     lineHeight: Metrics.lineHeight,
-    textAlign: 'justify',
+    // textAlign: 'justify',
   },
   lastTextElement: {
     ...Fonts.style.normal,
