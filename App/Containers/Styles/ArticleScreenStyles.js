@@ -16,11 +16,11 @@ export default StyleSheet.create({
     flex: 1
   },
   cover:{
-    height: Metrics.screenHeight / 3,
+    height: Metrics.screenWidth / 1.67,
     resizeMode: 'cover'
   },
   image:{
-    height: Metrics.screenHeight / 3,
+    height: Metrics.screenWidth / 1.67,
     resizeMode: 'cover',
     marginTop: 15,
   },
