@@ -61,7 +61,7 @@ export default StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
     lineHeight: Metrics.lineHeight,
-    textAlign: 'justify',
+    // textAlign: 'justify',
   },
   btnText: {
     ...Fonts.style.description,
