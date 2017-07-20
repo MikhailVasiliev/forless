@@ -105,7 +105,7 @@ class RootContainer extends Component {
     if (this.user && !notif.opened_from_tray){
       //this is a local notification
       Platform.OS === 'ios'
-          ? this.dropdown.alertWithType('info', notif.notification.title, notif.articleTitle)
+          ? this.dropdown.alertWithType('info', notif.notification ? notif.notification.title : notif.aps.alert.title, notif.articleTitle)
           : this.dropdown.alertWithType('info', notif.fcm.title, notif.articleTitle)
     }
     if (notif.opened_from_tray && notif.articleTitle){

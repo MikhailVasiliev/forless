@@ -1,12 +1,16 @@
+import {NativeModules} from 'react-native';
 const Reactotron = require('reactotron-react-native').default
 const errorPlugin = require('reactotron-react-native').trackGlobalErrors
 const apisaucePlugin = require('reactotron-apisauce')
 import sagaPlugin from 'reactotron-redux-saga'
 
 if (__DEV__) {
+  const scriptURL = NativeModules.SourceCode.scriptURL;
+  let scriptHostname = scriptURL.split('://')[1].split(':')[0];
+
   Reactotron
     .configure({
-      // host: '10.0.3.2', // default is localhost (on android don't forget to `adb reverse tcp:9090 tcp:9090`),
+      host: scriptHostname,//'10.0.3.2', // default is localhost (on android don't forget to `adb reverse tcp:9090 tcp:9090`),
       name: 'ForexLessons' // would you like to see your app's name?
     })
 

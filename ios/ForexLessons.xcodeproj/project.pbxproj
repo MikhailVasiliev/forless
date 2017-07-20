@@ -339,6 +339,7 @@
 		041B571F35E1473F9AB416E2 /* libRNShare.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShare.a; sourceTree = "<group>"; };
 		09FACB99351B418BA4B9CB3A /* SafariServices.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		0C5D747B1EE2E26C006330AF /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		0C9C7B021F212EBC00683EB4 /* ForexLessons.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ForexLessons.entitlements; path = ForexLessons/ForexLessons.entitlements; sourceTree = "<group>"; };
 		0CAFD2011EBF784900C3E622 /* Lock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lock.framework; path = "Pods/../build/Release-iphoneos/Lock/Lock.framework"; sourceTree = "<group>"; };
 		0CB9BBBE1EBF275F0030DEB9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0CB9BBF01EBF36870030DEB9 /* AccountKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AccountKit.framework; path = ../../Documents/FacebookSDK/AccountKit.framework; sourceTree = "<group>"; };
@@ -644,6 +645,7 @@
 		13B07FAE1A68108700A75B9A /* ForexLessons */ = {
 			isa = PBXGroup;
 			children = (
+				0C9C7B021F212EBC00683EB4 /* ForexLessons.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				0CB9BBBE1EBF275F0030DEB9 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -877,8 +879,15 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 93HE3597FG;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -1525,7 +1534,9 @@
 			baseConfigurationReference = 885DE488A96116976068D1D9 /* Pods-ForexLessons.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ForexLessons/ForexLessons.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 93HE3597FG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
@@ -1677,8 +1688,10 @@
 			baseConfigurationReference = D70FA74CECA03803CF30301A /* Pods-ForexLessons.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ForexLessons/ForexLessons.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 93HE3597FG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
@@ -1729,7 +1742,9 @@
 			baseConfigurationReference = 885DE488A96116976068D1D9 /* Pods-ForexLessons.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ForexLessons/ForexLessons.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 93HE3597FG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
