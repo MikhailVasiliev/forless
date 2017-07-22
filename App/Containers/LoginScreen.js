@@ -41,6 +41,7 @@ class LoginScreen extends React.Component {
     }
 
     this.KEYS = {
+      scopes: ['https://www.googleapis.com/auth/plus.login'],
       iosClientId: '350196186671-c7hi3nigtp9101q5b1cb6o2uuqh785lr.apps.googleusercontent.com', // only for iOS
       webClientId: '350196186671-ckn9u519anj4pr0f1inb4r45763cb60v.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
       // clientId: '103291085862809761902',
@@ -217,6 +218,8 @@ class LoginScreen extends React.Component {
   loginFacebook() {
     LoginManager.logInWithReadPermissions(['public_profile', 'email']).then(
       (result) => {
+        console.tron.log('result - ')
+        console.tron.log(result)
         if (result.isCancelled) {
           Toast.show('Отмена авторизации', {duration: Toast.durations.LONG})
         } else {
@@ -249,8 +252,11 @@ class LoginScreen extends React.Component {
         .then(() => {
           GoogleSignin.configure(this.KEYS)
              .then(() => {
+               console.tron.log('configure')
                GoogleSignin.signIn()
                  .then((user) => {
+                   console.tron.log('user - ')
+                   console.tron.log(user)
                    const credential = firebase.auth.GoogleAuthProvider.credential(null, user.accessToken)
                    firebase.auth().signInWithCredential(credential).then((loginResult) => {
                      let userProfile = loginResult.providerData[0]

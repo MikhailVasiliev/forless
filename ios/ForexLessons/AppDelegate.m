@@ -50,26 +50,42 @@
   [FIRApp configure];
   [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
 
-  [[FBSDKApplicationDelegate sharedInstance] application:application
-                           didFinishLaunchingWithOptions:launchOptions];
+//  [[FBSDKApplicationDelegate sharedInstance] application:application
+//                           didFinishLaunchingWithOptions:launchOptions];
   [Fabric with:@[[Crashlytics class]]];
   [SplashScreen show];
-  return YES;
+//  return YES;
+  return   [[FBSDKApplicationDelegate sharedInstance] application:application
+                                    didFinishLaunchingWithOptions:launchOptions];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+  [FBSDKAppEvents activateApp];
 }
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
-            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+//            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation{
 
-   return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                         openURL:url
-                                               sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-                                                      annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
-                  ] || [RNGoogleSignin application:application
-                                           openURL:url
-                                 sourceApplication:sourceApplication
-                                        annotation:annotation];
+//   return [[FBSDKApplicationDelegate sharedInstance] application:application
+//                                                         openURL:url
+//                                               sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+//                                                      annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
+//                  ] || [RNGoogleSignin application:application
+//                                           openURL:url
+//                                 sourceApplication:sourceApplication
+//                                        annotation:annotation];
 
+  BOOL shouldOpen = [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                                   openURL:url
+                                                         sourceApplication:sourceApplication
+                                                                annotation:annotation];
+  
+  
+  return shouldOpen = shouldOpen ? shouldOpen : [RNGoogleSignin application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+  
 }
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
