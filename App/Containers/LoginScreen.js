@@ -278,6 +278,7 @@ class LoginScreen extends React.Component {
         })
         .catch((err) => {
           Toast.show(err.message, {duration: Toast.durations.LONG})
+
           console.tron.log('Play services error - ');
           console.tron.log(err);
         })
