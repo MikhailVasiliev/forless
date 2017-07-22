@@ -1,0 +1,127 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.26.1"
+
+platform :ios do
+  # before_all do
+  #   ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+  # end
+
+  desc "Runs all the tests"
+  lane :test do
+    scan
+  end
+
+  lane :dev do |options|
+    # slack(
+    #   channel: "alacrity",
+    #   message: "Branch #{options[:branch]} can be merged into #{options[:dest_branch]}",
+    #   payload: {
+    #     "Title" => "Build Succeeded",
+    #     "Platform" => "IOS",
+    #     "View Build" => options[:build_url]
+    #   },
+    #   default_payloads: [:git_author]
+    # )
+  end
+
+  lane :master do
+    # slack(channel: "alacrity", message: "Build succeeded - Ios.")
+  end
+
+
+  lane :pre_release do |options|
+  	increment_build_number(
+      build_number: latest_testflight_build_number + 1,
+      xcodeproj: "./ios/ForexLessons.xcodeproj"
+    )
+    gym(scheme: "ForexLessons", workspace: './ios/ForexLessons.xcworkspace') # Build your app - more options available
+    pilot(skip_submission: true, skip_waiting_for_build_processing: true)
+    # slack(
+    #   channel: "alacrity",
+    #   message: "Branch #{options[:branch]} can be merged into #{options[:dest_branch]}",
+    #   payload: {
+    #     "Title" => "Successfully upload to TestFlight new version",
+    #     "Platform" => "IOS",
+    #     "View Build" => options[:build_url]
+    #   },
+    #   default_payloads: [:git_author]
+    # )
+    # sh "your_script.sh"
+    # You can also use other beta testing services here (run `fastlane actions`)
+  end
+
+
+  # You can define as many lanes as you want
+
+  error do |lane, exception|
+    # slack(channel: "alacrity", message: "Ios error - #{exception.to_s}. Lane - #{lane}", success: false)
+  end
+end
+
+
+platform :android do
+  # before_all do
+  #   ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+  # end
+
+  lane :dev do |options|
+    # slack(
+    #   channel: "alacrity",
+    #   message: "Branch #{options[:branch]} can be merged into #{options[:dest_branch]}",
+    #   payload: {
+    #     "Title" => "Build Succeeded",
+    #     "Platform" => "Android",
+    #     "View Build" => options[:build_url]
+    #   },
+    #   default_payloads: [:git_author]
+    # )
+  end
+
+  lane :master do
+    # slack(channel: "alacrity", message: "Build succeeded - Ios.")
+  end
+
+  lane :pre_release do |options|
+    gradle(task: 'clean', project_dir: "android/") # Clean the Gradle project
+    gradle(task: 'assembleRelease', project_dir: "android/")
+    supply(
+      track: "alpha",
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+    )
+    # slack(
+    #   channel: "alacrity",
+    #   message: "Branch #{options[:branch]} can be merged into #{options[:dest_branch]}",
+    #   payload: {
+    #     "Title" => "Successfully upload to Google Play new version",
+    #     "Platform" => "Android",
+    #     "View Build" => options[:build_url]
+    #   },
+    #   default_payloads: [:git_author]
+    # )
+  end
+
+  error do |lane, exception|
+    # slack(channel: "alacrity", message: "Android error - #{exception.to_s}. Lane - #{lane}", success: false)
+  end
+end
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used
+# No personal data is recorded. Learn more at https://github.com/fastlane/enhancer
