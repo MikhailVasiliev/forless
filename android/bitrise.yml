@@ -18,7 +18,7 @@ workflows:
             # write your script here
             npm install
             # npm run test
-    - install-missing-android-tools@1.0.1: {}
+    - install-missing-android-tools@1.0.3: {}
     - gradle-runner@1.7.3:
         inputs:
         - gradle_task: "$GRADLE_TASK"
@@ -43,7 +43,7 @@ workflows:
             # write your script here
             npm install
             npm run test
-    - install-missing-android-tools@1.0.2: {}
+    - install-missing-android-tools@1.0.3: {}
     - gradle-runner@1.7.3:
         inputs:
         - gradle_task: "$GRADLE_TASK"
