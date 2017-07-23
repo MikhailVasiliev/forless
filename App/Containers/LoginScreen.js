@@ -218,8 +218,6 @@ class LoginScreen extends React.Component {
   loginFacebook() {
     LoginManager.logInWithReadPermissions(['public_profile', 'email']).then(
       (result) => {
-        console.tron.log('result - ')
-        console.tron.log(result)
         if (result.isCancelled) {
           Toast.show('Отмена авторизации', {duration: Toast.durations.LONG})
         } else {
@@ -230,17 +228,14 @@ class LoginScreen extends React.Component {
               this.onLoggedIn(userProfile)
             }, (error) => {
               Toast.show(error.message, {duration: Toast.durations.LONG})
-              console.tron.log(error)
             })
           }, (error) => {
             Toast.show(error.message, {duration: Toast.durations.LONG})
-            console.tron.log(error)
           })
         }
       },
       function(error) {
         Toast.show('Login fail with error: ' + error, {duration: Toast.durations.LONG})
-        console.tron.log(error)
       }
     );
   }
@@ -252,11 +247,8 @@ class LoginScreen extends React.Component {
         .then(() => {
           GoogleSignin.configure(this.KEYS)
              .then(() => {
-               console.tron.log('configure')
                GoogleSignin.signIn()
                  .then((user) => {
-                   console.tron.log('user - ')
-                   console.tron.log(user)
                    const credential = firebase.auth.GoogleAuthProvider.credential(null, user.accessToken)
                    firebase.auth().signInWithCredential(credential).then((loginResult) => {
                      let userProfile = loginResult.providerData[0]
@@ -264,13 +256,11 @@ class LoginScreen extends React.Component {
                      this.onLoggedIn(userProfile)
                    }, (error) => {
                      this.setState({loading: false})
-                     console.tron.log(error)
                      Toast.show(error.message, {duration: Toast.durations.LONG})
                    })
                  })
                  .catch(error=>{
                    this.setState({loading: false})
-                   console.tron.log(error);
                    Toast.show(error.message, {duration: Toast.durations.LONG})
                  })
                  .done();
@@ -278,8 +268,6 @@ class LoginScreen extends React.Component {
         })
         .catch((err) => {
           Toast.show(err.message, {duration: Toast.durations.LONG})
-          console.tron.log('Play services error - ');
-          console.tron.log(err);
         })
 
     } catch (error) {

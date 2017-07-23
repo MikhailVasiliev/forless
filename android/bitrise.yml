@@ -19,7 +19,7 @@ workflows:
             npm install
             # npm run test
     - install-missing-android-tools@1.0.1: {}
-    - gradle-runner@1.5.4:
+    - gradle-runner@1.7.3:
         inputs:
         - gradle_task: "$GRADLE_TASK"
     - deploy-to-bitrise-io@1.2.9: {}
@@ -44,7 +44,7 @@ workflows:
             npm install
             npm run test
     - install-missing-android-tools@1.0.2: {}
-    - gradle-runner@1.5.4:
+    - gradle-runner@1.7.3:
         inputs:
         - gradle_task: "$GRADLE_TASK"
     - deploy-to-bitrise-io@1.2.9: {}
