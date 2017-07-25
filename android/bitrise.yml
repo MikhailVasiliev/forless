@@ -44,7 +44,7 @@ workflows:
             # write your script here
             yarn
             # npm install
-            npm run test
+            # npm run test
     - install-missing-android-tools@1.0.3: {}
     - gradle-runner@1.7.3:
         inputs:
