@@ -25,6 +25,7 @@ import { BlurView, VibrancyView } from 'react-native-blur';
 
 // Styles
 import styles from './Styles/SettingsScreenStyles'
+import {Colors} from '../Themes'
 
 class SettingsScreen extends React.Component {
 
@@ -40,6 +41,7 @@ class SettingsScreen extends React.Component {
   }
 
   render () {
+    let buttonColor = this.state.notificationsEnabled ? Colors.mainGreen : 'grey'
     let allThemes = this.props.allThemes
     let isAdmin = this.props.user().email && (this.props.user().email === adminEmail)
     return (
@@ -63,11 +65,21 @@ class SettingsScreen extends React.Component {
           </LinearGradient>
           <View style={styles.switchContainer} >
             <Text style={styles.switchComponentText}>Уведомления</Text>
-            <Switch
+            <View style={styles.switchComponent}>
+              <TouchableOpacity
+                style={styles.switchButton}
+                onPress={() => this.handleSwitchToggle()}>
+              <View
+                style={[styles.switchButtonView, {backgroundColor: buttonColor}]}
+                />
+              </TouchableOpacity>
+            </View>
+            {/*<Switch
                 onValueChange={(notificationsEnabled) => this.handleSwitchToggle(notificationsEnabled)}
                 style={styles.switchComponent}
                 value={this.state.notificationsEnabled}
-                />
+                onTintColor={Colors.mainGreen}
+                />*/}
           </View>
           <LinearGradient
             colors={[
@@ -91,7 +103,7 @@ class SettingsScreen extends React.Component {
                   disabledColor="grey"
                   selected={theme.enabled}
                   defaultColor={'white'}
-                  selectedColor="green"
+                  selectedColor={Colors.mainGreen}
                   containerStyle={styles.containerStyle}
                   labelStyle={styles.labelStyle}
                   checkboxStyle={styles.checkboxStyle}
@@ -115,7 +127,8 @@ class SettingsScreen extends React.Component {
     // FirebaseDB.getNewArticle(callback)
   }
 
-  handleSwitchToggle(enabled){
+  handleSwitchToggle(){
+    let enabled = !this.state.notificationsEnabled
     this.setState({notificationsEnabled: enabled})
     this.props.toggleNotifications(enabled)
     this.props.allThemes.map((theme)=> {

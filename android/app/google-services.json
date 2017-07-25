@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "350196186671-9pto10m76sqt0vfpo26bub059h107cb1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vasiliev.forexlessons",
+            "certificate_hash": "768a79b84e5ebf11b2b89348d4de956c5744c4a5"
+          }
+        },
+        {
           "client_id": "350196186671-nmd2vtijo3jpfsnt595aitqs539e2mpm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

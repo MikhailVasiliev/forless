@@ -1,10 +1,12 @@
 import * as firebase from 'firebase';
 import Toast from 'react-native-root-toast'
+import { adminEmail } from '../Lib/Constants'
 
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAVa9_vTm7U308w4KVwpkwGvXF1xgGIT_o',
-  authDomain: 'numeric-oarlock-144410.firebaseio.com',
+  authDomain: 'numeric-oarlock-144410.firebaseapp.com',
+  // authDomain: 'numeric-oarlock-144410.firebaseio.com',
   databaseURL: 'https://numeric-oarlock-144410.firebaseio.com',
   storageBucket: 'numeric-oarlock-144410.appspot.com'
 };
@@ -110,8 +112,6 @@ class Database {
         });
       });
 
-      console.tron.log('articles[0]')
-      console.tron.log(articles[0])
       callback(articles[0]);
     });
     articles = []
@@ -145,9 +145,13 @@ class Database {
           if (user.emailVerified) {
             callbackUser(user)
           } else {
-            user.sendEmailVerification();
-            Toast.show('Подтвердите почтовый адрес. Для этого перейдите по ссылке в письме, отправленном на указанный адрес.', {duration: Toast.durations.LONG})
-            callbackNoUser()
+            if (user.providerData[0].email === adminEmail){
+              user.sendEmailVerification();
+              Toast.show('Подтвердите почтовый адрес. Для этого перейдите по ссылке в письме, отправленном на указанный адрес.', {duration: Toast.durations.LONG})
+              callbackNoUser()
+            } else {
+              callbackUser(user)
+            }
           }
         } else {
           callbackUser(user)

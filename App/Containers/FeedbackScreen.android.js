@@ -36,7 +36,7 @@ class FeedbackScreen extends React.Component {
 
   componentDidMount(){
     setTimeout(() => {
-      this.setState({ renderBlurry: true })
+      // this.setState({ renderBlurry: true })
     }, 380);
   }
 
@@ -50,7 +50,7 @@ class FeedbackScreen extends React.Component {
       {overlay}
         <View
           style={styles.bluredOverlay}/>
-        <ScrollView style={styles.scrollview}>
+        <ScrollView style={styles.scrollview} keyboardShouldPersistTaps={'handled'}>
             <TextInput style={styles.topicInput}
                 onChangeText={(topic) => this.setState({topic})}
                 value={this.state.topic}
@@ -75,7 +75,6 @@ class FeedbackScreen extends React.Component {
             </TouchableOpacity>
         </ScrollView>
       </View>
-
     );
   }
 
@@ -87,7 +86,7 @@ class FeedbackScreen extends React.Component {
         sender: this.props.user().email
       }
       FirebaseDB.sendFeedback(feedback)
-      NavigationActions.presentationScreen({mode: 'feed'})
+      NavigationActions.pop()
       Toast.show('Отзыв отправлен')
     } else {
       Toast.show('Заполните оба поля')

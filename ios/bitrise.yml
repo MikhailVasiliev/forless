@@ -1,0 +1,121 @@
+---
+format_version: 1.3.1
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+
+workflows:
+  dev:
+    steps:
+    - script@1.1.3:
+        title: Do anything with Script step
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            # write your script here
+            npm install
+            # npm run test
+    - certificate-and-profile-installer@1.8.5: {}
+    - deploy-to-bitrise-io@1.2.9: {}
+    - fastlane@2.3.9:
+        inputs:
+        - lane: ios dev dest_branch:$BITRISEIO_GIT_BRANCH_DEST branch:$BITRISE_GIT_BRANCH build_url:$BITRISE_BUILD_URL
+    before_run:
+    after_run:
+  pre_release:
+    steps:
+    - script@1.1.3:
+        title: Do anything with Script step
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            # write your script here
+            npm install
+            # npm run test
+    - certificate-and-profile-installer@1.8.5: {}
+    - deploy-to-bitrise-io@1.2.9: {}
+    - script@1.1.3:
+        title: Check for binary/non-binary update
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            CHANGED_FILES=$(git diff HEAD^ HEAD)
+            if [ -n "$CHANGED_FILES" -a -n $(git diff HEAD^ HEAD -- | grep .*js) ]
+            then
+              CHANGED_JS_FILES=$(git diff HEAD^ HEAD -- | grep .*js)
+              if [ "$CHANGED_FILES" == "$CHANGED_JS_FILES" ]
+              then
+                envman add --key BINARY_UPDATE --value false
+              else
+                envman add --key BINARY_UPDATE --value true
+              fi
+            fi
+    - script@1.1.3:
+        title: CodePush
+        run_if: '{{getenv "BINARY_UPDATE" | eq "false" }}'
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            # install cli, login and push
+
+            npm install -g code-push-cli
+            code-push login --accessKey 2611577ef6c3fdb2729642098f3bc4084f816988
+            code-push release-react ForexLessons ios
+            code-push promote ForexLessons Staging Production
+    - fastlane@2.3.9:
+        run_if: '{{getenv "BINARY_UPDATE" | eq "true"}}'
+        inputs:
+        - lane: ios pre_release dest_branch:$BITRISEIO_GIT_BRANCH_DEST branch:$BITRISE_GIT_BRANCH build_url:$BITRISE_BUILD_URL
+    before_run:
+    after_run:
+  master:
+    steps:
+    - script@1.1.3:
+        title: Do anything with Script step
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            # write your script here
+            npm install
+            # npm run test
+    - certificate-and-profile-installer@1.8.5: {}
+    - deploy-to-bitrise-io@1.2.9: {}
+    - fastlane@2.3.9:
+        inputs:
+        - lane: ios dev dest_branch:$BITRISEIO_GIT_BRANCH_DEST branch:$BITRISE_GIT_BRANCH build_url:$BITRISE_BUILD_URL
+    before_run:
+    after_run:
+app:
+  envs:
+  - opts:
+      is_expand: false
+    BITRISE_PROJECT_PATH: ios/ForexLessons.xcodeproj
+  - opts:
+      is_expand: false
+    BINARY_UPDATE: true
+  - opts:
+      is_expand: false
+    BITRISE_SCHEME: ForexLessons

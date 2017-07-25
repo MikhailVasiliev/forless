@@ -7,6 +7,7 @@ import { Images, Colors } from '../Themes'
 
 // screens identified by the router
 import PresentationScreen from '../Containers/PresentationScreen'
+import OnBoardingScreen from '../Containers/OnBoardingScreen'
 import ArticleScreen from '../Containers/ArticleScreen'
 import NewArticleScreen from '../Containers/NewArticleScreen'
 import LoginScreen from '../Containers/LoginScreen'
@@ -30,9 +31,11 @@ class NavigationRouter extends Component {
     return (
       <Router
             toggleDrawer={() => this.props.toggleDrawer()}
+            isDrawerOpened={() => this.props.isDrawerOpened()}
             blockDrawer={(isBlocked) => this.props.blockDrawer(isBlocked)}
             storeUser={(user) => this.props.storeUser(user)}
-            user={()=>this.props.user()}>
+            user={()=>this.props.user()}
+            onExitApp={() => {}}>
           <Scene key="drawerChildrenWrapper"
                  navigationBarStyle={Styles.navBar}
                  backButtonImage={Images.back}
@@ -45,6 +48,11 @@ class NavigationRouter extends Component {
                    type={ActionConst.REPLACE}
                    component={LoginScreen}
                    title="Login" />
+            <Scene key="onboarding"
+                   hideNavBar
+                   type={ActionConst.REPLACE}
+                   component={OnBoardingScreen}
+                   />
             <Scene initial key="presentationScreen"
                    type={ActionConst.REPLACE}
                    component={PresentationScreen}
@@ -53,10 +61,8 @@ class NavigationRouter extends Component {
                    mode="feed"
                    leftButtonImage={Images.menu}
                    leftButtonIconStyle={Styles.leftButton}
-                   rightButtonImage={Images.settings}
-                   rightButtonIconStyle={Styles.rightButton}
-                   onLeft={() => {Actions.feedback()}}
-                   onRight={() => {Actions.settings()}} />
+                   onLeft={() => {}}
+                   /*onRight={() => {Actions.settings()}}*/ />
             <Scene key="articleScreen"
                    hideNavBar
                    component={ArticleScreen}
@@ -84,6 +90,13 @@ class NavigationRouter extends Component {
             <Scene key="filteredArticles"
                    component={PresentationScreen}
                    title="Избранные"
+                   titleStyle={Styles.titleFavorites}
+                   onBack={() => {Actions.pop()}} />
+            <Scene key="themeArticles"
+                   type={ActionConst.REPLACE}
+                   component={PresentationScreen}
+                   title="Статьи по теме:"
+                   titleStyle={Styles.titleThemes}
                    onBack={() => {Actions.pop()}} />
             <Scene key="feedback"
                    animationStyle={animationStyle}

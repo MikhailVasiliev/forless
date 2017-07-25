@@ -5,7 +5,8 @@ import { Metrics, Colors } from '../../Themes/'
 
 export default StyleSheet.create({
   main: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'black'
   },
   noArticlesContainer: {
     flex: 1,
@@ -53,5 +54,15 @@ export default StyleSheet.create({
     height: 6,
     // borderRadius: 2,
     // margin: 2,
+  },
+  separate: {
+    backgroundColor: 'black',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    width: 5
+  },
+  scrollview: {
+    backgroundColor: 'black'
   }
 })

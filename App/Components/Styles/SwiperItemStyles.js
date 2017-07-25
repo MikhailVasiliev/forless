@@ -35,6 +35,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 10,
     paddingRight: 10,
+    elevation: 15
   },
   articleTheme: {
     ...Fonts.style.normal,
@@ -42,4 +43,15 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: 14
   },
+
+  container: {
+    width: Metrics.screenWidth,
+    height: Metrics.screenHeight,
+    overflow: 'hidden'
+  },
+  image2: {
+    flex: 1,
+    width: null,
+    height: null
+  }
 })

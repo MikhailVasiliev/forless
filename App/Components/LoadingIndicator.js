@@ -20,7 +20,7 @@ class LoadingIndicator extends Component {
         <View style={styles.container} visible={this.props.active}>
           <View style={styles.indicatorView} >
             <ActivityIndicator color="white" />
-            <Text style={styles.loadingAlertText}>{this.props.text}</Text>
+            {this.props.text && <Text style={styles.loadingAlertText}>{this.props.text}</Text>}
           </View>
         </View>
       );
