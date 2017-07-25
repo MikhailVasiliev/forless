@@ -16,7 +16,8 @@ workflows:
             set -x
 
             # write your script here
-            npm install
+            yarn
+            # npm install
             # npm run test
     - install-missing-android-tools@1.0.3: {}
     - gradle-runner@1.7.3:
@@ -41,7 +42,8 @@ workflows:
             set -x
 
             # write your script here
-            npm install
+            yarn
+            # npm install
             npm run test
     - install-missing-android-tools@1.0.3: {}
     - gradle-runner@1.7.3:
@@ -105,7 +107,8 @@ workflows:
             set -x
 
             # write your script here
-            npm install
+            yarn
+            # npm install
             # npm run test
     - deploy-to-bitrise-io@1.2.9: {}
     - fastlane@2.3.9:
