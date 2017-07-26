@@ -45,14 +45,14 @@ const create = (baseURL = 'https://api.telegra.ph/') => {
   const createAccount = () => api.get('createAccount', {
     short_name: 'ForexLessons',
     author_name: 'Forex Lessons',
-    author_url: 'https://www.facebook.com/profile.php?id=100004244741608',
+    author_url: 'https://www.facebook.com/groups/320071831739196/',
   })
 
   const createPage = (title, content, token) => api.post('createPage', {
     access_token: token,
     title: title,
     author_name: 'Forex Lessons',
-    author_url: 'https://www.facebook.com/profile.php?id=100004244741608',
+    author_url: 'https://www.facebook.com/groups/320071831739196/',
     content: content,
     return_content: true
   })
