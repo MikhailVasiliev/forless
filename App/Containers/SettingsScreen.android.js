@@ -23,7 +23,6 @@ import { adminEmail } from '../Lib/Constants'
 import { CheckboxField, Checkbox } from 'react-native-checkbox-field';
 import FCM from 'react-native-fcm'
 import LinearGradient from 'react-native-linear-gradient';
-import BlurryOverlay from 'react-native-android-blurryoverlay';
 // Styles
 import styles from './Styles/SettingsScreenStyles'
 import {Colors} from '../Themes'
@@ -37,30 +36,17 @@ class SettingsScreen extends React.Component {
       notificationsEnabled: true,
       selectedOverall: false,
       selectedIntro: false,
-      selectedTech: false,
-      renderBlurry: false
+      selectedTech: false
     }
-  }
-
-  componentDidMount(){
-    setTimeout(() => {
-      // this.setState({ renderBlurry: true })
-    }, 380);
   }
 
   render () {
     let buttonColor = this.state.notificationsEnabled ? Colors.mainGreen : 'grey'
     let allThemes = this.props.allThemes
     let isAdmin = this.props.user() && (this.props.user().email === adminEmail)
-    var overlay = (this.state.renderBlurry)
-                  ? <BlurryOverlay
-                      radius={7} sampling={6} color="#00FFFF00"
-                      style={styles.blur}  />
-                  : <View />;
 
     return (
       <View style={styles.main}>
-      {overlay}
         <View
           style={styles.bluredOverlay}/>
         <ScrollView style={styles.main}  >

@@ -19,7 +19,6 @@ import com.facebook.soloader.SoLoader;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.kwaak.react.BlurryOverlayPackage;
 import com.microsoft.codepush.react.CodePush;
 
 import io.fabric.sdk.android.Fabric;
@@ -60,7 +59,6 @@ public class MainApplication extends Application implements ReactApplication {
           new FBSDKPackage(mCallbackManager),
           new RNSharePackage(),
           new LinearGradientPackage(),
-          new BlurryOverlayPackage(),
           new FabricPackage()
       );
     }

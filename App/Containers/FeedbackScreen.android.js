@@ -19,7 +19,6 @@ import { Colors } from '../Themes'
 import Toast from 'react-native-root-toast';
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import { BlurView, VibrancyView } from 'react-native-blur';
-import BlurryOverlay from 'react-native-android-blurryoverlay';
 
 //Services
 import FirebaseDB from '../Services/FirebaseDB'
@@ -29,25 +28,13 @@ class FeedbackScreen extends React.Component {
     super(props)
     this.state = {
       topic: '',
-      message: '',
-      renderBlurry: false
+      message: ''
     }
   }
 
-  componentDidMount(){
-    setTimeout(() => {
-      // this.setState({ renderBlurry: true })
-    }, 380);
-  }
-
   render() {
-    var overlay = (this.state.renderBlurry) ? <BlurryOverlay
-    radius={7} sampling={6} color="#00FFFF00"
-    style={styles.blur}  /> : <View />;
-
     return (
       <View style={styles.main}>
-      {overlay}
         <View
           style={styles.bluredOverlay}/>
         <ScrollView style={styles.scrollview} keyboardShouldPersistTaps={'handled'}>
