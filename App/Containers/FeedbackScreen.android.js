@@ -19,7 +19,6 @@ import { Colors } from '../Themes'
 import Toast from 'react-native-root-toast';
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import { BlurView, VibrancyView } from 'react-native-blur';
-import BlurryOverlay from 'react-native-android-blurryoverlay';
 
 //Services
 import FirebaseDB from '../Services/FirebaseDB'
