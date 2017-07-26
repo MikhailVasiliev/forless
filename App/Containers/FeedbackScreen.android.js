@@ -29,25 +29,13 @@ class FeedbackScreen extends React.Component {
     super(props)
     this.state = {
       topic: '',
-      message: '',
-      renderBlurry: false
+      message: ''
     }
   }
 
-  componentDidMount(){
-    setTimeout(() => {
-      // this.setState({ renderBlurry: true })
-    }, 380);
-  }
-
   render() {
-    var overlay = (this.state.renderBlurry) ? <BlurryOverlay
-    radius={7} sampling={6} color="#00FFFF00"
-    style={styles.blur}  /> : <View />;
-
     return (
       <View style={styles.main}>
-      {overlay}
         <View
           style={styles.bluredOverlay}/>
         <ScrollView style={styles.scrollview} keyboardShouldPersistTaps={'handled'}>
