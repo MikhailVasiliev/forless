@@ -113,6 +113,13 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = ForexLessons;
 		};
+		0C013C5E1F2BC73100051303 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 622927BAED6843BBAFE8C506 /* RNBlur.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 64D1BD361EEFE88700F3F219;
+			remoteInfo = "RNBlur-tvOS";
+		};
 		0C4EE36B1ED0E0FA00F659BC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FE2E24925CC4470D8A90C019 /* CodePush.xcodeproj */;
@@ -558,6 +565,7 @@
 			isa = PBXGroup;
 			children = (
 				0C73F4E41ED0485B009281EA /* libRNBlur.a */,
+				0C013C5F1F2BC73100051303 /* libRNBlur.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1040,6 +1048,13 @@
 			fileType = archive.ar;
 			path = libRCTVibration.a;
 			remoteRef = 00C302E31ABCB9EE00DB3ED1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0C013C5F1F2BC73100051303 /* libRNBlur.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNBlur.a;
+			remoteRef = 0C013C5E1F2BC73100051303 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		0C4EE36C1ED0E0FA00F659BC /* libCodePush.a */ = {
