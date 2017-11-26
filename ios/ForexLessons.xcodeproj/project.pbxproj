@@ -13,17 +13,13 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* ForexLessonsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ForexLessonsTests.m */; };
+		0C40166D1FCB7C6D005D0997 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C4016691FCB7C6C005D0997 /* FBSDKCoreKit.framework */; };
+		0C40166E1FCB7C6D005D0997 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C40166A1FCB7C6C005D0997 /* FBSDKShareKit.framework */; };
+		0C40166F1FCB7C6D005D0997 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C40166B1FCB7C6C005D0997 /* Bolts.framework */; };
+		0C4016701FCB7C6D005D0997 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C40166C1FCB7C6D005D0997 /* FBSDKLoginKit.framework */; };
 		0C5D747C1EE2E26C006330AF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5D747B1EE2E26C006330AF /* Launch Screen.storyboard */; };
 		0CB9BBBF1EBF275F0030DEB9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CB9BBBE1EBF275F0030DEB9 /* GoogleService-Info.plist */; };
 		0CB9BBF91EBF36870030DEB9 /* AccountKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB9BBF01EBF36870030DEB9 /* AccountKit.framework */; };
-		0CB9BBFA1EBF36870030DEB9 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB9BBF11EBF36870030DEB9 /* Bolts.framework */; };
-		0CB9BBFB1EBF36870030DEB9 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB9BBF21EBF36870030DEB9 /* FBAudienceNetwork.framework */; };
-		0CB9BBFC1EBF36870030DEB9 /* FBNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB9BBF31EBF36870030DEB9 /* FBNotifications.framework */; };
-		0CB9BBFD1EBF36870030DEB9 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB9BBF41EBF36870030DEB9 /* FBSDKCoreKit.framework */; };
-		0CB9BBFE1EBF36870030DEB9 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB9BBF51EBF36870030DEB9 /* FBSDKLoginKit.framework */; };
-		0CB9BBFF1EBF36870030DEB9 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB9BBF61EBF36870030DEB9 /* FBSDKMessengerShareKit.framework */; };
-		0CB9BC001EBF36870030DEB9 /* FBSDKPlacesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB9BBF71EBF36870030DEB9 /* FBSDKPlacesKit.framework */; };
-		0CB9BC011EBF36870030DEB9 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB9BBF81EBF36870030DEB9 /* FBSDKShareKit.framework */; };
 		0CB9BC401EBF4A770030DEB9 /* GoogleAppUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB9BC391EBF4A770030DEB9 /* GoogleAppUtilities.framework */; };
 		0CB9BC411EBF4A770030DEB9 /* GoogleAuthUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB9BC3A1EBF4A770030DEB9 /* GoogleAuthUtilities.framework */; };
 		0CB9BC421EBF4A770030DEB9 /* GoogleNetworkingUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB9BC3B1EBF4A770030DEB9 /* GoogleNetworkingUtilities.framework */; };
@@ -345,19 +341,15 @@
 		038357A95CD84A53B30909A2 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		041B571F35E1473F9AB416E2 /* libRNShare.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShare.a; sourceTree = "<group>"; };
 		09FACB99351B418BA4B9CB3A /* SafariServices.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		0C4016691FCB7C6C005D0997 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		0C40166A1FCB7C6C005D0997 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		0C40166B1FCB7C6C005D0997 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
+		0C40166C1FCB7C6D005D0997 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		0C5D747B1EE2E26C006330AF /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0C9C7B021F212EBC00683EB4 /* ForexLessons.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ForexLessons.entitlements; path = ForexLessons/ForexLessons.entitlements; sourceTree = "<group>"; };
 		0CAFD2011EBF784900C3E622 /* Lock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lock.framework; path = "Pods/../build/Release-iphoneos/Lock/Lock.framework"; sourceTree = "<group>"; };
 		0CB9BBBE1EBF275F0030DEB9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0CB9BBF01EBF36870030DEB9 /* AccountKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AccountKit.framework; path = ../../Documents/FacebookSDK/AccountKit.framework; sourceTree = "<group>"; };
-		0CB9BBF11EBF36870030DEB9 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
-		0CB9BBF21EBF36870030DEB9 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBAudienceNetwork.framework; path = ../../Documents/FacebookSDK/FBAudienceNetwork.framework; sourceTree = "<group>"; };
-		0CB9BBF31EBF36870030DEB9 /* FBNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBNotifications.framework; path = ../../Documents/FacebookSDK/FBNotifications.framework; sourceTree = "<group>"; };
-		0CB9BBF41EBF36870030DEB9 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		0CB9BBF51EBF36870030DEB9 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		0CB9BBF61EBF36870030DEB9 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = ../../Documents/FacebookSDK/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
-		0CB9BBF71EBF36870030DEB9 /* FBSDKPlacesKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKPlacesKit.framework; path = ../../Documents/FacebookSDK/FBSDKPlacesKit.framework; sourceTree = "<group>"; };
-		0CB9BBF81EBF36870030DEB9 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		0CB9BC391EBF4A770030DEB9 /* GoogleAppUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppUtilities.framework; sourceTree = "<group>"; };
 		0CB9BC3A1EBF4A770030DEB9 /* GoogleAuthUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAuthUtilities.framework; sourceTree = "<group>"; };
 		0CB9BC3B1EBF4A770030DEB9 /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
@@ -394,6 +386,7 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		885DE488A96116976068D1D9 /* Pods-ForexLessons.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ForexLessons.release.xcconfig"; path = "Pods/Target Support Files/Pods-ForexLessons/Pods-ForexLessons.release.xcconfig"; sourceTree = "<group>"; };
 		89E4D02388F64F8087E403CD /* RNGoogleSignin.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGoogleSignin.xcodeproj; path = "../node_modules/react-native-google-signin/ios/RNGoogleSignin.xcodeproj"; sourceTree = "<group>"; };
+		980723922AF94E95324E2541 /* Pods-ForexLessons.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ForexLessons.staging.xcconfig"; path = "Pods/Target Support Files/Pods-ForexLessons/Pods-ForexLessons.staging.xcconfig"; sourceTree = "<group>"; };
 		9C3EF733EE8C479AA452E585 /* AddressBook.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		A9583DA587D5488AA695050A /* libCodePush.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libCodePush.a; sourceTree = "<group>"; };
 		BB04D6DDC55E4CBC87E7AC9B /* libSMXCrashlytics.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSMXCrashlytics.a; sourceTree = "<group>"; };
@@ -418,13 +411,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CB9BCF91EBF535B0030DEB9 /* libxml2.2.dylib in Frameworks */,
-				0CB9BBFF1EBF36870030DEB9 /* FBSDKMessengerShareKit.framework in Frameworks */,
-				0CB9BC001EBF36870030DEB9 /* FBSDKPlacesKit.framework in Frameworks */,
-				0CB9BC011EBF36870030DEB9 /* FBSDKShareKit.framework in Frameworks */,
-				0CB9BBFD1EBF36870030DEB9 /* FBSDKCoreKit.framework in Frameworks */,
-				0CB9BBFE1EBF36870030DEB9 /* FBSDKLoginKit.framework in Frameworks */,
-				0CB9BBFC1EBF36870030DEB9 /* FBNotifications.framework in Frameworks */,
-				0CB9BBFB1EBF36870030DEB9 /* FBAudienceNetwork.framework in Frameworks */,
 				2E035E6D60CD405090F188C0 /* libRCTFBSDK.a in Frameworks */,
 				0CD94E7D1EBF0F3600016C38 /* libBVLinearGradient.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -434,19 +420,22 @@
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
+				0C4016701FCB7C6D005D0997 /* FBSDKLoginKit.framework in Frameworks */,
 				0CB9BC461EBF4A780030DEB9 /* GoogleUtilities.framework in Frameworks */,
 				0CB9BC441EBF4A770030DEB9 /* GoogleSignIn.framework in Frameworks */,
 				0CB9BC421EBF4A770030DEB9 /* GoogleNetworkingUtilities.framework in Frameworks */,
 				0CB9BC451EBF4A780030DEB9 /* GoogleSymbolUtilities.framework in Frameworks */,
 				0CB9BC401EBF4A770030DEB9 /* GoogleAppUtilities.framework in Frameworks */,
+				0C40166F1FCB7C6D005D0997 /* Bolts.framework in Frameworks */,
 				0CB9BC411EBF4A770030DEB9 /* GoogleAuthUtilities.framework in Frameworks */,
 				9B739A57622A4D1385AB3223 /* libRNGoogleSignin.a in Frameworks */,
+				0C40166E1FCB7C6D005D0997 /* FBSDKShareKit.framework in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
+				0C40166D1FCB7C6D005D0997 /* FBSDKCoreKit.framework in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				674C8CCC274B499088DC185F /* libRNShare.a in Frameworks */,
-				0CB9BBFA1EBF36870030DEB9 /* Bolts.framework in Frameworks */,
 				2E9983015F764AA49688D666 /* libz.tbd in Frameworks */,
 				C0D7495F97DF4693A221822F /* SafariServices.framework in Frameworks */,
 				860D6CA4534748E1A91E8FD7 /* SystemConfiguration.framework in Frameworks */,
@@ -543,6 +532,21 @@
 				00E356F11AD99517003FC87E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0C4015FA1FCB737F005D0997 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				1928F2757E98416D8A4D1D65 /* libRCTFBSDK.a */,
+				6277BCD139A7407CBC66F679 /* libRNGoogleSignin.a */,
+				041B571F35E1473F9AB416E2 /* libRNShare.a */,
+				1E702C142D904D288D40B9AA /* libRNFIRMessaging.a */,
+				2DE4CD16FD1045FF81BAAF00 /* libRNBlur.a */,
+				BB04D6DDC55E4CBC87E7AC9B /* libSMXCrashlytics.a */,
+				A9583DA587D5488AA695050A /* libCodePush.a */,
+				241F3FF76EB44606AECC94EC /* libSplashScreen.a */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		0C4EE3671ED0E0FA00F659BC /* Products */ = {
@@ -686,16 +690,12 @@
 			children = (
 				0CAFD2011EBF784900C3E622 /* Lock.framework */,
 				0CB9BCD51EBF52990030DEB9 /* Lock.framework */,
+				0C40166B1FCB7C6C005D0997 /* Bolts.framework */,
+				0C4016691FCB7C6C005D0997 /* FBSDKCoreKit.framework */,
+				0C40166C1FCB7C6D005D0997 /* FBSDKLoginKit.framework */,
+				0C40166A1FCB7C6C005D0997 /* FBSDKShareKit.framework */,
 				0CB9BCC21EBF4EDE0030DEB9 /* libxml2.2.dylib */,
 				0CB9BBF01EBF36870030DEB9 /* AccountKit.framework */,
-				0CB9BBF11EBF36870030DEB9 /* Bolts.framework */,
-				0CB9BBF21EBF36870030DEB9 /* FBAudienceNetwork.framework */,
-				0CB9BBF31EBF36870030DEB9 /* FBNotifications.framework */,
-				0CB9BBF41EBF36870030DEB9 /* FBSDKCoreKit.framework */,
-				0CB9BBF51EBF36870030DEB9 /* FBSDKLoginKit.framework */,
-				0CB9BBF61EBF36870030DEB9 /* FBSDKMessengerShareKit.framework */,
-				0CB9BBF71EBF36870030DEB9 /* FBSDKPlacesKit.framework */,
-				0CB9BBF81EBF36870030DEB9 /* FBSDKShareKit.framework */,
 				4AE62950757742CA92FDAC6A /* libz.tbd */,
 				09FACB99351B418BA4B9CB3A /* SafariServices.framework */,
 				23628963331B43DEADA72EDF /* SystemConfiguration.framework */,
@@ -769,6 +769,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				16109C50EDCC4385A9F86B7B /* Frameworks */,
 				D4E89D23F9CE5A5A361166D6 /* Pods */,
+				0C4015FA1FCB737F005D0997 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -790,6 +791,7 @@
 			children = (
 				D70FA74CECA03803CF30301A /* Pods-ForexLessons.debug.xcconfig */,
 				885DE488A96116976068D1D9 /* Pods-ForexLessons.release.xcconfig */,
+				980723922AF94E95324E2541 /* Pods-ForexLessons.staging.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1346,13 +1348,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ForexLessons-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		66B5EAD2E2EE4611B00A928A /* [CP] Copy Pods Resources */ = {
@@ -1361,9 +1366,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ForexLessons/Pods-ForexLessons-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1376,9 +1384,18 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ForexLessons/Pods-ForexLessons-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1546,12 +1563,13 @@
 		};
 		0C4EE3B31ED0E5FE00F659BC /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 885DE488A96116976068D1D9 /* Pods-ForexLessons.release.xcconfig */;
+			baseConfigurationReference = 980723922AF94E95324E2541 /* Pods-ForexLessons.staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ForexLessons/ForexLessons.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 93HE3597FG;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
@@ -1707,6 +1725,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 93HE3597FG;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
@@ -1760,6 +1779,7 @@
 				CODE_SIGN_ENTITLEMENTS = ForexLessons/ForexLessons.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 93HE3597FG;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",

@@ -38,7 +38,7 @@ class FeedbackScreen extends React.Component {
             style={styles.blur}
             blurType="dark"
             blurAmount={10}/>
-        <ScrollView style={styles.scrollview} keyboardShouldPersistTaps={'handled'}>
+        <ScrollView style={styles.scrollview} keyboardShouldPersistTaps={'handled'} keyboardDismissMode={'on-drag'}>
             <TextInput style={styles.topicInput}
                 onChangeText={(topic) => this.setState({topic})}
                 value={this.state.topic}
@@ -53,6 +53,7 @@ class FeedbackScreen extends React.Component {
                 value={this.state.message}
                 autoCapitalize={'sentences'}
                 autoCorrect={true}
+                autoFocus={true}
                 placeholder={'Отзыв'}
                 placeholderTextColor={Colors.textInputPlaceholder}
                 multiline={true}
