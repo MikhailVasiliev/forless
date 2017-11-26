@@ -11,6 +11,7 @@ import codePush from 'react-native-code-push';
 applyConfigSettings()
 // create our store
 const store = createStore()
+console.disableYellowBox = true;
 // production
 // const codePushOptions = { updateDialog: true, deploymentKey: 'AOxdtq88esMn2G7guwIL1cCldti341a6FqYxQ', checkFrequency: codePush.CheckFrequency.ON_APP_RESUME , installMode: codePush.InstallMode.ON_NEXT_RESUME};
 // staging
